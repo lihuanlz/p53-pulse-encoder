@@ -6,7 +6,7 @@ Companion code, results and manuscript source for the paper:
 
 ## Layout
 
-- `manuscript/` — LaTeX source, compiled PDF, figure PNGs, figure-generation scripts.
+- `manuscript/` — LaTeX source, compiled PDF, four figure PNGs, and one figure-generation script per figure (`make_fig1.py` … `make_fig4.py`; fig3/fig4 read the audited code89/code92 result JSONs under `results/molecular_layer/`).
 - `code/` — analysis scripts (ours): Fisher stratification (code13), cascade self-check (code50), Fisher audit series (code51r1–r4), discrimination map (code52), full-cascade audit (code81), mechanism audit (code82), digital-limit and cascade-model studies (code83–88), molecular-constant decomposition and cross-validation (code89–93), plus the cell-line-1 bifurcation-and-discrimination suite cited in Methods.
 - `results/` — derived outputs (ours): JSON result files, verdict figures, molecular-layer tables.
 - `data_external/` — third-party data used; see `data_external/PROVENANCE.md`. Large source archives are not re-hosted; the file lists exact sources.
