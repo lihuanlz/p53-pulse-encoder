@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-Code 83: why digital, why noise upstream — L1 loss decomposition + encoder-structure variational race
+Code 83: why digital, why noise upstream  -  L1 loss decomposition + encoder-structure variational race
 =================================================================================
 Date: 2026-09-25 | seed fixed: 20260925 | deterministic parts fully deterministic
 
 Lineage:
   - Encoder-layer SEAL: verdict card / seal card 2026-09-18 (code 51r3/51r4A archived parameters)
-  - Full-chain cascade audit: code 81 (verdict card 2026-09-23) — this script directly reuses all of its constants and mutual-information conventions
-  - Mechanism-model audit: code 82 (verdict card 2026-09-23) — registry source of "94.2/5.5 is a function of the noise-calibration convention"
+  - Full-chain cascade audit: code 81 (verdict card 2026-09-23)  -  this script directly reuses all of its constants and mutual-information conventions
+  - Mechanism-model audit: code 82 (verdict card 2026-09-23)  -  registry source of "94.2/5.5 is a function of the noise-calibration convention"
 
 Questions (user proposition, 2026-09-25):
   Q-A: Code 81 ruled the L1 sensing-layer loss of 0.872 bits = 31% H(D) to be the weakest layer of the full chain.
@@ -48,9 +48,9 @@ except Exception:
 
 SEED = 20260925
 ROOT = Path(__file__).resolve().parent.parent
-OUT_JSON = ROOT / "结果" / "代码83_变分竞赛_结果.json"
-OUT_PNG = ROOT / "结果" / "代码83_变分竞赛_六面体.png"
-OUT_SVG = ROOT / "结果" / "代码83_变分竞赛_六面体.svg"
+OUT_JSON = ROOT / "results" / "code83_variational_competition_results.json"
+OUT_PNG = ROOT / "results" / "code83_variational_competition_sixpanel.png"
+OUT_SVG = ROOT / "results" / "code83_variational_competition_sixpanel.svg"
 plt.rcParams["svg.fonttype"] = "none"
 
 # ---------------- Archived constants identical to code 81 verbatim ----------------
@@ -71,7 +71,7 @@ H_D = float(np.log2(len(DOSES)))
 N_BOOT = 200
 
 # Constants specific to arms B/C (explicitly declared, not fitted)
-N_FIXED = 5            # fixed pulse count for FM/AM arms (budget matching: arm A's population-mean pulse count ~2.5, FM/AM use 5 — a bias in favor of FM/AM, double-recorded)
+N_FIXED = 5            # fixed pulse count for FM/AM arms (budget matching: arm A's population-mean pulse count ~2.5, FM/AM use 5  -  a bias in favor of FM/AM, double-recorded)
 GAMMA_T = 0.15         # T(D) = T_PERIOD * (D/1Gy)^(-GAMMA_T): D 0.1->10 maps to T 7.77->3.89 h (2x range)
 AMP_SLOPE = 0.15       # A(D) = A0*(1+0.15*ln(D/1Gy)) (code 81 hypothetical amplitude-arm convention)
 AMP_INTR = 0.15        # endogenous CV of the hypothetical amplitude arm (same convention as code 81)
@@ -212,7 +212,7 @@ def part_A():
     log(f"  optimal {N_MAX + 1}-level quantizer: I={I_opt:.4f} bits, loss={I_DSB - I_opt:.4f}, "
         f"bounds N={bounds}")
 
-    # A3: repair thinning — the part the sensing layer "physically" has to pay
+    # A3: repair thinning  -  the part the sensing layer "physically" has to pay
     PHI = [1.0, 0.8, 0.6, 0.4, 0.25, 0.15, 0.1, 0.05]
     thin_sweep = []
     for phi in PHI:
@@ -366,7 +366,7 @@ def main():
         AM_sk06_enc=am_06["I_enc"],
         count_wins_enc=B["armA"]["I_enc"] > max(fm_native["I_enc"], am_native["I_enc"]),
         count_wins_dec=B["armA"]["I_dec"] > max(fm_native["I_dec"], am_native["I_dec"]),
-    )
+)
     log(f"  [verdict] native dispersion point: counting {verdict['A_count_enc']:.4f} vs "
         f"FM {verdict['FM_native_enc']:.4f} vs AM {verdict['AM_native_enc']:.4f} bits "
         f"(encoder output); through decoder {verdict['A_count_dec']:.4f} / "
@@ -377,7 +377,7 @@ def main():
         "Part A uses the analytic Poisson channel throughout (not MC), reported alongside code 81's MC convention (I(D;N_DSB)=2.526); the difference between the two is an estimation-convention difference",
         "The optimal quantizer is an exact DP (minimizing sum p(b) H(D|b)), M=13 levels aligned with N_MAX=12+1; it gives the 'information upper bound under the pulse cap', and does not represent biological realizability",
         "In the repair-thinning arm, phi is a free parameter (the fraction of DSBs surviving unrepaired before triggering); the literature half-life range is not pinned down, so it is reported as a sweep, and conclusions are cited only at the monotonic level of 'smaller phi means larger loss'",
-        "Arms B/C use fixed N=5 pulses: arm A's population-mean pulse count is about 2.5, so this choice favors the FM/AM arms (more pulses = better period/amplitude estimation) — a conservative fairness bias (against the counting arm)",
+        "Arms B/C use fixed N=5 pulses: arm A's population-mean pulse count is about 2.5, so this choice favors the FM/AM arms (more pulses = better period/amplitude estimation)  -  a conservative fairness bias (against the counting arm)",
         "The FM arm's T(D) mapping (gamma=0.15, 2x dynamic range) is an arbitrary choice; the part of the sweep showing the conclusion is insensitive to the direction of this slope is in the JSON; the slope itself was not optimized",
         "The AM arm directly reuses the code 81 hypothetical amplitude-arm convention (slope 0.15/ln, endogenous CV 0.15, LogNormal gain); the sigma_k=0.6 row should be on the same order as code 81's I_amp=0.096 bits",
         "The decoding stage shares the same pair of leaky integrators across all three arms (tau=10h/4h): this itself favors the counting arm, because an integrator is natively a counter; this bias is part of the argument (the known decoder hardware is an integrator), but is registered as a structural bias",
@@ -385,7 +385,7 @@ def main():
     ]
 
     results = dict(
-        meta=dict(script="代码83_为什么数字化_变分竞赛.py", seed=SEED, date="2026-09-25",
+        meta=dict(script="code83_why_digital_variational_competition.py", seed=SEED, date="2026-09-25",
                   question="Q-A: the physically irreducible part vs the design part of the L1 loss of 0.872 bits; "
                            "Q-B: a variational race of three encoder structures (counting/FM/AM) under the same upstream noise",
                   constants=dict(K0_DSB=K0_DSB, C_CLUSTER=C_CLUSTER, N_MAX=N_MAX,
@@ -394,7 +394,7 @@ def main():
                                  AMP_SLOPE=AMP_SLOPE, AMP_INTR=AMP_INTR)),
         H_D=H_D, part_A=A, part_B=B, verdict=verdict,
         double_record=double_record,
-    )
+)
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     def _js(o):
         if isinstance(o, np.bool_):
@@ -513,10 +513,10 @@ def main():
         f"  counting wins dec: {v['count_wins_dec']}\n"
         f"  budget note: FM/AM arms use N=5 fixed pulses\n"
         f"  (bias against the counting arm, by design)"
-    )
+)
     axs.text(0.02, 0.98, summary, va="top", fontsize=8.4, family="monospace",
              transform=axs.transAxes)
-    fig.suptitle("Code 83: why digital, why noise upstream — L1 loss decomposition + encoder variational race",
+    fig.suptitle("Code 83: why digital, why noise upstream  -  L1 loss decomposition + encoder variational race",
                  fontsize=12.5)
     fig.savefig(OUT_PNG, dpi=150, bbox_inches="tight")
     fig.savefig(OUT_SVG, bbox_inches="tight")

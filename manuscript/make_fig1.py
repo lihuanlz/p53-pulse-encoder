@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""paper_p53 fig1_topology.png — rebuild with corrected panel d axis label.
+"""paper_p53 fig1_topology.png  -  rebuild with corrected panel d axis label.
 All numbers from named archives:
   code52 TrackC2 JSON (alphas, grid points), digitized_Fig1GH.json (bars),
   NC-manuscript lineage (R2=0.9926/0.971, hysteresis 0.275 vs 0.25,
@@ -14,9 +14,9 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-WS = Path(r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911")
-OUT = WS / "05_主线纲领与设计/论文_细胞通讯审计_2026-09-23/拆稿_LaTeX/paper_p53/fig1_topology.png"
-DIG = json.loads((WS / "01_细胞线/公开数据/Batchelor2011/digitized_Fig1GH.json").read_text(encoding="utf-8"))
+WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
+OUT = WS / "05_main_program/paper_cell_communication_audit_2026-09-23/split_LaTeX/paper_p53/fig1_topology.png"
+DIG = json.loads((WS / "01_cell_line_1/public_data/Batchelor2011/digitized_Fig1GH.json").read_text(encoding="utf-8"))
 rng = np.random.default_rng(7)
 
 fig, axes = plt.subplots(2, 3, figsize=(14.6, 8.7))

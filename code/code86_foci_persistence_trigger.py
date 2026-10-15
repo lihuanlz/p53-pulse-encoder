@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-代码86_焦点持续触发.py  (seed-deterministic)
+code86_foci_persistence_trigger.py  (seed-deterministic)
 ================================================
 Task: the final chapter of route reconciliation. Code 85 has falsified the "ATM gain heterogeneity patches the dispersion ratio" route;
-this script switches the mechanistic framing — the trigger signal is not the live DSB count A(t) (fast phase t½≈2h, code 84 framing),
+this script switches the mechanistic framing  -  the trigger signal is not the live DSB count A(t) (fast phase t½≈2h, code 84 framing),
 but the γH2AX foci count F(t) (measured single-phase decay t½≈11h: dSTORM 2Gy 50 foci@30min ->
 12 foci@24h, 2^(-24/11)=0.22 ≈ 12/50=0.24).
 
@@ -20,8 +20,8 @@ Constants table: all identical to code 84/85; the only calibrated constant LAM0'
 the literature anchor t1@10Gy ≈ 2.2h (MCF7 first peak 2-3h); the dispersion ratio plays no part in calibration.
 
 Usage:
-  python 代码86_焦点持续触发.py calib    # LAM0' three-point calibration, N=1000
-  python 代码86_焦点持续触发.py final    # final version, N=4000, σ∈{0, 0.2}
+  python code86_foci_persistence_trigger.py calib    # LAM0' three-point calibration, N=1000
+  python code86_foci_persistence_trigger.py final    # final version, N=4000, σ∈{0, 0.2}
 """
 import json
 import sys
@@ -37,9 +37,9 @@ plt.rcParams["font.size"] = 9.5
 
 SEED = 20260925
 ROOT = Path(__file__).resolve().parent.parent
-OUT_JSON = ROOT / "结果" / "代码86_焦点持续触发_结果.json"
-OUT_PNG = ROOT / "结果" / "代码86_焦点持续触发_图.png"
-OUT_SVG = ROOT / "结果" / "代码86_焦点持续触发_图.svg"
+OUT_JSON = ROOT / "results" / "code86_foci_persistence_trigger_results.json"
+OUT_PNG = ROOT / "results" / "code86_foci_persistence_trigger_fig.png"
+OUT_SVG = ROOT / "results" / "code86_foci_persistence_trigger_fig.svg"
 
 DOSES = np.array([0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0])
 K0_DSB = 35.0
@@ -201,9 +201,9 @@ def main():
         if OUT_JSON.exists():
             payload = json.loads(OUT_JSON.read_text(encoding="utf-8"))
         payload["calib"] = grid
-        payload.setdefault("meta", dict(script="代码86_焦点持续触发.py", seed=SEED,
+        payload.setdefault("meta", dict(script="code86_foci_persistence_trigger.py", seed=SEED,
                                         t_half_foci_h=T_HALF_FOCI,
-                                        anchor="LAM0' 只对齐 t1@10Gy~2.2h"))
+                                        anchor="LAM0' only aligns t1@10Gy~2.2h"))
         OUT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
         log("JSON written:", OUT_JSON)
         return
@@ -227,10 +227,10 @@ def main():
     if OUT_JSON.exists():
         payload = json.loads(OUT_JSON.read_text(encoding="utf-8"))
     payload["final"] = finals
-    payload["meta"] = dict(script="代码86_焦点持续触发.py", seed=SEED, mode="final",
+    payload["meta"] = dict(script="code86_foci_persistence_trigger.py", seed=SEED, mode="final",
                            lam0_foci=lam_star, t_half_foci_h=T_HALF_FOCI,
-                           anchors="LAM0' 只对齐 t1@10Gy~2.2h；t½(foci)=11h 为文献锚",
-                           identity_prediction="CV(t1)~1 时 弥散比~mean(t1)/SD(IPI)")
+                           anchors="LAM0' only aligns t1@10Gy~2.2h; t_half(foci)=11h is a literature anchor",
+                           identity_prediction="when CV(t1)~1, dispersion ratio ~ mean(t1)/SD(IPI)")
     OUT_JSON.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     log("JSON updated:", OUT_JSON)
     make_figure(finals, lam_star)

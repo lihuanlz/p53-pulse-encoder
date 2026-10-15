@@ -14,10 +14,10 @@ import numpy as np
 
 sys.path.insert(0, str(Path(sys.executable).parent.parent.parent))
 
-WS = Path(r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911")
-DATA = WS / "01_细胞线" / "公开数据" / "Batchelor2011" / "digitized_Fig1GH.json"
-OUT_PNG = WS / "03_细胞线3" / "结果" / "代码52_TrackC2_alpha-nu判别图.png"
-OUT_JSON = WS / "03_细胞线3" / "结果" / "代码52_TrackC2_结果.json"
+WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
+DATA = WS / "01_cell_line_1" / "public_data" / "Batchelor2011" / "digitized_Fig1GH.json"
+OUT_PNG = WS / "03_cell_line_3" / "results" / "code52_TrackC2_alpha_nu_discrimination.png"
+OUT_JSON = WS / "03_cell_line_3" / "results" / "code52_TrackC2_results.json"
 
 RNG = np.random.default_rng(11)
 
@@ -45,9 +45,9 @@ def main():
 
     # data points (alpha, nu, alpha_err, nu_err, label, source level)
     pts = [
-        dict(name="γ-IR（DSB）", alpha=0.05, aerr=0.10, nu=1.4, nerr=0.4,
+        dict(name="γ-IR (DSB) ", alpha=0.05, aerr=0.10, nu=1.4, nerr=0.4,
              src="D2+D3: Batchelor2011 original text 'amplitude dose-independent'; Lahav2004 N:1->~6/0.1-10Gy"),
-        dict(name="NCS（DSB）", alpha=a_ncs[0], aerr=a_ncs[1], nu=2.0, nerr=0.5,
+        dict(name="NCS (DSB) ", alpha=a_ncs[0], aerr=a_ncs[1], nu=2.0, nerr=0.5,
              src="D1: in-house digitized Fig1G; nu via Moenke2017/TCS report"),
         dict(name="UV", alpha=a_uv[0], aerr=a_uv[1], nu=0.0, nerr=0.2,
              src="D1: in-house digitized Fig1H; original text 'single pulse' -> nu~0"),
@@ -84,7 +84,7 @@ def main():
     ax.axvline(0.5, color="#c0392b", ls="--", lw=1)
     ax.text(-0.02, 10.6, "EXC zone (digital signature)\nalpha<~0.1, nu>0", fontsize=9, color="#1e8449")
     ax.text(0.86, 10.6, "NF zone (analog signature)\nalpha>~0.5", fontsize=9, color="#922b21")
-    colors = {"γ-IR（DSB）": "#2471a3", "NCS（DSB）": "#8e44ad", "UV": "#ca6f1e"}
+    colors = {"γ-IR (DSB) ": "#2471a3", "NCS (DSB) ": "#8e44ad", "UV": "#ca6f1e"}
     for p in pts:
         ax.errorbar(p["alpha"], p["nu"], xerr=p["aerr"], yerr=p["nerr"],
                     fmt="o", ms=9, capsize=5, color=colors[p["name"]],

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Code 92: Belgacem closed-form Hopf period x our molecular constants — cross-validation of two independent routes
+Code 92: Belgacem closed-form Hopf period x our molecular constants  -  cross-validation of two independent routes
 Source: arXiv 2605.23722 (2026-05) Section 9 p53 calibration:
   γ1=γ2=ln2≈0.693/h (1 h protein half-life); loop-gain inversion for τc=1 h (measured transcriptional delay),
   gives AB≈1.72, closed-form Tc=2π/ωc≈5.6 h (within 3% of 5.5 h).
@@ -21,15 +21,15 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 SEED_TAG = 20260925
-OUT_JSON = r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911\03_细胞线3\结果\代码92_Belgacem交叉核验_结果.json"
-OUT_PNG = r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911\03_细胞线3\代码与图\代码92_Belgacem交叉核验_两面体.png"
+OUT_JSON = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\results\code92_belgacem_crossvalidation_results.json"
+OUT_PNG = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\code_and_figures\code92_belgacem_crossvalidation_twopanel.png"
 OUT_SVG = OUT_PNG.replace(".png", ".svg")
 plt.rcParams.update({"svg.fonttype": "none", "font.size": 9,
                      "axes.spines.top": False, "axes.spines.right": False})
 
 LN2 = np.log(2.0)
 res = {"seed": SEED_TAG,
-       "source": "arXiv 2605.23722 Section 9 (PDF belgacem_2605.23722.pdf 本地存档)"}
+       "source": "arXiv 2605.23722 Section 9 (PDF belgacem_2605.23722.pdf local archive)"}
 
 # ---------------- Closed-form formulas (paper Section 4) ----------------
 def omega_c(g1, g2, AB):
@@ -103,7 +103,7 @@ for tau in [1.0, 1.2, 1.5, 2.0]:
     dde_rows.append(dict(tau_h=tau, period_sim_h=per, amplitude=amp))
 res["P2_dde_integration"] = dict(kappa=KAPPA, lam=LAM, theta=THETA, gamma=GAM,
                                  rows=dde_rows,
-                                 note="τ=1.0 位于临界点上（边缘），周期仅在 τ>τc 的极限环上有意义")
+                                 note="tau=1.0 sits on the critical point (marginal); the period is defined only on the limit cycle for tau>tau_c")
 
 # ---------------- P3: our molecular constants in the closed-form framework ----------------
 def T_from_measured_tau(g1, g2, tau_measured):
@@ -123,7 +123,7 @@ p3.append(dict(case="same half-lives, tau=K3 measured 2.0h",
 AB3, T3 = T_from_measured_tau(LN2, LN2, 1.70)
 p3.append(dict(case="same half-lives, tau=K3 decomposed 1.70h (code89)",
                g1=LN2, g2=LN2, tau=1.70, AB=AB3, T_h=T3))
-# Row 4: stress-regime convention — p53 MDM2-dependent half-life ~15 min (γ=ln2/0.25), Mdm2 dM=2/h, τ=2.0 h
+# Row 4: stress-regime convention  -  p53 MDM2-dependent half-life ~15 min (γ=ln2/0.25), Mdm2 dM=2/h, τ=2.0 h
 g_p53_fast = LN2 / 0.25
 AB4, T4 = T_from_measured_tau(g_p53_fast, 2.0, 2.0)
 p3.append(dict(case="stress regime: g_p53=ln2/0.25h, g_Mdm2=2/h, tau=2.0h",
@@ -136,7 +136,7 @@ res["P4_reconciliation"] = dict(
     belgacem_closed_form_h=T1,
     monke_sim_h=5.48, monke_jacobian_h=5.95,
     ours_tau2_closed_form_h=T2,
-    verdict="见判词卡")
+    verdict="see verdict card")
 
 # ---------------- Figure: two-panel ----------------
 fig, axes = plt.subplots(1, 2, figsize=(12.5, 4.6))

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""paper_p53 fig2_census.png — rebuild: panel d title 94.5%, panel e redrawn
+"""paper_p53 fig2_census.png  -  rebuild: panel d title 94.5%, panel e redrawn
 on the literature-matched dispersion series, inset cleanup.
 Archives:
-  代码51r3_p53_Fisher审计_结果.json (M=400 central h=2%/5%: evals, evecs, shares,
+  code51r3_p53_Fisher_audit_results.json (M=400 central h=2%/5%: evals, evecs, shares,
       capacity, gain dispersion)
-  代码51r4B_Fisher_M4000.json (M=4000 central)
-  代码51r4A_噪声标定与稳健性.json (lit_matched dispersion series)
+  code51r4B_Fisher_M4000.json (M=4000 central)
+  code51r4A_noise_calibration_robustness.json (lit_matched dispersion series)
   FHN Eq. with locked parameters s=20, tau_r=20, a=0.7, b=0.8, eps=0.08,
   I0=0.6, sigma=0.06 (reference pulse train).
 """
@@ -16,13 +16,13 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-WS = Path(r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911")
-RES = WS / "03_细胞线3/结果"
-OUT = WS / "05_主线纲领与设计/论文_细胞通讯审计_2026-09-23/拆稿_LaTeX/paper_p53/fig2_census.png"
+WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
+RES = WS / "03_cell_line_3/results"
+OUT = WS / "05_main_program/paper_cell_communication_audit_2026-09-23/split_LaTeX/paper_p53/fig2_census.png"
 
-r3 = json.loads((RES / "代码51r3_p53_Fisher审计_结果.json").read_text(encoding="utf-8"))
-r4b = json.loads((RES / "代码51r4B_Fisher_M4000.json").read_text(encoding="utf-8"))
-r4a = json.loads((RES / "代码51r4A_噪声标定与稳健性.json").read_text(encoding="utf-8"))
+r3 = json.loads((RES / "code51r3_p53_Fisher_audit_results.json").read_text(encoding="utf-8"))
+r4b = json.loads((RES / "code51r4B_Fisher_M4000.json").read_text(encoding="utf-8"))
+r4a = json.loads((RES / "code51r4A_noise_calibration_robustness.json").read_text(encoding="utf-8"))
 
 fig, axes = plt.subplots(2, 3, figsize=(14.85, 8.19))
 fig.subplots_adjust(hspace=0.55, wspace=0.32, left=0.06, right=0.99, top=0.90, bottom=0.10)

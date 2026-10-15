@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""p53 全通路上下游蛋白/酶链路图谱 v2（2026-09-25）。
-按 L0-L4 级联层排布真实分子，颜色=单细胞活细胞时序数据可得性。
-输出：03_细胞线3/结果/图谱_p53全通路上下游蛋白与酶_2026-09-25.{png,svg}
+"""p53 full-pathway protein/enzyme cascade map v2 (2026-09-25).
+arrange real molecules by L0-L4 cascade layer; color = availability of single-cell live-imaging time-series data.
+output: 03_cell_line_3/results/map_p53_full_pathway_proteins_enzymes_2026-09-25.{png,svg}
 """
 import matplotlib
 matplotlib.use("Agg")
@@ -20,8 +20,8 @@ except Exception:
 plt.rcParams["svg.fonttype"] = "none"
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT_PNG = ROOT / "结果" / "图谱_p53全通路上下游蛋白与酶_2026-09-25.png"
-OUT_SVG = ROOT / "结果" / "图谱_p53全通路上下游蛋白与酶_2026-09-25.svg"
+OUT_PNG = ROOT / "results" / "map_p53_full_pathway_proteins_enzymes_2026-09-25.png"
+OUT_SVG = ROOT / "results" / "map_p53_full_pathway_proteins_enzymes_2026-09-25.svg"
 
 C_GREEN, E_GREEN = "#d9f0e3", "#0b6b3a"
 C_YEL, E_YEL = "#fdf1dc", "#b07a1e"
@@ -30,7 +30,7 @@ GREEN, YEL, RED = "g", "y", "r"
 FC = {GREEN: C_GREEN, YEL: C_YEL, RED: C_RED}
 EC = {GREEN: E_GREEN, YEL: E_YEL, RED: E_RED}
 
-# 六列：L0, L1, L1.5, L2, L3, L4
+# six columns: L0, L1, L1.5, L2, L3, L4
 COLS = [0.005 + i * 0.166 for i in range(6)]
 COLW = 0.152
 BOX_H = 0.135
@@ -99,7 +99,7 @@ for ci, (name, prots) in enumerate(layers):
                 fontsize=7.3, color="#444444")
         centers[(ci, i)] = (x0 + COLW / 2, y0)
 
-# 层间主干箭头（中线）
+# inter-layer backbone arrows (midline)
 ymid = slot_y(0, 1)
 for ci in range(5):
     ax.add_patch(FancyArrowPatch((COLS[ci] + COLW + 0.004, ymid),
@@ -107,7 +107,7 @@ for ci in range(5):
                                  arrowstyle="-|>", mutation_scale=20,
                                  color="#33527a", lw=2.0, zorder=1))
 
-# 反馈箭头：MDM2 -> p53（L2 列内，负反馈）
+# feedback arrow: MDM2 -> p53 (within the L2 column, negative feedback)
 x_p53, y_p53 = centers[(3, 0)]
 x_mdm2, y_mdm2 = centers[(3, 1)]
 ax.add_patch(FancyArrowPatch((x_mdm2 + COLW * 0.42, y_mdm2 + BOX_H / 2),
@@ -117,7 +117,7 @@ ax.add_patch(FancyArrowPatch((x_mdm2 + COLW * 0.42, y_mdm2 + BOX_H / 2),
                              connectionstyle="arc3,rad=-0.35"))
 ax.text(x_p53 + COLW * 0.62, (y_p53 + y_mdm2) / 2, "MDM2 degrades p53\n(negative feedback)",
         fontsize=7.2, color=E_RED, ha="left", style="italic")
-# Wip1 -> ATM 复位（长弧，底部走线）
+# Wip1 -> ATM reset (long arc, routed along the bottom)
 x_wip1, y_wip1 = centers[(3, 3)]
 x_atm, y_atm = centers[(1, 2)]
 ax.add_patch(FancyArrowPatch((x_wip1, y_wip1 - BOX_H / 2 - 0.005),
@@ -128,7 +128,7 @@ ax.add_patch(FancyArrowPatch((x_wip1, y_wip1 - BOX_H / 2 - 0.005),
 ax.text((x_wip1 + x_atm) / 2, 0.045, "Wip1 resets the cascade (dephosphorylates ATM, Chk1/2, p53, MDM2, gammaH2AX)",
         fontsize=7.6, color="#7a4a9e", ha="center", style="italic")
 
-# 审计判词横带
+# audit verdict band
 verdicts = [
     (0, "L0: Poisson floor\n0.28 bits (codes 81/83)", E_GREEN),
     (1, "L1: weakest layer 0.87 bits;\n98% mapping choice, not physics;\nno public ATM single-cell\nseries (registered gap)", E_RED),

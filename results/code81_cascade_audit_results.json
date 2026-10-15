@@ -1,6 +1,6 @@
 {
   "meta": {
-    "script": "代码81_p53全通链路级联审计.py",
+    "script": "code81_p53_full_cascade_audit.py",
     "seed": 20260923,
     "date": "2026-09-23",
     "doses": [
@@ -270,53 +270,53 @@
   },
   "three_legs": [
     {
-      "interface": "I0->1 剂量->DSB计数",
+      "interface": "I0->1 dose->DSB count",
       "legs": {
         "leg1_algebraic": true,
         "leg2_symbolic": true,
         "leg3_temporal": true
       },
-      "evidence": "计数为类别I免校准统计量（S1.4）；I(D;N_DSB)=2.526 bits > 0；DSB 形成时标（分钟）远小于剂量交付与下游时标（小时）",
+      "evidence": "Count is a class-I calibration-free statistic (S1.4); I(D;N_DSB)=2.526 bits > 0; the DSB-formation timescale (minutes) is far below the dose-delivery and downstream timescales (hours)",
       "assumption_flagged": false
     },
     {
-      "interface": "I1->2 DSB->脉冲触发（registered gap）",
+      "interface": "I1->2 DSB->pulse trigger (registered gap)",
       "legs": {
         "leg1_algebraic": true,
         "leg2_symbolic": true,
         "leg3_temporal": true
       },
-      "evidence": "聚类映射计数->计数，代数幸存平凡成立（假设）；I(D;N_trig)=1.654 bits；ATM 激活分钟级 << T=5.5h；本层无公开单细胞数据，三腿均标注为假设",
+      "evidence": "The clustering map count->count makes algebraic survival trivially hold (assumption); I(D;N_trig)=1.654 bits; ATM activation is minute-scale << T=5.5h; no public single-cell data exist for this layer and all three legs are flagged as assumptions",
       "assumption_flagged": true
     },
     {
-      "interface": "I2->3 脉冲串->mRNA（计数/事件时间）",
+      "interface": "I2->3 pulse train->mRNA (count/event timing)",
       "legs": {
         "leg1_algebraic": true,
         "leg2_symbolic": true,
         "leg3_temporal": true
       },
-      "evidence": "计数对仿射简并免疫：sigma_k 0->0.6 检出率 1.000->1.000，I(count) 1.632->1.632 bits；解码器 tau_p21=10h、tau_PUMA=4h 夹住脉冲间隔 5.5h 与窗 48h（tau>W 失忆，tau<<T 无积分）",
+      "evidence": "Counting is immune to affine degeneracy: sigma_k 0->0.6 detection rate 1.000->1.000, I(count) 1.632->1.632 bits; the decoders tau_p21=10h and tau_PUMA=4h bracket the inter-pulse interval 5.5h and the window 48h (tau>W forgets, tau<<T does not integrate)",
       "assumption_flagged": false
     },
     {
-      "interface": "I2->3 脉冲串->mRNA（幅度，反例腿）",
+      "interface": "I2->3 pulse train->mRNA (amplitude, counterexample leg)",
       "legs": {
         "leg1_algebraic": false,
         "leg2_symbolic": false,
         "leg3_temporal": null
       },
-      "evidence": "幅度腿1 死亡：sigma_k 0->0.6，CV(A_meas) 0.002->0.659；假想幅度码份额 @sigma_k=0.6 = 0.057（归档编码器层 Fisher 份额 5.5% 的端到端对应）",
+      "evidence": "Amplitude leg 1 dies: sigma_k 0->0.6, CV(A_meas) 0.002->0.659; hypothetical amplitude-code share @sigma_k=0.6 = 0.057 (the end-to-end counterpart of the archived encoder-layer Fisher share 5.5%)",
       "assumption_flagged": false
     },
     {
-      "interface": "I3->4 mRNA->命运",
+      "interface": "I3->4 mRNA->fate",
       "legs": {
         "leg1_algebraic": true,
         "leg2_symbolic": true,
         "leg3_temporal": true
       },
-      "evidence": "命运=计数比阈值，比值消共模增益（S1.4 差分类幸存）；I(D;fate)=1.325 bits > 0；决策时标 24-48h 与 mRNA 积分时标匹配",
+      "evidence": "Fate = threshold on count ratios, which cancels common-mode gain (S1.4 difference-class survival); I(D;fate)=1.325 bits > 0; the decision timescale 24-48h matches the mRNA integration timescale",
       "assumption_flagged": false
     }
   ],
@@ -329,7 +329,7 @@
     "cv_A_at_sk06": {
       "model": 0.6585003287744243,
       "archived": 0.639,
-      "note": "定性复现（生成模型 LogNormal 增益）",
+      "note": "qualitatively reproduced (generative model with LogNormal gain)",
       "match": true
     },
     "cv_T_pinned": {
@@ -346,7 +346,7 @@
         0.0349
       ],
       "archived": 0.016,
-      "note": "OLS 周期估计口径下钉死在小值且对增益散布不变；N>=7 标定子集对齐归档 N≈9 口径",
+      "note": "pinned at a small value under the OLS period-estimation convention and invariant to gain dispersion; the N>=7 calibration subset matches the archived N~9 convention",
       "match": true
     },
     "count_immune": {
@@ -354,7 +354,7 @@
         1.6323324272544293,
         1.6323324272544293
       ],
-      "note": "计数链信息对 sigma_k 平坦"
+      "note": "count-chain information flat in sigma_k"
     },
     "archived_anchor": {
       "fisher_time_share": 0.942,
@@ -367,11 +367,11 @@
     }
   },
   "double_record": [
-    "L1 传感层为 registered gap：无公开单细胞 ATM 活性数据，聚类常数 c=50 DSB/触发为假设（选取依据：10 Gy -> 7 脉冲，对齐文献 0-7 脉冲/24h 剂量范围）；恒等式中 L2 损失含该层不可知成分",
-    "L3/L4 解码核（量子产出、tau、PUMA 第 3 脉冲阈值、命运阈值 TH_PUMA=800/R0=0.15/TH_P21=1500）为文献启发假设，非拟合",
-    "互信息为分箱 plug-in 估计（mRNA 12x12 分位分箱），绝对值有偏、趋势可靠（代码50 同口径声明）；同时报 Miller-Madow 校正值",
-    "p21 积分器 tau=10h > 脉冲间隔 5.5h：逐脉冲分辨在该接口死亡，幸存的是积分计数（与代码50 腿3 tau=8h 崩溃一致），积分统计量的时标为整串时长而非单脉冲间隔",
-    "幅度臂为假想反事实臂（A(D) 对数斜率 0.15、内生 CV 0.15），用于给幅度链一个'有信息可死'的对照；真实 p53 幅度剂量不变（归档 |alpha|<=0.05）",
-    "CV(T) 的归档值 0.016 取自 FHN 代表元 sigma=0.06 行；本生成模型用 OLS 周期估计复现同量级钉死值，数值一致性依赖估计口径，已显式声明"
+    "The L1 sensing layer is a registered gap: no public single-cell ATM activity data; the clustering constant c=50 DSB/trigger is an assumption (chosen so that 10 Gy -> 7 pulses, matching the literature range 0-7 pulses/24h); the L2 loss in the identity contains this layer's unknowable component",
+    "The L3/L4 decoding kernels (quantum yield, tau, PUMA produces only from the 3rd pulse, fate thresholds TH_PUMA=800/R0=0.15/TH_P21=1500) are literature-inspired assumptions, not fits",
+    "Mutual information is a binned plug-in estimate (mRNA 12x12 quantile binning); absolute values are biased, trends are reliable (same convention as code50); Miller-Madow corrected values also reported",
+    "p21 integrator tau=10h > inter-pulse interval 5.5h: per-pulse resolution dies at this interface; what survives is the integrated count (consistent with the code50 leg-3 tau=8h collapse); the timescale of the integrated statistic is the whole-train duration, not the single-pulse interval",
+    "The amplitude arm is a hypothetical counterfactual arm (A(D) log-slope 0.15, intrinsic CV 0.15), giving the amplitude channel a control with 'information to lose'; real p53 amplitude is dose-invariant (archived |alpha|<=0.05)",
+    "The archived CV(T) value 0.016 comes from the FHN representative sigma=0.06 row; this generative model reproduces the same order of pinned-down value via OLS period estimation; numerical agreement depends on the estimation convention, as explicitly declared"
   ]
 }

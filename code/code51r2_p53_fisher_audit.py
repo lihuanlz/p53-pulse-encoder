@@ -15,9 +15,9 @@ import numpy as np
 
 sys.path.insert(0, str(Path(sys.executable).parent.parent.parent))
 
-WS = Path(r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911")
-OUT_JSON = WS / "03_细胞线3" / "结果" / "代码51r2_p53_Fisher审计_结果.json"
-OUT_PNG = WS / "03_细胞线3" / "结果" / "代码51r2_p53_Fisher审计_六面体.png"
+WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
+OUT_JSON = WS / "03_cell_line_3" / "results" / "code51r2_p53_Fisher_audit_results.json"
+OUT_PNG = WS / "03_cell_line_3" / "results" / "code51r2_p53_Fisher_audit_sixpanel.png"
 
 PARAM_NAMES = ["a", "b", "eps", "s", "tau_r", "I0", "sigma"]
 OBS_NAMES = ["t1", "T", "A", "N", "w", "IPI_sd"]
@@ -170,7 +170,7 @@ def channel_capacity():
 
 def gain_corruption():
     """sigma_k corruption: per-cell k_i~LogN(0,sigma_k) multiplied onto the observation y=k_i*v.
-    Watch the cross-cell CV of A inflate with sigma_k while the CV of T stays immune — minimal control with the same convention as code 50 leg 1."""
+    Watch the cross-cell CV of A inflate with sigma_k while the CV of T stays immune  -  minimal control with the same convention as code 50 leg 1."""
     rows = []
     for sk in [0.0, 0.2, 0.4, 0.6]:
         rng = np.random.default_rng(5)

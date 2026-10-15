@@ -5,8 +5,8 @@ Code 84: p53 discovery-based chain model (constant skeleton + explicit distribut
 Date: 2026-09-25 | seed fixed: 20260925 | deterministic parts fully deterministic
 
 Lineage:
-  - Constant registry: 结果/常数登记_p53通路_发现式建模_v01_2026-09-25.md (K1-K8 / D1-D4 / G1-G4)
-  - Cascade audit: code 81 (verdict card 2026-09-23) — all downstream conventions of this model match it verbatim
+  - Constant registry: results/constant_registry_p53_pathway_discovery_modeling_v01_2026-09-25.md (K1-K8 / D1-D4 / G1-G4)
+  - Cascade audit: code 81 (verdict card 2026-09-23)  -  all downstream conventions of this model match it verbatim
   - Variational race: code 83 (2026-09-25)
 
 Differences from code 81 (everything new in this model):
@@ -23,8 +23,8 @@ Differences from code 81 (everything new in this model):
   Downstream L3/L4 identical to code 81 verbatim (τ_p21=10h, τ_PUMA=4h, PUMA 3rd-pulse threshold, fate thresholds)
 
 Only two non-literature constants (pre-registration calibration, double-recorded):
-  LAM0 = 0.003 /DSB/h — calibration anchor: mean first-pulse delay at 10 Gy ~1.5h (literature: MCF7 first peak 2-3h; measured 1.66h)
-  A_MIN = 10 DSB — calibration anchor: ~7 pulses/24h at 10 Gy (literature range 0-7 pulses)
+  LAM0 = 0.003 /DSB/h  -  calibration anchor: mean first-pulse delay at 10 Gy ~1.5h (literature: MCF7 first peak 2-3h; measured 1.66h)
+  A_MIN = 10 DSB  -  calibration anchor: ~7 pulses/24h at 10 Gy (literature range 0-7 pulses)
   Both are aligned only to these two literature anchors and are not tuned to any audit output.
 """
 
@@ -46,9 +46,9 @@ plt.rcParams["svg.fonttype"] = "none"
 
 SEED = 20260925
 ROOT = Path(__file__).resolve().parent.parent
-OUT_JSON = ROOT / "结果" / "代码84_发现式链路_结果.json"
-OUT_PNG = ROOT / "结果" / "代码84_发现式链路_六面体.png"
-OUT_SVG = ROOT / "结果" / "代码84_发现式链路_六面体.svg"
+OUT_JSON = ROOT / "results" / "code84_discovery_cascade_results.json"
+OUT_PNG = ROOT / "results" / "code84_discovery_cascade_sixpanel.png"
+OUT_SVG = ROOT / "results" / "code84_discovery_cascade_sixpanel.svg"
 
 # ---------------- K-series constants (measured, each with a source; see the constant registry) ----------------
 DOSES = np.array([0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0])
@@ -275,7 +275,7 @@ def main():
         log(f"  MDM2 shadow layer: cross-correlation lag {lag_h:.2f} h (constructed value {LAG_MDM2} h, K3)")
 
     results = dict(
-        meta=dict(script="代码84_发现式链路模型.py", seed=SEED, date="2026-09-25",
+        meta=dict(script="code84_discovery_cascade_model.py", seed=SEED, date="2026-09-25",
                   K_constants=dict(K0_DSB=K0_DSB, R_FAST=R_FAST, FRAC_SLOW=FRAC_SLOW,
                                    T_HALF_SLOW=T_HALF_SLOW, T_PERIOD=T_PERIOD,
                                    JIT_IPI=JIT_IPI, W_PULSE=W_PULSE,
@@ -295,7 +295,7 @@ def main():
             "The square-wave width 3.5h (K2) stays comparable to the code 81 quantum convention via area alignment q_r=q/w; second-order effects of width on integrator output were not scanned separately",
             "Mutual information is a binned plug-in estimate (same convention as code 81); absolute values are biased, trends are reliable",
         ],
-    )
+)
     with open(OUT_JSON, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2, default=lambda o: float(o) if isinstance(o, np.floating) else (int(o) if isinstance(o, np.integer) else str(o)))
     log("JSON written:", OUT_JSON)
@@ -386,10 +386,10 @@ def main():
         f"End-to-end I(D;fate) = {I_chain[-1]:.3f} bits\n"
         f"  (code 81 assumed-L1: 1.325 bits)\n"
         f"weakest layer loss = {max(losses):.2f} bits"
-    )
+)
     axs.text(0.02, 0.98, summary, va="top", fontsize=8.4, family="monospace",
              transform=axs.transAxes)
-    fig.suptitle("Code 84: discovery-based p53 chain — measured-constant skeleton, emergent sensing noise",
+    fig.suptitle("Code 84: discovery-based p53 chain  -  measured-constant skeleton, emergent sensing noise",
                  fontsize=12.5)
     fig.savefig(OUT_PNG, dpi=150, bbox_inches="tight")
     fig.savefig(OUT_SVG, bbox_inches="tight")

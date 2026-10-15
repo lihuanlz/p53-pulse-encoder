@@ -19,7 +19,7 @@ theory, evidence, and the molecular origin of the 5.5-hour clock}
 
 \noindent This Supporting Information documents the complete computational
 output of the accompanying repository
-(\texttt{p53-pulse-encoder}, release v1.0.0): every analysis script, the
+(\texttt{p53-pulse-encoder}, release v1.0.1): every analysis script, the
 numerical results each script produced, and the provenance of third-party
 data. All numbers below are transcribed verbatim from the archived result
 files (\texttt{results/}); scripts are plain Python~3
@@ -37,29 +37,29 @@ files (\texttt{results/}); scripts are plain Python~3
 Script & Computes & Archived output \\
 \midrule
 \endhead
-\texttt{code13\_p53\_fisher\_ stratification\_S7} & Fisher stratification of the pulse generator, S7 slice & \texttt{p53\_channel\_census.csv} \\
-\texttt{code50\_p53\_cascade\_ framework\_selfcheck} & internal consistency self-check of the cascade framework & console log \\
-\texttt{code51r1--r4\_p53\_fisher\_ audit} & Fisher identifiability audit of the phenomenological pulse model; r4 adds noise calibration and an $M{=}4000$ central-difference control & code51r2/r3 results JSONs (Chinese-named), \texttt{code51r4A\_...json}, \texttt{code51r4B\_Fisher\_M4000.json}, three verdict figures (PNG) \\
-\texttt{code52\_TrackC2\_ discrimination\_diagram} & discrimination map between counting and amplitude encoders & the code52 results JSON (Chinese-named), discrimination-map PNG \\
-\texttt{code81\_p53\_full\_cascade\_ audit\_CN\_original} & full-cascade simulation (damage $\to$ fate), information identity, amplitude-share sweep & the code81 results JSON (Chinese-named), five-panel PNG \\
-\texttt{code82\_p53\_mechanism\_ model\_audit} & mechanistic 6-species model; baseline reproduction, Fisher audit, mechanism tests & the code82 results JSON (Chinese-named), two four-panel PNGs \\
-\texttt{code83\_why\_digital\_ variational\_competition} & variational argument for digital pulses & console/tables \\
-\texttt{code84\_discovery\_ cascade\_model} & discovery-grade cascade variant & console/tables \\
-\texttt{code85\_heterogeneity\_ recheck} & heterogeneity robustness re-check & console/tables \\
-\texttt{code86\_foci\_persistence\_ trigger} & DSB-foci persistence as trigger & console/tables \\
-\texttt{code87\_clock\_dose\_ independent\_architecture} & dose-independence of the clock architecture & console/tables \\
-\texttt{code88\_foci\_termination\_ channel} & foci-termination channel analysis & console/tables \\
-\texttt{code89\_p53\_molecular\_ constant\_decomposition} & decomposition of the clock period into molecular phase constants & \texttt{molecular\_layer/code89\_...json} \\
-\texttt{code90\_p53\_full\_cascade\_ consistency\_audit} & 14 static link closures; onset-time decomposition & \texttt{molecular\_layer/code90\_...json} \\
-\texttt{code91\_K2\_pulse\_width\_ decomposition} & pulse-width (FWHM) molecular attribution & \texttt{molecular\_layer/code91\_...json} \\
-\texttt{code92\_belgacem\_closedform\_ crossvalidation} & reproduction of the closed-form period of arXiv:2605.23722 and reconciliation & \texttt{molecular\_layer/code92\_...json} \\
-\texttt{code93\_tcs\_logistic\_ correspondence} & event-time invariance under logistic time warp & \texttt{molecular\_layer/code93\_...json} \\
-\texttt{cellline1\_bifurcation}\allowbreak\texttt{\_suite/} (scripts 1--3, Chinese-named) & stochastic population simulation, bifurcation analysis, discrimination diagram (cell-line 1 suite cited in Methods) & figures \\
+\texttt{code13\_\allowbreak{}p53\_\allowbreak{}fisher\_\allowbreak{} stratification\_\allowbreak{}S7} & Fisher stratification of the pulse generator, S7 slice & \texttt{p53\_\allowbreak{}channel\_\allowbreak{}census.csv} \\
+\texttt{code50\_\allowbreak{}p53\_\allowbreak{}cascade\_\allowbreak{} framework\_\allowbreak{}selfcheck} & internal consistency self-check of the cascade framework & console log \\
+\texttt{code51r1--r4\_\allowbreak{}p53\_\allowbreak{}fisher\_\allowbreak{} audit} & Fisher identifiability audit of the phenomenological pulse model; r4 adds noise calibration and an $M{=}4000$ central-difference control & code51r2/r3 results JSONs (\texttt{code51r2\_\allowbreak{}p53\_\allowbreak{}Fisher\_\allowbreak{}audit\_\allowbreak{}results.json}, \texttt{code51r3\_\allowbreak{}...json}), \texttt{code51r4A\_\allowbreak{}...json}, \texttt{code51r4B\_\allowbreak{}Fisher\_\allowbreak{}M4000.json}, three verdict figures (PNG) \\
+\texttt{code52\_\allowbreak{}TrackC2\_\allowbreak{} discrimination\_\allowbreak{}diagram} & discrimination map between counting and amplitude encoders & \texttt{code52\_\allowbreak{}TrackC2\_\allowbreak{}results.json}, discrimination-map PNG \\
+\texttt{code81\_\allowbreak{}p53\_\allowbreak{}full\_\allowbreak{}cascade\_\allowbreak{} audit} & full-cascade simulation (damage $\to$ fate), information identity, amplitude-share sweep & \texttt{code81\_\allowbreak{}cascade\_\allowbreak{}audit\_\allowbreak{}results.json}, five-panel PNG \\
+\texttt{code82\_\allowbreak{}p53\_\allowbreak{}mechanism\_\allowbreak{} model\_\allowbreak{}audit} & mechanistic 6-species model; baseline reproduction, Fisher audit, mechanism tests & \texttt{code82\_\allowbreak{}mechanism\_\allowbreak{}audit\_\allowbreak{}results.json}, two four-panel PNGs \\
+\texttt{code83\_\allowbreak{}why\_\allowbreak{}digital\_\allowbreak{} variational\_\allowbreak{}competition} & variational argument for digital pulses & console/tables \\
+\texttt{code84\_\allowbreak{}discovery\_\allowbreak{} cascade\_\allowbreak{}model} & discovery-grade cascade variant & console/tables \\
+\texttt{code85\_\allowbreak{}heterogeneity\_\allowbreak{} recheck} & heterogeneity robustness re-check & console/tables \\
+\texttt{code86\_\allowbreak{}foci\_\allowbreak{}persistence\_\allowbreak{} trigger} & DSB-foci persistence as trigger & console/tables \\
+\texttt{code87\_\allowbreak{}clock\_\allowbreak{}dose\_\allowbreak{} independent\_\allowbreak{}architecture} & dose-independence of the clock architecture & console/tables \\
+\texttt{code88\_\allowbreak{}foci\_\allowbreak{}termination\_\allowbreak{} channel} & foci-termination channel analysis & console/tables \\
+\texttt{code89\_\allowbreak{}p53\_\allowbreak{}molecular\_\allowbreak{} constant\_\allowbreak{}decomposition} & decomposition of the clock period into molecular phase constants & \texttt{molecular\_\allowbreak{}layer/code89\_\allowbreak{}...json} \\
+\texttt{code90\_\allowbreak{}p53\_\allowbreak{}full\_\allowbreak{}cascade\_\allowbreak{} consistency\_\allowbreak{}audit} & 14 static link closures; onset-time decomposition & \texttt{molecular\_\allowbreak{}layer/code90\_\allowbreak{}...json} \\
+\texttt{code91\_\allowbreak{}K2\_\allowbreak{}pulse\_\allowbreak{}width\_\allowbreak{} decomposition} & pulse-width (FWHM) molecular attribution & \texttt{molecular\_\allowbreak{}layer/code91\_\allowbreak{}...json} \\
+\texttt{code92\_\allowbreak{}belgacem\_\allowbreak{}closedform\_\allowbreak{} crossvalidation} & reproduction of the closed-form period of arXiv:2605.23722 and reconciliation & \texttt{molecular\_\allowbreak{}layer/code92\_\allowbreak{}...json} \\
+\texttt{code93\_\allowbreak{}tcs\_\allowbreak{}logistic\_\allowbreak{} correspondence} & event-time invariance under logistic time warp & \texttt{molecular\_\allowbreak{}layer/code93\_\allowbreak{}...json} \\
+\texttt{cellline1\_bifurcation}\allowbreak\texttt{\_suite/} (scripts 1--3) & stochastic population simulation, bifurcation analysis, discrimination diagram (cell-line 1 suite cited in Methods) & figures \\
 \multicolumn{3}{l}{\emph{Manuscript figures (all in \texttt{manuscript/})}}\\
-\texttt{make\_fig1.py} & Fig.~1 encoder topology & \texttt{fig1\_topology.png} \\
-\texttt{make\_fig2.py} & Fig.~2 channel census & \texttt{fig2\_census.png} \\
-\texttt{make\_fig3.py} & Fig.~3 molecular decomposition (figure layer of code89; reads \texttt{code89\_...json}) & \texttt{fig3\_molecular.png} \\
-\texttt{make\_fig4.py} & Fig.~4 closed-form cross-validation (figure layer of code92; reads \texttt{code92\_...json}) & \texttt{fig4\_closedform.png} \\
+\texttt{make\_\allowbreak{}fig1.py} & Fig.~1 encoder topology & \texttt{fig1\_\allowbreak{}topology.png} \\
+\texttt{make\_\allowbreak{}fig2.py} & Fig.~2 channel census & \texttt{fig2\_\allowbreak{}census.png} \\
+\texttt{make\_\allowbreak{}fig3.py} & Fig.~3 molecular decomposition (figure layer of code89; reads \texttt{code89\_\allowbreak{}...json}) & \texttt{fig3\_\allowbreak{}molecular.png} \\
+\texttt{make\_\allowbreak{}fig4.py} & Fig.~4 closed-form cross-validation (figure layer of code92; reads \texttt{code92\_\allowbreak{}...json}) & \texttt{fig4\_\allowbreak{}closedform.png} \\
 \bottomrule
 \end{longtable}
 

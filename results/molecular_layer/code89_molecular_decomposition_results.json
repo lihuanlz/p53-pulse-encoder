@@ -79,11 +79,11 @@
   "T4_fisher_cross": {
     "code82_stiffest_axis": "Wip1 production axis (Tw 0.27 + TW 0.26 + P 0.11 + dW 0.10)",
     "molecular_closure": {
-      "Tw": "mRNA 产生率：跨源未实测，模型内常数 -> 缺口",
-      "TW": "翻译率：普适生物物理量 4 aa/s -> 常数候选",
-      "P": "Wip1 对 ATM* 去磷酸化：体外酶活量级有报道，单细胞未测 -> 缺口",
-      "dW": "Wip1 降解 0.7-2.3/h 跨源 3 倍散布 -> 分布"
+      "Tw": "mRNA production rate: not measured across sources, in-model constant -> gap",
+      "TW": "translation rate: universal biophysical quantity 4 aa/s -> constant candidate",
+      "P": "Wip1 dephosphorylation of ATM*: in-vitro enzymatic order-of-magnitude reported, not measured in single cells -> gap",
+      "dW": "Wip1 degradation 0.7-2.3/h, 3-fold spread across sources -> distribution"
     },
-    "reading": "数据钉得最死的方向，恰恰一半是分子常数（TW/dW 可测），一半是缺口（Tw/P）；代码82 预言2 的实验优先级在分子层得到独立支持。"
+    "reading": "The directions pinned hardest by the data are half molecular constants (TW/dW measurable) and half gaps (Tw/P); the experimental priority of code82 prediction 2 is independently supported at the molecular layer."
   }
 }

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Code 91: K2 pulse width (3.5 h) molecular-level decomposition + full-chain gap L13 closure
-Proposition: the width is governed not by the delay but by the ATM* plateau —
+Proposition: the width is governed not by the delay but by the ATM* plateau  - 
   W = Wip1 induction delay (K4, already closed) + time for Wip1 to accumulate to the extinction threshold + fast p53 collapse tail (minute scale)
 Method:
   B1 Mönke 2025 errata version with constant DSB=100 input; extract p53 first-pulse FWHM, ATM* plateau,
@@ -19,8 +19,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 SEED_TAG = 20260925
-OUT_JSON = r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911\03_细胞线3\结果\代码91_K2宽度分解_结果.json"
-OUT_PNG = r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911\03_细胞线3\代码与图\代码91_K2宽度分解_三面体.png"
+OUT_JSON = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\results\code91_K2_width_decomposition_results.json"
+OUT_PNG = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\code_and_figures\code91_K2_width_decomposition_threepanel.png"
 OUT_SVG = OUT_PNG.replace(".png", ".svg")
 
 plt.rcParams.update({"svg.fonttype": "none", "font.size": 9,
@@ -132,15 +132,15 @@ res["B1_decomposition"] = dict(
         Wip1_at_extinction_AU=W_threshold,
         wip1_accumulation_from_pulse_start_h=float(t_wip1_to_threshold),
         p53_collapse_tail_h=float(tail),
-    ),
+),
     W_decomp_h=float(W_decomp),
     closes=bool(abs(W_decomp - W_meas) / W_meas <= 0.05),
     closes_vs_archive=bool(abs(W_meas - 3.5) <= 0.7),
-    tautology_note="W_decomp 与 FWHM 的相等是构造恒等（两段恰好铺满半高宽区间）；"
-                   "分解的实质内容是归属：平台期 1.54 h 由 Wip1 积累决定，"
-                   "崩塌尾 1.99 h 由 Mdm2 恢复动力学（dM/dAM）决定，"
-                   "且崩塌尾长于平台期——宽度的主要分子归因是 Mdm2 恢复，不是 Wip1 阈值穿越本身",
-    reading="宽度 = p53 半升到 ATM* 熄灭 (%.2f h) + 崩塌尾 (%.2f h) = %.2f h vs FWHM %.2f h"
+    tautology_note="the equality of W_decomp and FWHM is a constructive identity (the two segments exactly tile the half-maximum interval); "
+                   "the substantive content of the decomposition is attribution: the 1.54 h plateau is set by Wip1 accumulation, "
+                   "the 1.99 h collapse tail by Mdm2 recovery kinetics (dM/dAM), "
+                   "and the collapse tail is longer than the plateau - the dominant molecular attribution of width is Mdm2 recovery, not the Wip1 threshold crossing itself",
+    reading="width = p53 half-rise to ATM* off (%.2f h) + collapse tail (%.2f h) = %.2f h vs FWHM %.2f h"
             % (a_f - t_rise, tail, W_decomp, W_meas),
 )
 

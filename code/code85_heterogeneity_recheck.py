@@ -34,9 +34,9 @@ plt.rcParams["font.size"] = 9.5
 
 SEED = 20260925
 ROOT = Path(__file__).resolve().parent.parent
-OUT_JSON = ROOT / "结果" / "代码85_异质性复核_结果.json"
-OUT_PNG = ROOT / "结果" / "代码85_异质性复核_图.png"
-OUT_SVG = ROOT / "结果" / "代码85_异质性复核_图.svg"
+OUT_JSON = ROOT / "results" / "code85_heterogeneity_recheck_results.json"
+OUT_PNG = ROOT / "results" / "code85_heterogeneity_recheck_fig.png"
+OUT_SVG = ROOT / "results" / "code85_heterogeneity_recheck_fig.svg"
 
 # ---- constants kept byte-identical to code 84 ----
 DOSES = np.array([0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0])
@@ -214,7 +214,7 @@ def main():
             dr = {k: round(v["dispersion_ratio"], 2) for k, v in r["dispersion"].items()}
             log(f"    <N>10={r['count_10Gy']:.2f}, t1@10={r['t1_10Gy_mean']:.2f}h, "
                 f"Fano(2Gy)={r['fano_2Gy']:.2f}, I(D;fate)={r['I_D_fate']:.3f}, dispersion_ratio={dr}")
-        payload = dict(meta=dict(script="代码85_异质性复核.py", mode="scan", N=N, seed=SEED,
+        payload = dict(meta=dict(script="code85_heterogeneity_recheck.py", mode="scan", N=N, seed=SEED,
                                  lit_dispersion=LIT_DISPERSION,
                                  lit_fano_band=LIT_FANO_BAND),
                        scan=results)

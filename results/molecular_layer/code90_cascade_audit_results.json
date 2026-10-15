@@ -6,9 +6,9 @@
       "en": "dose->DSB",
       "name": "dose -> DSB count",
       "constant": "35 DSB/Gy",
-      "sources": "代码81 锚定；代码82 双录4；代码87/88 沿用",
+      "sources": "code81 anchored; code82 dual-recorded 4; code87/88 inherited",
       "status": "closed",
-      "note": "跨代码一致，但本身是假设口径（未实测换算），假设旗标保留",
+      "note": "consistent across codes, but itself an assumption convention (conversion not measured); assumption flag retained",
       "_pos": [
         0.06,
         0.72,
@@ -19,10 +19,10 @@
       "id": "L1",
       "en": "DSB->gH2AX",
       "name": "DSB -> γH2AX",
-      "constant": "半峰1-3 min，峰 30 min（K5）",
-      "sources": "常数登记 v01 K5（多来源一致）",
+      "constant": "half-peak 1-3 min, peak 30 min (K5)",
+      "sources": "constant registry v01 K5 (consistent across sources)",
       "status": "closed",
-      "note": "分钟级，远小于下游所有时标",
+      "note": "minute-scale, far below all downstream timescales",
       "_pos": [
         0.20666666666666667,
         0.72,
@@ -32,11 +32,11 @@
     {
       "id": "L2",
       "en": "gH2AX->ATM",
-      "name": "γH2AX -> ATM 激活",
-      "constant": "缺剂量分级单细胞时序",
+      "name": "gamma-H2AX -> ATM activation",
+      "constant": "dose-graded single-cell time series missing",
       "sources": "v01 G1 registered gap",
       "status": "gap",
-      "note": "ATM-SPARK/ATOMIC 探针存在但无公开剂量分级数据",
+      "note": "ATM-SPARK/ATOMIC probes exist but no public dose-graded data",
       "_pos": [
         0.35333333333333333,
         0.72,
@@ -46,11 +46,11 @@
     {
       "id": "L3",
       "en": "ATM->p53 cat.",
-      "name": "ATM -> p53（催化）",
-      "constant": "kcat/Km 未实测",
-      "sources": "v02 G5（用户点名催化速率，恰在缺口）",
+      "name": "ATM -> p53 (catalytic)",
+      "constant": "kcat/Km not measured",
+      "sources": "v02 G5 (catalytic rate singled out by the user, happens to sit in a gap)",
       "status": "gap",
-      "note": "模型用唯象保护因子 R=2 代替",
+      "note": "the model substitutes a phenomenological protection factor R=2",
       "_pos": [
         0.5,
         0.72,
@@ -60,11 +60,11 @@
     {
       "id": "L4",
       "en": "p53 engine",
-      "name": "p53 脉冲引擎（K1/K3/K4）",
+      "name": "p53 pulse engine (K1/K3/K4)",
       "constant": "5.5 h / 2.0 h / 1.25 h",
-      "sources": "代码89：三常数全部分解闭合",
+      "sources": "code89: all three constants decompose closed",
       "status": "closed",
-      "note": "周期 5.95 vs 5.48（8.5% 尾巴登记）",
+      "note": "period 5.95 vs 5.48 (8.5% tail registered)",
       "_pos": [
         0.6466666666666667,
         0.72,
@@ -74,11 +74,11 @@
     {
       "id": "L5",
       "en": "counting N(D)",
-      "name": "剂量 -> 脉冲计数 N(D)",
-      "constant": "计数律 D_c：归档 0.261 vs 代码82 0.99 Gy",
-      "sources": "代码82 验证靶标1：3.8 倍差",
+      "name": "dose -> pulse count N(D)",
+      "constant": "counting law D_c: archived 0.261 vs code82 0.99 Gy",
+      "sources": "code82 validation target 1: 3.8-fold discrepancy",
       "status": "tension",
-      "note": "方向对（饱和形状 R2=0.995），绝对刻度差源于 L0 换算假设",
+      "note": "direction correct (saturation shape R2=0.995); the absolute-scale offset stems from the L0 conversion assumption",
       "_pos": [
         0.7933333333333334,
         0.72,
@@ -88,11 +88,11 @@
     {
       "id": "L6",
       "en": "first pulse t1",
-      "name": "首脉冲 t1",
-      "constant": "分布（首峰 2.5-3.0 h），剂量无关",
-      "sources": "D1；Lahav 2004；代码87 平坦 2.5-3.0 h 全剂量",
+      "name": "first-pulse time t1",
+      "constant": "distribution (first peak 2.5-3.0 h), dose-independent",
+      "sources": "D1; Lahav 2004; code87 flat 2.5-3.0 h across doses",
       "status": "closed",
-      "note": "分布本体是感知层签名，不是缺陷",
+      "note": "the distribution itself is the sensing-layer signature, not a defect",
       "_pos": [
         0.94,
         0.72,
@@ -102,12 +102,12 @@
     {
       "id": "L7",
       "en": "dispersion 5.8",
-      "name": "弥散比 t1/IPI",
-      "constant": "归档 5.8 = (240/100)^2，5 Gy 口径",
-      "sources": "代码86 口径错误已撤回；代码87/88 得 6.65-7.32",
-      "sources_detail": "更正登记 2026-09-25",
+      "name": "dispersion ratio t1/IPI",
+      "constant": "archived 5.8 = (240/100)^2, 5 Gy convention",
+      "sources": "code86 retracted for a convention error; code87/88 give 6.65-7.32",
+      "sources_detail": "correction registered 2026-09-25",
       "status": "closed",
-      "note": "同量级首合账；86 撤回已登记",
+      "note": "first account closing at the same order of magnitude; the 86 retraction is registered",
       "_pos": [
         0.94,
         0.18,
@@ -117,11 +117,11 @@
     {
       "id": "L8",
       "en": "clock dose-indep.",
-      "name": "时钟剂量无关架构",
-      "constant": "剂量只走门控+终止",
-      "sources": "代码87/88 闭环",
+      "name": "clock dose-independent architecture",
+      "constant": "dose acts only through gating + termination",
+      "sources": "code87/88 closed loop",
       "status": "closed",
-      "note": "0.3 Gy 低剂量持续振荡见 L9",
+      "note": "for sustained low-dose 0.3 Gy oscillation see L9",
       "_pos": [
         0.7933333333333334,
         0.18,
@@ -131,11 +131,11 @@
     {
       "id": "L9",
       "en": "low-dose osc.",
-      "name": "低剂量振荡分数",
-      "constant": "文献 0.3 Gy 约 35% 振荡",
-      "sources": "代码87/88 判词卡",
+      "name": "low-dose oscillation fraction",
+      "constant": "literature: ~35% oscillating at 0.3 Gy",
+      "sources": "code87/88 verdict card",
       "status": "tension",
-      "note": "损伤驱动终止造不出低剂量振荡；文献内部张力，已登记",
+      "note": "damage-driven termination cannot produce low-dose oscillation; internal tension in the literature, registered",
       "_pos": [
         0.6466666666666667,
         0.18,
@@ -145,11 +145,11 @@
     {
       "id": "L10",
       "en": "p21 tracking",
-      "name": "下游 p21 转录追踪",
-      "constant": "延迟精确值待提取",
-      "sources": "v01 G3（Hafner 2020）",
+      "name": "downstream p21 transcription tracking",
+      "constant": "exact delay value to be extracted",
+      "sources": "v01 G3 (Hafner 2020) ",
       "status": "gap",
-      "note": "定性同期振荡已证，定量延迟待从原文图提取",
+      "note": "qualitative synchronized oscillation shown; quantitative delay to be extracted from the source figure",
       "_pos": [
         0.5,
         0.18,
@@ -159,11 +159,11 @@
     {
       "id": "L11",
       "en": "info budget",
-      "name": "信息账 I(D;fate)",
-      "constant": "0.55-0.63 bits（修正后）",
-      "sources": "代码81 的 1.325 因依赖剂量相关时序被 C1 证伪",
+      "name": "information account I(D;fate)",
+      "constant": "0.55-0.63 bits (after correction)",
+      "sources": "code81's 1.325 falsified by C1 for relying on dose-dependent timing",
       "status": "closed",
-      "note": "撤回与修正均已登记；论文从未引用 1.325",
+      "note": "retraction and correction both registered; the paper never cited 1.325",
       "_pos": [
         0.35333333333333333,
         0.18,
@@ -173,11 +173,11 @@
     {
       "id": "L12",
       "en": "Wip1 RNAi",
-      "name": "Wip1 RNAi 表型",
-      "constant": "幅度方向：模型升 vs Batchelor 降 45%",
-      "sources": "代码82 验证靶标5",
+      "name": "Wip1 RNAi phenotype",
+      "constant": "amplitude direction: model rises vs Batchelor falls 45%",
+      "sources": "code82 validation target 5",
       "status": "tension",
-      "note": "失控与变宽预言复现；幅度方向冲突登记为模型-实验不符项",
+      "note": "runaway and widening predictions reproduced; the amplitude-direction conflict is registered as a model-experiment mismatch",
       "_pos": [
         0.20666666666666667,
         0.18,
@@ -187,11 +187,11 @@
     {
       "id": "L13",
       "en": "width K2",
-      "name": "脉冲宽度 K2 = 3.5 h",
-      "constant": "分子层未分解",
-      "sources": "v02 登记表 D 节",
+      "name": "pulse width K2 = 3.5 h",
+      "constant": "not decomposed at the molecular layer",
+      "sources": "v02 registry, section D",
       "status": "gap",
-      "note": "由 ATM* 平台期决定，非纯延迟和，待分解",
+      "note": "set by the ATM* plateau, not a pure sum of delays; decomposition pending",
       "_pos": [
         0.06,
         0.18,
@@ -225,15 +225,15 @@
       2.5,
       3.0
     ],
-    "t1_definition": "文献 t1 = 首峰时刻（D1：MCF7 2-3 h）；onset 是阈穿越，不等于 t1",
-    "finding": "感知段（γH2AX 0.5 + ATM 上升 0.19 + p53 阈值 0.14）合计仅 0.83 h；t1 的大头是 p53 积累爬坡到峰（2.38 h），不是感知延迟",
+    "t1_definition": "Literature t1 = time of first peak (D1: MCF7 2-3 h); onset is a threshold crossing and does not equal t1",
+    "finding": "The sensing segment (gamma-H2AX 0.5 + ATM rise 0.19 + p53 threshold 0.14) totals only 0.83 h; the bulk of t1 is the p53 accumulation ramp to peak (2.38 h), not sensing delay",
     "peak_closes": true
   },
   "B_ordering_ok": true,
   "C_tensions_register": [
-    "L5: 计数律 D_c 3.8 倍差（换算假设）",
-    "L9: 0.3 Gy 低剂量振荡（文献内部张力）",
-    "L12: Wip1 RNAi 幅度方向（模型-实验不符）",
-    "B: 模拟首峰 3.21 h vs 实测 t1 带 2.5-3.0 h（阶跃口径差）"
+    "L5: counting-law D_c 3.8-fold discrepancy (conversion assumption)",
+    "L9: 0.3 Gy low-dose oscillation (internal tension in the literature)",
+    "L12: Wip1 RNAi amplitude direction (model-experiment mismatch)",
+    "B: simulated first peak 3.21 h vs measured t1 band 2.5-3.0 h (step-convention difference)"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "seed": 20260925,
-  "source": "arXiv 2605.23722 Section 9 (PDF belgacem_2605.23722.pdf 本地存档)",
+  "source": "arXiv 2605.23722 Section 9 (PDF belgacem_2605.23722.pdf local archive)",
   "P1_reproduce": {
     "gamma": 0.6931471805599453,
     "tau_c_target_h": 1.0,
@@ -40,7 +40,7 @@
         "amplitude": 0.556436518961786
       }
     ],
-    "note": "τ=1.0 位于临界点上（边缘），周期仅在 τ>τc 的极限环上有意义"
+    "note": "tau=1.0 sits on the critical point (marginal); the period is defined only on the limit cycle for tau>tau_c"
   },
   "P3_our_constants_in_closed_form": [
     {
@@ -82,6 +82,6 @@
     "monke_sim_h": 5.48,
     "monke_jacobian_h": 5.95,
     "ours_tau2_closed_form_h": 8.404331099664685,
-    "verdict": "见判词卡"
+    "verdict": "see verdict card"
   }
 }

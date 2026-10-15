@@ -12,7 +12,7 @@ Revised to two arms:
 The two arms answer different questions: A = behavior of the faithful pathway; B = a strong test of leg 1 (whether true amplitude information can die).
 
 Dual record of the audit (recorded faithfully; neither side touches the numbers):
-  Audit prediction "fold survives in arm B (the ratio cancels the gain)" — refuted by measurement: fold I=0.401→0.178 decay.
+  Audit prediction "fold survives in arm B (the ratio cancels the gain)"  -  refuted by measurement: fold I=0.401→0.178 decay.
   With affine b≠0, fold=(ka+b)/(km+b); k does not cancel → fold leaks,
   consistent row-for-row with the framework interface-algebra table "fold survives only at b=0".
 
@@ -22,7 +22,7 @@ Remaining hypotheses:
       The differential-ratio decoder is unstable to define in pulse-train models (pulse positions misaligned with sampling points); left to continuous-response models.
 
 Discipline: past project assets (line 1 p53 audit, sealed) are background only and do not enter this model.
-Output: console printout + figure 结果/仿真_p53cascade_三腿nucleus验.png. Seed 20260815. Pure CPU.
+Output: console printout + figure results/sim_p53cascade_three_leg_nucleus_check.png. Seed 20260815. Pure CPU.
 """
 import numpy as np
 from scipy.signal import find_peaks
@@ -163,7 +163,7 @@ for n, mk in [("amplitude", "o"), ("fold", "s"), ("count", "^")]:
     ax.plot(SIG_LIST, [leg1[("B", sk)][n] for sk in SIG_LIST], mk + "-", label=n + "(arm B)")
     ax.plot(SIG_LIST, [leg1[("A", sk)][n] for sk in SIG_LIST], mk + "--", alpha=0.45, label=n + "(arm A)")
 ax.set_xlabel("gain fluctuation σ_k"); ax.set_ylabel("I(D; readout) / bits")
-ax.legend(fontsize=7, ncol=2); ax.set_title("leg 1: two-arm control — amplitude dead (arm B confirmed), fold leaks, count survives")
+ax.legend(fontsize=7, ncol=2); ax.set_title("leg 1: two-arm control  -  amplitude dead (arm B confirmed), fold leaks, count survives")
 
 ax = axes[1]
 taus = sorted(leg3)
@@ -177,5 +177,5 @@ axes[2].bar(["L1\ndamage→pulse train", "I(D;Y)\nend-to-end survival", "L2\npul
 axes[2].set_ylabel("bits"); axes[2].set_title("information-loss decomposition (H(D)=2.32)")
 
 plt.tight_layout()
-plt.savefig("/mnt/agents/output/03_细胞线3/结果/仿真_p53cascade_三腿nucleus验.png", dpi=150)
-print("\nFigure saved: 03_细胞线3/结果/仿真_p53cascade_三腿nucleus验.png")
+plt.savefig("/mnt/agents/output/03_cell_line_3/results/sim_p53cascade_three_leg_nucleus_check.png", dpi=150)
+print("\nFigure saved: 03_cell_line_3/results/sim_p53cascade_three_leg_nucleus_check.png")

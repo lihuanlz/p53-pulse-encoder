@@ -1,11 +1,11 @@
 {
   "meta": {
-    "script": "代码82_p53机制模型审计.py",
+    "script": "code82_p53_mechanism_model_audit.py",
     "seed": 20260923,
     "date": "2026-09-23",
     "errata": [
-      "E1: Hill 分母 1+ATM^2/kA（非 kA^2）",
-      "E2: p53 保护因子 1+R/(1+ATM*)（非 1/(1+R·ATM*)）"
+      "E1: Hill denominator 1+ATM^2/kA (not kA^2)",
+      "E2: p53 protection factor 1+R/(1+ATM*) (not 1/(1+R*ATM*))"
     ],
     "params2025": {
       "A": 30.5,
@@ -1718,7 +1718,7 @@
       "R2": 0.92,
       "Dc": 0.261
     },
-    "note": "D 由 b_s×1h/35 DSB/Gy 换算，单位映射为假设口径；基态自发脉冲 N(0)≈4.5 由双池随机背景所致"
+    "note": "D is converted via b_s x 1h/35 DSB/Gy; the unit mapping is an assumption; the basal spontaneous pulses N(0)~4.5 arise from the two-pool stochastic background"
   },
   "V3": {
     "ctrl": {
@@ -1758,7 +1758,7 @@
       "n_ipi": 804
     },
     "archived": 5.8,
-    "note": "归档口径：Var(首脉冲时刻)/Var(相继IPI)，文献 5.8，代码81 生成模型 5.7"
+    "note": "Archived convention: Var(time of first pulse)/Var(subsequent IPI); literature 5.8, code81 generative model 5.7"
   },
   "V5": {
     "x1.0": {
@@ -1813,14 +1813,14 @@
     }
   },
   "V4": {
-    "ref": "F2 时间/幅度通道分解",
+    "ref": "F2 time/amplitude channel decomposition",
     "share_time": 0.45113696774677536,
     "archived_time": 0.942
   },
   "V6": {
     "ref": "R4",
-    "log_transition": "见 R4.log",
-    "sat_no_transition": "见 R4.sat"
+    "log_transition": "see R4.log",
+    "sat_no_transition": "see R4.sat"
   },
   "V7": {
     "ref": "R2",

@@ -19,8 +19,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 SEED_TAG = 20260925
-OUT_JSON = r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911\03_细胞线3\结果\代码89_分子层分解_结果.json"
-OUT_PNG = r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911\03_细胞线3\代码与图\代码89_分子层分解_四面体.png"
+OUT_JSON = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\results\code89_molecular_decomposition_results.json"
+OUT_PNG = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\code_and_figures\code89_molecular_decomposition_fourpanel.png"
 OUT_SVG = OUT_PNG.replace(".png", ".svg")
 
 plt.rcParams.update({
@@ -35,7 +35,7 @@ TAU_TRANSCR = 0.5          # h, Mdm2 transcription delay: elongation 20 nt/s ~25
 TAU_TRANSL = 0.17          # h, translation 4 aa/s ~2 min + nuclear import/export ~4 min each (Wang 2019)
 OMEGA = 2 * np.pi / 5.5    # rad/h, phase lags evaluated at the archived 5.5 h period
 
-# Mönke 2025 parameters (errata version, 机制模型方程与参数表_2026-09-23.md)
+# Mönke 2025 parameters (errata version, mechanism_model_equations_parameters_2026-09-23.md)
 PAR = dict(A=30.5, P=22.0, C=1.4, g=2.5, dAM=20.0,
            Tm=1.2, TM=4.0, Tw=1.2, TW=1.0,
            dA=0.16, dP=0.1, dm=1.0, dM=2.0, dw=1.3, dW=2.3,
@@ -131,12 +131,12 @@ res["T3_K1_period"] = dict(
 res["T4_fisher_cross"] = dict(
     code82_stiffest_axis="Wip1 production axis (Tw 0.27 + TW 0.26 + P 0.11 + dW 0.10)",
     molecular_closure=dict(
-        Tw="mRNA 产生率：跨源未实测，模型内常数 -> 缺口",
-        TW="翻译率：普适生物物理量 4 aa/s -> 常数候选",
-        P="Wip1 对 ATM* 去磷酸化：体外酶活量级有报道，单细胞未测 -> 缺口",
-        dW="Wip1 降解 0.7-2.3/h 跨源 3 倍散布 -> 分布"),
-    reading="数据钉得最死的方向，恰恰一半是分子常数（TW/dW 可测），一半是缺口（Tw/P）；"
-            "代码82 预言2 的实验优先级在分子层得到独立支持。")
+        Tw="mRNA production rate: not measured across sources, in-model constant -> gap",
+        TW="translation rate: universal biophysical quantity 4 aa/s -> constant candidate",
+        P="Wip1 dephosphorylation of ATM*: in-vitro enzymatic order-of-magnitude reported, not measured in single cells -> gap",
+        dW="Wip1 degradation 0.7-2.3/h, 3-fold spread across sources -> distribution"),
+    reading="The directions pinned hardest by the data are half molecular constants (TW/dW measurable) and half gaps (Tw/P);"
+            "the experimental priority of code82 prediction 2 is independently supported at the molecular layer. ")
 
 # ---------------- Figure: four-panel ----------------
 fig, axes = plt.subplots(2, 2, figsize=(10, 7.2))

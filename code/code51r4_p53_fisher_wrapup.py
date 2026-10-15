@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Code 51r4 p53 Fisher audit wrap-up (two stages)
-part A (fast): core noise calibration — σ scan driving IPI CV→30% (Lahav: 100/330min),
+part A (fast): core noise calibration  -  σ scan driving IPI CV→30% (Lahav: 100/330min),
        re-run the P2' delay scan at the calibration point σ*, verifying result 3 (independent random perception-level signature) is robust at realistic noise magnitude.
 part B (heavy): M=4000 + forward differences (common random numbers) tighten the information upper bound along the σ soft direction,
        compared against r3's M=400.
-usage: python 代码51r4_p53_Fisher收尾.py A|B
+usage: python code51r4_p53_fisher_wrapup.py A|B
 """
 import sys, json
 from pathlib import Path
@@ -13,10 +13,10 @@ import numpy as np
 
 sys.path.insert(0, str(Path(sys.executable).parent.parent.parent))
 
-WS = Path(r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911")
-OUT_A = WS / "03_细胞线3" / "结果" / "代码51r4A_噪声标定与稳健性.json"
-OUT_B = WS / "03_细胞线3" / "结果" / "代码51r4B_Fisher_M4000.json"
-OUT_PNG = WS / "03_细胞线3" / "结果" / "代码51r4_收尾_四面体.png"
+WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
+OUT_A = WS / "03_cell_line_3" / "results" / "code51r4A_noise_calibration_robustness.json"
+OUT_B = WS / "03_cell_line_3" / "results" / "code51r4B_Fisher_M4000.json"
+OUT_PNG = WS / "03_cell_line_3" / "results" / "code51r4_wrapup_fourpanel.png"
 
 PARAM_NAMES = ["a", "b", "eps", "s", "tau_r", "I0", "sigma"]
 OBS_NAMES = ["t1", "T", "A", "N", "w", "IPI_sd"]
@@ -147,7 +147,7 @@ def part_A():
         var_T = float(np.nanvar(obs[:, 1], ddof=1))
         ratio = var_t1 / var_T
         rows.append(dict(mu_d_over_T=frac, var_ratio=ratio, pass_P2p=ratio >= 4))
-        print(f"      μd/T={frac:.2f}  VarRatio={ratio:.2f}  P2'={'过' if ratio>=4 else '不过'}",
+        print(f"      μd/T={frac:.2f}  VarRatio={ratio:.2f}  P2'={'pass' if ratio>=4 else 'fail'}",
               flush=True)
     print("[A3] noise-color discrimination: can slow heterogeneity satisfy IPI_CV≈0.30 and N≈9 simultaneously ...", flush=True)
     hetero = []
@@ -203,7 +203,7 @@ def fisher_M(theta0, M, hrel):
                 share=share.tolist(), N_mean=float(np.nanmean(base[:, 3])))
 
 
-CACHE = WS / "03_细胞线3" / "结果" / "_代码51r4B2_缓存.json"
+CACHE = WS / "03_cell_line_3" / "results" / "_code51r4B2_cache.json"
 
 
 def _group_mean_cache(name, factor, M, hrel, cache):
@@ -248,7 +248,7 @@ def part_B3():
         gp = np.array(cache[f"{name}|{1+hrel}|{M}|{hrel}"])
         gm = np.array(cache[f"{name}|{1-hrel}|{M}|{hrel}"])
         J[:, i] = (gp - gm) / (np.log(1 + hrel) - np.log(1 - hrel))
-    # Σ uses trajectory covariance of the M=4000 baseline group — cache stores means only, re-run baseline for covariance
+    # Σ uses trajectory covariance of the M=4000 baseline group  -  cache stores means only, re-run baseline for covariance
     obs = run_group(THETA0, m=M, seed0=0)
     X = obs.copy()
     for i in range(X.shape[1]):
@@ -303,10 +303,10 @@ def make_figure(resA, resB):
     ax2.axhline(9.0, ls=":", color="#e67e22", alpha=0.5)
     ax2.set_ylabel("N")
     ax.axvline(resA["sigma_star"], ls="--", color="gray",
-               label=f"σ*={resA['sigma_star']}（IPI_CV={resA['star']['ipi_cv']:.2f}, N={resA['star']['N_mean']:.0f}）")
+               label=f"σ*={resA['sigma_star']} (IPI_CV={resA['star']['ipi_cv']:.2f}, N={resA['star']['N_mean']:.0f}) ")
     ax.set_xscale("log")
     ax.set_title("(a) fast-noise calibration: IPI CV on target ↔ N inflation trade-off")
-    ax.set_xlabel("σ（log）"); ax.set_ylabel("CV")
+    ax.set_xlabel("σ (log) "); ax.set_ylabel("CV")
     h1, l1 = ax.get_legend_handles_labels(); h2, l2 = ax2.get_legend_handles_labels()
     ax.legend(h1 + h2, l1 + l2, fontsize=8)
 

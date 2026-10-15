@@ -3,8 +3,8 @@
 code87_clock_dose_independent_architecture.py  (seed-deterministic)
 ================================================
 Trigger layer rebuilt per the logic fixed on 2026-09-25 14:16:
-  dose enters only through two channels — gating (whether to respond) and termination (how many pulses);
-  the clock is dose-independent — intrinsic first-pulse delay + one 5.5±1.5h clock per cell.
+  dose enters only through two channels  -  gating (whether to respond) and termination (how many pulses);
+  the clock is dose-independent  -  intrinsic first-pulse delay + one 5.5±1.5h clock per cell.
 
 Literature hard constraints (verified 2026-09-25):
   C1 first-pulse timing dose-independent ~2-3h  Lahav 2004 (restated in GZ2006 intro)
@@ -41,9 +41,9 @@ plt.rcParams["font.size"] = 9.5
 
 SEED = 20260925
 ROOT = Path(__file__).resolve().parent.parent
-OUT_JSON = ROOT / "结果" / "代码87_时钟剂量无关_结果.json"
-OUT_PNG = ROOT / "结果" / "代码87_时钟剂量无关_图.png"
-OUT_SVG = ROOT / "结果" / "代码87_时钟剂量无关_图.svg"
+OUT_JSON = ROOT / "results" / "code87_clock_dose_independent_results.json"
+OUT_PNG = ROOT / "results" / "code87_clock_dose_independent_fig.png"
+OUT_SVG = ROOT / "results" / "code87_clock_dose_independent_fig.svg"
 
 DOSES = np.array([0.1, 0.3, 0.5, 1.0, 2.5, 5.0, 10.0])
 N_CELLS = 4000
@@ -198,13 +198,13 @@ def main():
         f" (code81: 1.325@7 doses; code84: 0.817; code86: 0.855)")
 
     results = dict(
-        meta=dict(script="代码87_时钟剂量无关架构.py", seed=SEED, date="2026-09-25",
+        meta=dict(script="code87_clock_dose_independent_architecture.py", seed=SEED, date="2026-09-25",
                   architecture="dose enters only via gate and termination; clock dose-independent",
                   anchored=dict(t1_gamma_k=T1_K, t1_scale=T1_SCALE,
                                 T_cell=f"{T_MEAN}+/-{T_BETWEEN_SD}h", jit=JIT_IPI,
                                 repair="code84 sealed biphasic"),
                   fitted=dict(p0_spont=P0_SPONT, c_gate_per_Gy=C_GATE,
-                              note="两参数对齐 C6 三点，唯一拟合件")),
+                              note="two parameters align the three C6 points; the only fitted element")),
         doses=DOSES.tolist(),
         resp_frac=resp_frac, osc_frac=osc_frac, count_law=count_law,
         gate_fit_at_lit_doses=gate_fit, lit_osc_frac=LIT_OSC_F.tolist(),
@@ -216,14 +216,14 @@ def main():
                                 sd_ratio_continuity=sd_ratio),
         info=dict(H_D=H_D, I_D_fate=I_fate),
         double_record=[
-            "t1 伽马形状（k=0.47, scale=5.82h）本身锚自归档均值/SD（C1+C2），方差比 6.5 vs 5.8 属'三个实测数内部一致性'的检验，不是零拟合预言",
-            "门控两参数（p0=0.25 自发基线, c=0.22/Gy）对齐 C6 三点，是全模型唯一拟合件",
-            "GZ2006'振荡细胞'口径（持续振荡）用 >=3 脉冲近似；>=1 脉冲口径同时报告",
-            "幅度通道不建模（C7 登记）：幅度剂量无关且 CV~70%，与信息链结论（幅度份额 5.5%）一致",
-            "Lahav 2004 剂量无关声明基于 16h 窗口最多两峰；0.3 Gy 端 t1 是否剂量无关无直接数据，模型预言'响应者 t1 各剂量同分布'，可证伪",
-            "互信息为分箱 plug-in 估计，绝对值有偏、趋势可靠",
+            "the t1 gamma shape (k=0.47, scale=5.82h) is itself anchored to archived mean/SD (C1+C2); the variance ratio 6.5 vs 5.8 is a test of internal consistency among three measured numbers, not a zero-fit prediction",
+            "the two gating parameters (p0=0.25 spontaneous baseline, c=0.22/Gy) align the three C6 points and are the only fitted element of the whole model",
+            "the GZ2006 'oscillating cell' convention (sustained oscillation) is approximated by >=3 pulses; the >=1 pulse convention is reported alongside",
+            "amplitude channel not modelled (C7 registered): amplitude is dose-independent with CV~70%, consistent with the information-chain conclusion (amplitude share 5.5%)",
+            "the Lahav 2004 dose-independence claim rests on at most two peaks in a 16h window; there are no direct data on dose-independence of t1 at 0.3 Gy; the model predicts 'responder t1 identically distributed across doses', which is falsifiable",
+            "Mutual information is a binned plug-in estimate; absolute values are biased, trends are reliable",
         ],
-    )
+)
     OUT_JSON.write_text(json.dumps(results, ensure_ascii=False, indent=2,
                                    default=lambda o: float(o) if isinstance(o, np.floating) else str(o)),
                         encoding="utf-8")

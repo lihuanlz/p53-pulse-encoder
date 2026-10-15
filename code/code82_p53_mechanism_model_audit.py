@@ -5,8 +5,8 @@ Code 82: Mönke 2017 p53 mechanism-model audit (23-parameter Fisher / sloppy spe
 Date: 2026-09-23 | seed fixed: 20260923 | run budget: a few minutes
 
 Authoritative inputs:
-  - 03_细胞线3/文献参数/机制模型方程与参数表_2026-09-23.md (23-parameter table, 2025 revision Tm=Tw=1.2)
-  - 03_细胞线3/文献参数/monke2017_supp/srep46571-s1.pdf (equation typesetting check, page 5 Eq.3)
+  - 03_cell_line_3/literature_params/mechanism_model_equations_parameters_2026-09-23.md (23-parameter table, 2025 revision Tm=Tw=1.2)
+  - 03_cell_line_3/literature_params/monke2017_supp/srep46571-s1.pdf (equation typesetting check, page 5 Eq.3)
 
 !!! Equation errata (relative to the archived md; verified character by character against the rendered figure on page 5 of the supplementary PDF) !!!
   E1: the denominator of the ATM auto-activation Hill term is (1 + ATM*^2/k_A), not (1 + ATM*^2/k_A^2).
@@ -32,10 +32,10 @@ DSB input:
              Basal b=0.7 DSB/h; under NCS, b=b_s during the first hour.
 
 Outputs:
-  03_细胞线3/结果/代码82_机制审计_结果.json
-  03_细胞线3/结果/代码82_基线复现_四面体.{png,svg}
-  03_细胞线3/结果/代码82_Fisher审计_四面体.{png,svg}
-  03_细胞线3/结果/代码82_验证靶标_六面体.{png,svg}
+  03_cell_line_3/results/code82_mechanism_audit_results.json
+  03_cell_line_3/results/code82_baseline_reproduction_fourpanel.{png,svg}
+  03_cell_line_3/results/code82_Fisher_audit_fourpanel.{png,svg}
+  03_cell_line_3/results/code82_validation_targets_sixpanel.{png,svg}
 """
 
 import json
@@ -59,7 +59,7 @@ plt.rcParams["svg.fonttype"] = "none"
 
 SEED = 20260923
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "结果"
+OUT = ROOT / "results"
 
 # ---------------- Parameter table (2025 revision; 2017 original differs only in Tm/Tw) ----------------
 PARAM_ORDER = ["A", "P", "C", "g", "dAM", "Tm", "TM", "Tw", "TW",
@@ -197,7 +197,7 @@ def detect_pulses(t, p53, prom=0.3, height=0.8, dist_h=2.0):
 
 def main():
     log = lambda *a: print(*a, flush=True)
-    res = dict(meta=dict(script="代码82_p53机制模型审计.py", seed=SEED, date="2026-09-23",
+    res = dict(meta=dict(script="code82_p53_mechanism_model_audit.py", seed=SEED, date="2026-09-23",
                          errata=["E1: Hill denominator 1+ATM^2/kA (not kA^2)",
                                  "E2: p53 protection factor 1+R/(1+ATM*) (not 1/(1+R·ATM*))"],
                          params2025=P2025, params2017=P2017))
@@ -610,7 +610,7 @@ def main():
     make_fig3(res, dose_rows, popt, lin, ens200, amp_cv_rows, rnai, scan, T0)
 
     OUT.mkdir(parents=True, exist_ok=True)
-    with open(OUT / "代码82_机制审计_结果.json", "w", encoding="utf-8") as f:
+    with open(OUT / "code82_mechanism_audit_results.json", "w", encoding="utf-8") as f:
         json.dump(res, f, ensure_ascii=False, indent=2, default=str)
     log("[done] JSON written")
 
@@ -689,7 +689,7 @@ def make_fig1(res, t_r1, y25, y17, r2_traces, r4):
     axd.set_title("(d) R4: oscillation-to-sustained transition", fontsize=10.5)
 
     fig.suptitle("Code 82 baseline reproduction: Mönke 2017 p53 model (2025 params)", fontsize=13)
-    savefig(fig, "代码82_基线复现_四面体")
+    savefig(fig, "code82_baseline_reproduction_fourpanel")
 
 
 def make_fig2(res, eigval, eigvec, per_param, share_t, noise_grid):
@@ -763,7 +763,7 @@ def make_fig2(res, eigval, eigvec, per_param, share_t, noise_grid):
                   "(CV_t=0.30, CV_A=0.125)", fontsize=9.5)
     fig.suptitle("Code 82 Fisher audit: 23 mechanistic parameters, nominal NCS 48 h trajectory",
                  fontsize=13)
-    savefig(fig, "代码82_Fisher审计_四面体")
+    savefig(fig, "code82_Fisher_audit_fourpanel")
 
 
 def make_fig3(res, dose_rows, popt, lin, ens200, amp_cv_rows, rnai, scan, T0):
@@ -870,11 +870,11 @@ def make_fig3(res, dose_rows, popt, lin, ens200, amp_cv_rows, rnai, scan, T0):
         f"R1 period: 2025={res['R1']['2025_log']['period']:.2f} h, "
         f"2017={res['R1']['2017_log']['period']:.2f} h (targets 5.5/7.0)\n"
         f"Fisher: {res['F1']['decades']:.1f} decades, near-zero={res['F1']['n_nearzero_6']}"
-    )
+)
     axs.text(0.02, 0.98, txt, va="top", fontsize=8.6, family="monospace",
              transform=axs.transAxes)
     fig.suptitle("Code 82 validation targets and structural-constant license", fontsize=13)
-    savefig(fig, "代码82_验证靶标_六面体")
+    savefig(fig, "code82_validation_targets_sixpanel")
 
 
 if __name__ == "__main__":

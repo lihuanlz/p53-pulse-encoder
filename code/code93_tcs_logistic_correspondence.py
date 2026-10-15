@@ -18,8 +18,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 SEED = 20260925
-OUT_JSON = r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911\03_细胞线3\结果\代码93_TCS_logistic对应_结果.json"
-OUT_PNG = r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911\03_细胞线3\代码与图\代码93_TCS_logistic对应_三面体.png"
+OUT_JSON = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\results\code93_tcs_logistic_correspondence_results.json"
+OUT_PNG = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\code_and_figures\code93_tcs_logistic_correspondence_threepanel.png"
 OUT_SVG = OUT_PNG.replace(".png", ".svg")
 plt.rcParams.update({"svg.fonttype": "none", "font.size": 9,
                      "axes.spines.top": False, "axes.spines.right": False})

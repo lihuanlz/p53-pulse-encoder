@@ -12,9 +12,9 @@ import numpy as np
 
 sys.path.insert(0, str(Path(sys.executable).parent.parent.parent))
 
-WS = Path(r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911")
-OUT_JSON = WS / "03_细胞线3" / "结果" / "代码51_p53_Fisher审计_结果.json"
-OUT_PNG = WS / "03_细胞线3" / "结果" / "代码51_p53_Fisher审计_四面体.png"
+WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
+OUT_JSON = WS / "03_cell_line_3" / "results" / "code51_p53_Fisher_audit_results.json"
+OUT_PNG = WS / "03_cell_line_3" / "results" / "code51_p53_Fisher_audit_fourpanel.png"
 
 # ---------- model ----------
 # v' = s*(v - v^3/3 - w) + sigma*xi
@@ -97,7 +97,7 @@ def fisher_audit(hrel):
     """Log perturbation hrel, central differences with common random numbers (seed0=0..M-1 shared)."""
     base = run_group(THETA0, seed0=0)
     g0 = nanmean_cols(base)
-    # covariance (approximate pairwise NaN deletion: fill NaN with column means before covariance — NaNs are very rare in 400 runs)
+    # covariance (approximate pairwise NaN deletion: fill NaN with column means before covariance  -  NaNs are very rare in 400 runs)
     X = base.copy()
     for i in range(X.shape[1]):
         col = X[:, i]

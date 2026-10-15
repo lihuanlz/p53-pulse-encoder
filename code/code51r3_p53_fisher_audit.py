@@ -15,9 +15,9 @@ import numpy as np
 
 sys.path.insert(0, str(Path(sys.executable).parent.parent.parent))
 
-WS = Path(r"D:\Kimi_Agent_细胞仿真工具包扩展以及具身智能20260911")
-OUT_JSON = WS / "03_细胞线3" / "结果" / "代码51r3_p53_Fisher审计_结果.json"
-OUT_PNG = WS / "03_细胞线3" / "结果" / "代码51r3_p53_Fisher审计_六面体.png"
+WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
+OUT_JSON = WS / "03_cell_line_3" / "results" / "code51r3_p53_Fisher_audit_results.json"
+OUT_PNG = WS / "03_cell_line_3" / "results" / "code51r3_p53_Fisher_audit_sixpanel.png"
 
 PARAM_NAMES = ["a", "b", "eps", "s", "tau_r", "I0", "sigma"]
 OBS_NAMES = ["t1", "T", "A", "N", "w", "IPI_sd"]
@@ -271,7 +271,7 @@ def main():
     print(f"      T0={delay['T0']:.3f}", flush=True)
     for r in delay["rows"]:
         print(f"      μd/T={r['mu_d_over_T']:.2f}  VarRatio={r['var_ratio']:.2f}  "
-              f"CV(t1)/CV(T)={r['cv_ratio']:.2f}  P2'={'过' if r['pass_P2p'] else '不过'}",
+              f"CV(t1)/CV(T)={r['cv_ratio']:.2f}  P2'={'pass' if r['pass_P2p'] else 'fail'}",
               flush=True)
     print("[3/4] channel capacity ...", flush=True)
     cap = channel_capacity()

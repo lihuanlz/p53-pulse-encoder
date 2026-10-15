@@ -1,30 +1,30 @@
 # -*- coding: utf-8 -*-
 """
-代码81：p53 全通链路级联模型与逐接口审计（L0 剂量 -> L4 命运）
+code81: p53 full-pathway cascade model with per-interface audit (L0 dose -> L4 fate)
 =================================================================
-日期：2026-09-23 ｜ 种子固定：20260923 ｜ 全程确定性
+date: 2026-09-23 | fixed seed: 20260923 | fully deterministic
 
-谱系：
-  - 设计文档：03_细胞线3/文稿/设计_p53全通链路级联模型_v01.md
-  - 编码器层已封卷：判词卡_P53-Fisher审计_2026-09-18.md / 封卷卡_p53信号线_2026-09-18.md
-    （代码51r3 / 代码51r4A 归档参数）
-  - 玩具级联自检：代码50（02_细胞线2，v0.2 双臂版）
-  - 框架：Nature_SI_v05 S1.3（幸存集）/ S1.5（三腿判据）/ S1.7（信息损失恒等式）/ S5.6（数字化代价）
+Lineage:
+  - design document: 03_cell_line_3/docs/design_p53_full_cascade_model_v01.md
+  - encoder layer sealed: verdict_card_P53_Fisher_audit_2026-09-18.md / seal_card_p53_signalling_2026-09-18.md
+    (code51r3 / code51r4A archived parameters)
+  - toy cascade self-check: code50 (02_cell_line_2, v0.2 two-arm version)
+  - framework: Nature_SI_v05 S1.3 (surviving set) / S1.5 (three-leg criterion) / S1.7 (information-loss identity) / S5.6 (cost of digitization)
 
-归档锚（逐字引用，重叠处必须一致）：
-  - 时间类 Fisher 份额 94.2%，幅度 5.5%
-  - I(D;N) = 3.07 / 3.17 bits（96.8%）
-  - 增益腐蚀：sigma_k 0->0.6，CV(A) 0.002->0.639，CV(T) 钉死 0.016
-  - sigma* = 0.25 -> 细胞内 IPI CV = 0.316 ≈ 文献 0.30；基线 sigma=0.06 -> IPI CV 0.085
-  - mu_d ≈ 1.0 T -> Var(t1)/Var(T) = 5.7 ≈ 文献 5.8
+archive anchors (quoted verbatim; overlaps must agree): 
+  - time-class Fisher share 94.2%, amplitude 5.5%
+  - I(D;N) = 3.07 / 3.17 bits (96.8%) 
+  - gain erosion: sigma_k 0->0.6, CV(A) 0.002->0.639, CV(T) pinned at 0.016
+  - sigma* = 0.25 -> within-cell IPI CV = 0.316 ~ literature 0.30; baseline sigma=0.06 -> IPI CV 0.085
+  - mu_d ~ 1.0 T -> Var(t1)/Var(T) = 5.7 ~ literature 5.8
 
-模型层定义：
-  L0 损伤层：N_DSB ~ Poisson(35 * D)          （计数产出，类别 I）
-  L1 传感层：N_trig = ceil(N_DSB / 50)，cap 12 （registered gap，最简聚类映射，假设）
-  L2 编码层：T = 5.5 h 固定常数；A 固定（CV 0.002）；N = N_trig；
-             首脉冲延迟 t1 ~ Exp(1.0 T)；区间抖动 CV 0.085（归档 sigma=0.06 行）
-  L3 解码层：mRNA 泄漏积分；p21 型积分器 tau=10 h；PUMA 型累积器 tau=4 h，第 3 脉冲起才产出
-  L4 命运层：阈值于 PUMA/p21 积分比与绝对水平 -> {survival, arrest, apoptosis}
+model-layer definitions:
+  L0 damage layer: N_DSB ~ Poisson(35 * D)          (count production, class I)
+  L1 sensing layer: N_trig = ceil(N_DSB / 50), cap 12 (registered gap, simplest clustering map, assumption)
+  L2 encoding layer: T = 5.5 h fixed constant; A fixed (CV 0.002); N = N_trig;
+             first-pulse delay t1 ~ Exp(1.0 T); interval jitter CV 0.085 (archived sigma=0.06 row)
+  L3 decoding layer: leaky integration of mRNA; p21-type integrator tau=10 h; PUMA-type accumulator tau=4 h, produces only from the 3rd pulse
+  L4 fate layer: thresholds on the PUMA/p21 integral ratio and absolute levels -> {survival, arrest, apoptosis}
 """
 
 import json
@@ -44,33 +44,33 @@ except Exception:
 
 SEED = 20260923
 ROOT = Path(__file__).resolve().parent.parent
-OUT_JSON = ROOT / "结果" / "代码81_级联审计_结果.json"
-OUT_PNG = ROOT / "结果" / "代码81_级联审计_五面体.png"
+OUT_JSON = ROOT / "results" / "code81_cascade_audit_results.json"
+OUT_PNG = ROOT / "results" / "code81_cascade_audit_fivepanel.png"
 
-# ---------------- 固定常数（全部显式，不拟合） ----------------
-DOSES = np.array([0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0])   # Gy，等权 -> H(D)=log2(7)
-N_CELLS = 4000                                            # 每剂量细胞数
-K0_DSB = 35.0         # DSB/Gy（文献锚）
-C_CLUSTER = 50.0      # DSB/触发（L1 聚类常数，假设：10 Gy -> 7 脉冲，对齐 0-7 脉冲/24h 文献范围）
-N_MAX = 12            # 触发上限
-T_PERIOD = 5.5        # h，候选结构常数（类别 II），归档固定值
-MU_D = 1.0 * T_PERIOD # 首脉冲延迟均值（归档 A3 标定：mu_d≈T 时比值 5.7≈文献 5.8）
-JIT_IPI = 0.085       # 逐区间抖动 CV（归档 r4A sigma=0.06 行 IPI CV = 0.085）
-A0 = 1.0              # 固定幅度（不载剂量信息）
-A_CV = 0.002          # 幅度内生 CV（归档 CV(A)=0.002 @ sigma_k=0）
-W = 48.0              # 观测窗 h
-Q21, TAU21 = 100.0, 10.0        # p21 型积分器：每脉冲量子产出、泄漏时间常数
-QPU, TAUPU, PUMA_NTHR = 100.0, 4.0, 3   # PUMA 型累积器：第 3 个脉冲起才产出（高阈值）
-TH_PUMA, R0_FATE, TH_P21 = 800.0, 0.15, 1500.0  # L4 命运阈值（固定常数）
-B_GAIN = 0.3          # 仿射观测基底 b（代码50 同口径）
-ETA_OBS = 0.02        # 读出加性噪声（相对 A0）
-N_BOOT = 200          # bootstrap 次数
-ALPHA_E = 7.0         # S5.6 事件可靠性常数
+# ---------------- fixed constants (all explicit, none fitted) ----------------
+DOSES = np.array([0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0])   # Gy, equal weights -> H(D)=log2(7)
+N_CELLS = 4000                                            # cells per dose
+K0_DSB = 35.0         # DSB/Gy (literature anchor) 
+C_CLUSTER = 50.0      # DSB/trigger (L1 clustering constant, assumption: 10 Gy -> 7 pulse, matching the literature range 0-7 pulses/24h) 
+N_MAX = 12            # trigger cap
+T_PERIOD = 5.5        # h, candidate structural constant (class II) , archived fixed value
+MU_D = 1.0 * T_PERIOD # mean first-pulse delay (archived A3 calibration: mu_d~T gives the ratio 5.7 ~ literature 5.8) 
+JIT_IPI = 0.085       # per-interval jitter CV (archived r4A sigma=0.06 row IPI CV = 0.085) 
+A0 = 1.0              # fixed amplitude (carries no dose information) 
+A_CV = 0.002          # intrinsic amplitude CV (archived CV(A)=0.002 @ sigma_k=0) 
+W = 48.0              # observation window (h)
+Q21, TAU21 = 100.0, 10.0        # p21-type integrator: quantum yield per pulse, leak time constant
+QPU, TAUPU, PUMA_NTHR = 100.0, 4.0, 3   # PUMA-type accumulator: produces only from the 3rd pulse (high threshold) 
+TH_PUMA, R0_FATE, TH_P21 = 800.0, 0.15, 1500.0  # L4 fate thresholds (fixed constants) 
+B_GAIN = 0.3          # affine observation baseline b (code50 same convention) 
+ETA_OBS = 0.02        # additive readout noise (relative to A0) 
+N_BOOT = 200          # bootstrap replicates
+ALPHA_E = 7.0         # S5.6 event-reliability constant
 
-# ---------------- 互信息工具 ----------------
+# ---------------- mutual-information tools ----------------
 
 def mi_discrete(x, y):
-    """plug-in 离散互信息（bits），x,y 为整数标签数组。"""
+    """Plug-in discrete mutual information (bits); x, y are integer label arrays."""
     x = np.asarray(x); y = np.asarray(y)
     Kx = int(x.max()) + 1; Ky = int(y.max()) + 1
     N = len(x)
@@ -82,7 +82,7 @@ def mi_discrete(x, y):
 
 
 def mi_mm(x, y):
-    """Miller-Madow 偏差校正后的互信息（bits），下限 0。"""
+    """Miller-Madow bias-corrected mutual information (bits), floored at 0."""
     x = np.asarray(x); y = np.asarray(y)
     rx = len(np.unique(x)); ry = len(np.unique(y)); N = len(x)
     bias = (rx - 1) * (ry - 1) / (2 * N * np.log(2))
@@ -90,7 +90,7 @@ def mi_mm(x, y):
 
 
 def qbin(v, nbin):
-    """分位数分箱 -> 整数标签。"""
+    """Quantile binning -> integer labels."""
     v = np.asarray(v, dtype=float)
     edges = np.unique(np.quantile(v, np.linspace(0, 1, nbin + 1)))
     if len(edges) <= 2:
@@ -99,7 +99,7 @@ def qbin(v, nbin):
 
 
 def boot_ci(x, y, n_boot=N_BOOT, rng=None):
-    """bootstrap 百分位 CI（plug-in MI）。"""
+    """Bootstrap percentile CI (plug-in MI)."""
     rng = rng or np.random.default_rng(0)
     N = len(x); vals = np.empty(n_boot)
     for b in range(n_boot):
@@ -107,20 +107,20 @@ def boot_ci(x, y, n_boot=N_BOOT, rng=None):
         vals[b] = mi_discrete(x[idx], y[idx])
     return float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5))
 
-# ---------------- 级联仿真 ----------------
+# ---------------- cascade simulation ----------------
 
 def simulate(dose, n, rng, cvT_extra=0.0):
-    """单剂量群体仿真。返回每层输出字典。
+    """Single-dose population simulation. Returns the per-layer output dict.
 
-    cvT_extra：逐细胞周期散布（固定常数检验用，审计 4）。
+    cvT_extra: per-cell period dispersion (for the fixed-constant test, audit 4) . 
     """
-    # L0：损伤计数
+    # L0: damage count
     n_dsb = rng.poisson(K0_DSB * dose, n)
-    # L1：聚类触发映射（registered gap，最简形式，假设）
+    # L1: clustered-trigger mapping (registered gap, simplest form, assumption)
     n_trig = np.minimum(np.ceil(n_dsb / C_CLUSTER).astype(int), N_MAX)
-    # L2：脉冲串（事件时间）
+    # L2: pulse train (event timing)
     t1 = rng.exponential(MU_D, n)
-    T_cell = T_PERIOD * (1.0 + cvT_extra * rng.standard_normal(n))  # 逐细胞周期散布
+    T_cell = T_PERIOD * (1.0 + cvT_extra * rng.standard_normal(n))  # per-cell period dispersion
     jit = JIT_IPI
     times = np.full((n, N_MAX), np.nan)
     tcur = t1.copy()
@@ -133,9 +133,9 @@ def simulate(dose, n, rng, cvT_extra=0.0):
     pulse_idx = np.arange(N_MAX)[None, :]
     active = (pulse_idx < n_trig[:, None]) & in_win
     n_pulse = active.sum(1)
-    # 幅度：固定 + 内生 CV 0.002
+    # amplitude: fixed + intrinsic CV 0.002
     amps = np.where(active, A0 * (1.0 + A_CV * rng.standard_normal(times.shape)), np.nan)
-    # L3：泄漏积分解码
+    # L3: leaky-integrator decoding
     with np.errstate(invalid="ignore"):
         integ = lambda q, tau: np.nansum(
             np.where(active, q * tau * (1.0 - np.exp(-(W - times) / tau)), 0.0), axis=1)
@@ -143,11 +143,11 @@ def simulate(dose, n, rng, cvT_extra=0.0):
     puma_mask = active & (pulse_idx >= PUMA_NTHR - 1)
     m_puma = np.nansum(np.where(puma_mask,
                                 QPU * TAUPU * (1.0 - np.exp(-(W - times) / TAUPU)), 0.0), axis=1)
-    # L4：命运 = 计数比与水平的阈值
+    # L4: fate = thresholds on the count ratio and levels
     ratio = m_puma / (m_p21 + 1.0)
     fate = np.where((m_puma >= TH_PUMA) & (ratio >= R0_FATE), 2,
                     np.where(m_p21 >= TH_P21, 1, 0))  # 0 survival, 1 arrest, 2 apoptosis
-    # 逐细胞周期估计（事件时间对序号 OLS 斜率 -> CV(T) 口径与归档一致）
+    # per-cell period estimation (OLS slope of event time vs index -> CV(T) convention matches the archive)
     T_est = np.full(n, np.nan)
     for i in range(n):
         k = int(n_pulse[i])
@@ -168,32 +168,32 @@ def run_ensemble(cvT_extra=0.0, seed=SEED):
         parts.append(p)
     return {k: np.concatenate([p[k] for p in parts]) for k in parts[0]}
 
-# ---------------- 主流程 ----------------
+# ---------------- main pipeline ----------------
 
 def main():
     log = lambda *a: print(*a, flush=True)
-    log("[代码81] 全链路级联仿真启动，种子", SEED)
+    log("[code81] full-cascade simulation starting, seed", SEED)
     E = run_ensemble()
     d = E["dose_idx"]
     H_D = np.log2(len(DOSES))
-    log(f"H(D) = {H_D:.3f} bits, 细胞总数 {len(d)}")
+    log(f"H(D) = {H_D:.3f} bits, total cells {len(d)}")
 
-    # ---- 命运分布检查 ----
+    # ---- fate-distribution check ----
     fate_names = ["survival", "arrest", "apoptosis"]
     fate_tab = {}
     for di, D in enumerate(DOSES):
         m = d == di
         fr = [float(np.mean(E["fate"][m] == k)) for k in range(3)]
         fate_tab[f"{D}Gy"] = dict(zip(fate_names, [round(f, 4) for f in fr]))
-        log(f"  D={D:>5} Gy  fate 分布 S/A/P = {[round(f,3) for f in fr]}, "
+        log(f"  D={D:>5} Gy  fate distribution S/A/P = {[round(f,3) for f in fr]}, "
             f"<N_DSB>={E['n_dsb'][m].mean():.1f}, <N_pulse>={E['n_pulse'][m].mean():.2f}")
 
-    # ---- 审计 2：信息损失恒等式 H(D) = I(D;Y5) + sum L_i ----
-    y1 = E["n_dsb"]                       # L0 输出
-    y2 = E["n_trig"]                      # L1 输出
-    y3 = E["n_pulse"] * 8 + qbin(E["t1"], 8)          # L2 输出（计数 + 首脉冲延迟分箱）
-    y4 = qbin(E["m_p21"], 12) * 12 + qbin(E["m_puma"], 12)  # L3 输出（联合分箱）
-    y5 = E["fate"]                        # L4 输出
+    # ---- audit 2: information-loss identity H(D) = I(D;Y5) + sum L_i ----
+    y1 = E["n_dsb"]                       # L0 output
+    y2 = E["n_trig"]                      # L1 output
+    y3 = E["n_pulse"] * 8 + qbin(E["t1"], 8)          # L2 output (count + first-pulse delay binned) 
+    y4 = qbin(E["m_p21"], 12) * 12 + qbin(E["m_puma"], 12)  # L3 output (joint binning) 
+    y5 = E["fate"]                        # L4 output
     labels = ["Y1=N_DSB (L0)", "Y2=N_trig (L1)", "Y3=pulse train (L2)",
               "Y4=mRNA joint (L3)", "Y5=fate (L4)"]
     ys = [y1, y2, y3, y4, y5]
@@ -209,22 +209,22 @@ def main():
     closure = I_chain[-1] + sum(losses)
     weakest = int(np.argmax(losses))
     weakest_name = ["L0 damage", "L1 sensing(gap)", "L2 encoder", "L3 decoder", "L4 fate"][weakest]
-    log(f"  恒等式闭合：I(D;Y5)+sum(L_i) = {closure:.6f} vs H(D) = {H_D:.6f}, "
-        f"残差 {closure - H_D:.2e}")
-    log(f"  逐层损失 L0..L4 = {[round(float(l),4) for l in losses]}, 最弱层 = {weakest_name}")
+    log(f"  identity closure: I(D;Y5)+sum(L_i) = {closure:.6f} vs H(D) = {H_D:.6f}, "
+        f"residual {closure - H_D:.2e}")
+    log(f"  per-layer losses L0..L4 = {[round(float(l),4) for l in losses]}, weakest layer = {weakest_name}")
 
-    # ---- 审计 3：增益散布测试（计数链 vs 幅度链） ----
+    # ---- audit 3: gain-dispersion test (count chain vs amplitude chain) ----
     SIG_K = [0.0, 0.1, 0.2, 0.3, 0.45, 0.6]
     rng_g = np.random.default_rng(SEED + 2)
     gain_sweep = []
     amps = E["amps"]; times = E["times"]; n_pulse = E["n_pulse"]
-    # 假想幅度臂：A(D) = A0*(1+0.15*ln(D/1Gy))，幅度跨剂量范围约翻倍（代码50 臂B 口径）
+    # hypothetical amplitude arm: A(D) = A0*(1+0.15*ln(D/1Gy)); amplitude roughly doubles across the dose range (code50 arm-B convention)
     amp_code = A0 * (1.0 + 0.15 * np.log(DOSES[d]))[:, None] * np.ones_like(amps)
-    amp_intr = 0.15  # 假想幅度臂内生 CV（代码50 臂A 口径 1.0±0.15）
+    amp_intr = 0.15  # hypothetical amplitude-arm intrinsic CV (code50 arm-A convention 1.0+/-0.15) 
     for sk in SIG_K:
-        k = np.exp(rng_g.standard_normal(len(d)) * sk - 0.5 * sk * sk)  # LogNormal(0,sk)，中位 1
+        k = np.exp(rng_g.standard_normal(len(d)) * sk - 0.5 * sk * sk)  # LogNormal(0,sk), median 1
         y_obs = k[:, None] * amps + B_GAIN + ETA_OBS * rng_g.standard_normal(amps.shape)
-        # 计数检测：逐细胞仿射不变阈值（无脉冲期基底估计 + 0.5*动态范围）
+        # count detection: per-cell affine-invariant threshold (pulse-free baseline estimate + 0.5*dynamic range)
         base = B_GAIN + ETA_OBS * rng_g.standard_normal((len(d), 8))
         b_est = np.median(base, axis=1)
         has = n_pulse > 0
@@ -234,17 +234,17 @@ def main():
         amp_meas[has] = k[has] * np.nanmean(amps[has], axis=1)
         thr = b_est + 0.5 * (y_max - b_est)
         n_det = np.where(has, np.nansum(y_obs > thr[:, None], axis=1), 0).astype(int)
-        # 幅度链（假想臂）：测幅度 = k * A_code * (1+0.15 z)
+        # amplitude chain (hypothetical arm): measured amplitude = k * A_code * (1+0.15 z)
         amp_hyp = k * amp_code[:, 0] * (1.0 + amp_intr * rng_g.standard_normal(len(d)))
         amp_hyp = amp_hyp + ETA_OBS * rng_g.standard_normal(len(d))
         I_cnt = mi_discrete(d, n_det)
         I_amp = mi_discrete(d, qbin(amp_hyp, 16))
-        # 编码器口径复现：CV(A_meas) 与 CV(T_est)
+        # encoder-convention reproduction: CV(A_meas) and CV(T_est)
         real = ~np.isnan(amp_meas)
         cv_A = float(np.std(amp_meas[real]) / np.mean(amp_meas[real]))
         tval = E["T_est"]; realt = ~np.isnan(tval)
         cv_T = float(np.std(tval[realt]) / np.mean(tval[realt]))
-        # 归档标定子集：N_pulse >= 7（对齐归档 N≈9 的周期估计口径）
+        # archived calibration subset: N_pulse >= 7 (matching the archived N~9 period-estimation convention)
         calib = realt & (n_pulse >= 7)
         cv_T_cal = float(np.std(tval[calib]) / np.mean(tval[calib])) if calib.sum() > 50 else np.nan
         gain_sweep.append(dict(sigma_k=sk, I_count=I_cnt, I_amp_hyp=I_amp,
@@ -252,9 +252,9 @@ def main():
                                frac_count_intact=float(np.mean(n_det == n_pulse))))
         log(f"  sigma_k={sk:.2f}: I(count)={I_cnt:.4f}  I(amp_hyp)={I_amp:.4f}  "
             f"CV(A)={cv_A:.3f}  CV(T)={cv_T:.4f}/{cv_T_cal:.4f}(N>=7)  "
-            f"计数检出率={np.mean(n_det==n_pulse):.4f}")
+            f"count detection rate={np.mean(n_det==n_pulse):.4f}")
 
-    # ---- 审计 4：固定常数检验（CV(T) 散布扫描） ----
+    # ---- audit 4: fixed-constant test (CV(T) dispersion scan) ----
     CVT = [0.0, 0.016, 0.05, 0.1, 0.2]
     cvt_sweep = []
     for cv in CVT:
@@ -263,7 +263,7 @@ def main():
         I_F = mi_discrete(Ec["dose_idx"], Ec["fate"])
         cvt_sweep.append(dict(cvT=cv, I_count=I_N, I_fate=I_F))
         log(f"  CV(T)={cv:.3f}: I(D;N)={I_N:.4f}  I(D;fate)={I_F:.4f}")
-    # 假想幅度码 vs 计数码的端到端份额（标定增益散布 sigma_k=0.3，S5.6 细胞蛋白变异 ~30%）
+    # end-to-end share of hypothetical amplitude code vs count code (calibration gain dispersion sigma_k=0.3, S5.6 cellular protein variation ~30%)
     rng_a = np.random.default_rng(SEED + 4)
     amp_share = {}
     for sk in [0.0, 0.3, 0.6]:
@@ -273,12 +273,12 @@ def main():
         I_cnt = mi_mm(d, E["n_pulse"])
         amp_share[f"sigma_k={sk}"] = dict(I_amp=I_amp, I_count=I_cnt,
                                           share=I_amp / (I_amp + I_cnt))
-        log(f"  幅度份额 @sigma_k={sk}: I_amp={I_amp:.4f} vs I_cnt={I_cnt:.4f} "
+        log(f"  amplitude share @sigma_k={sk}: I_amp={I_amp:.4f} vs I_cnt={I_cnt:.4f} "
             f"-> share={I_amp/(I_amp+I_cnt):.4f}")
 
-    # ---- 审计 5：能耗核算（S5.6） ----
+    # ---- audit 5: energy accounting (S5.6) ----
     bits_end = mi_mm(d, y5)
-    D_levels = float(2 ** bits_end)     # 端到端可分辨级数（由传输比特反演）
+    D_levels = float(2 ** bits_end)     # end-to-end resolvable levels (inverted from transmitted bits) 
     L_axis = np.arange(1, 9)
     E_A = 2.0 * L_axis**2 * D_levels**2    # 2 kT L^2 D^2
     E_B = ALPHA_E * L_axis * D_levels**2   # alpha kT L D^2
@@ -290,74 +290,74 @@ def main():
                   ratio_EA_over_EB_at_L4=float(2 * L_cascade / ALPHA_E),
                   L_star=L_star,
                   E_A_series=E_A.tolist(), E_B_series=E_B.tolist(), L_axis=L_axis.tolist())
-    log(f"  能耗：端到端 {bits_end:.4f} bits/细胞 -> D={D_levels:.2f} 级；"
-        f"L=4 处 E_A/E_B = {2*L_cascade/ALPHA_E:.3f}，交叉 L*={L_star}")
+    log(f"  energy: end-to-end {bits_end:.4f} bits/cell -> D={D_levels:.2f} resolvable levels; "
+        f"E_A/E_B at L=4 = {2*L_cascade/ALPHA_E:.3f}, crossover L*={L_star}")
 
-    # ---- 审计 1：三腿判据 x 4 接口 ----
+    # ---- audit 1: three-leg criterion x 4 interfaces ----
     g0, g6 = gain_sweep[0], gain_sweep[-1]
     legs = []
     def leg(name, legs_status, evidence, flagged=False):
         legs.append(dict(interface=name, legs=legs_status, evidence=evidence,
                          assumption_flagged=flagged))
-        log(f"  接口 {name}: {legs_status} | {evidence}")
-    leg("I0->1 剂量->DSB计数",
+        log(f"  interface {name}: {legs_status} | {evidence}")
+    leg("I0->1 dose->DSB count",
         dict(leg1_algebraic=True, leg2_symbolic=True, leg3_temporal=True),
-        f"计数为类别I免校准统计量（S1.4）；I(D;N_DSB)={I_chain[0]:.3f} bits > 0；"
-        f"DSB 形成时标（分钟）远小于剂量交付与下游时标（小时）")
-    leg("I1->2 DSB->脉冲触发（registered gap）",
+        f"count is a class-I calibration-free statistic (S1.4) ; I(D;N_DSB)={I_chain[0]:.3f} bits > 0; "
+        f"the DSB-formation timescale (minutes) is far below the dose-delivery and downstream timescales (hours) ")
+    leg("I1->2 DSB->pulse trigger (registered gap)",
         dict(leg1_algebraic=True, leg2_symbolic=True, leg3_temporal=True),
-        f"聚类映射计数->计数，代数幸存平凡成立（假设）；I(D;N_trig)={I_chain[1]:.3f} bits；"
-        f"ATM 激活分钟级 << T=5.5h；本层无公开单细胞数据，三腿均标注为假设",
+        f"the clustering map count->count makes algebraic survival trivially hold (assumption) ; I(D;N_trig)={I_chain[1]:.3f} bits; "
+        f"ATM activation is minute-scale << T=5.5h; no public single-cell data exist for this layer and all three legs are flagged as assumptions",
         flagged=True)
-    leg("I2->3 脉冲串->mRNA（计数/事件时间）",
+    leg("I2->3 pulse train->mRNA (count/event timing)",
         dict(leg1_algebraic=True, leg2_symbolic=True, leg3_temporal=True),
-        f"计数对仿射简并免疫：sigma_k 0->0.6 检出率 {g0['frac_count_intact']:.3f}->"
-        f"{g6['frac_count_intact']:.3f}，I(count) {g0['I_count']:.3f}->{g6['I_count']:.3f} bits；"
-        f"解码器 tau_p21=10h、tau_PUMA=4h 夹住脉冲间隔 5.5h 与窗 48h（tau>W 失忆，tau<<T 无积分）")
-    leg("I2->3 脉冲串->mRNA（幅度，反例腿）",
+        f"counting is immune to affine degeneracy: sigma_k 0->0.6 detection rate {g0['frac_count_intact']:.3f}->"
+        f"{g6['frac_count_intact']:.3f}, I(count) {g0['I_count']:.3f}->{g6['I_count']:.3f} bits; "
+        f"decoders tau_p21=10h, tau_PUMA=4h bracket the inter-pulse interval 5.5h and the window 48h (tau>W forgets, tau<<T does not integrate) ")
+    leg("I2->3 pulse train->mRNA (amplitude, counterexample leg)",
         dict(leg1_algebraic=False, leg2_symbolic=False, leg3_temporal=None),
-        f"幅度腿1 死亡：sigma_k 0->0.6，CV(A_meas) {g0['cv_A']:.3f}->{g6['cv_A']:.3f}；"
-        f"假想幅度码份额 @sigma_k=0.6 = {amp_share['sigma_k=0.6']['share']:.3f}"
-        f"（归档编码器层 Fisher 份额 5.5% 的端到端对应）")
-    leg("I3->4 mRNA->命运",
+        f"amplitude leg 1 dies: sigma_k 0->0.6, CV(A_meas) {g0['cv_A']:.3f}->{g6['cv_A']:.3f}; "
+        f"hypothetical amplitude-code share @sigma_k=0.6 = {amp_share['sigma_k=0.6']['share']:.3f}"
+        f" (the end-to-end counterpart of the archived encoder-layer Fisher share 5.5%) ")
+    leg("I3->4 mRNA->fate",
         dict(leg1_algebraic=True, leg2_symbolic=True, leg3_temporal=True),
-        f"命运=计数比阈值，比值消共模增益（S1.4 差分类幸存）；I(D;fate)={I_chain[4]:.3f} bits > 0；"
-        f"决策时标 24-48h 与 mRNA 积分时标匹配")
+        f"fate = threshold on count ratios, which cancels common-mode gain (S1.4 difference-class survival) ; I(D;fate)={I_chain[4]:.3f} bits > 0; "
+        f"the decision timescale 24-48h matches the mRNA integration timescale")
 
-    # ---- 归档一致性核对（重叠数字逐字对照） ----
+    # ---- archive-consistency check (verbatim comparison of overlapping numbers) ----
     archived_check = dict(
         cv_A_at_sk0=dict(model=g0["cv_A"], archived=0.002,
                          match=abs(g0["cv_A"] - 0.002) < 0.005),
-        cv_A_at_sk06=dict(model=g6["cv_A"], archived=0.639, note="定性复现（生成模型 LogNormal 增益）",
+        cv_A_at_sk06=dict(model=g6["cv_A"], archived=0.639, note="qualitatively reproduced (generative model with LogNormal gain)",
                           match=0.55 <= g6["cv_A"] <= 0.75),
         cv_T_pinned=dict(model_range=[min(g["cv_T"] for g in gain_sweep),
                                       max(g["cv_T"] for g in gain_sweep)],
                          model_calib_N7=[round(g["cv_T_calib"], 4) for g in gain_sweep],
                          archived=0.016,
-                         note="OLS 周期估计口径下钉死在小值且对增益散布不变；N>=7 标定子集对齐归档 N≈9 口径",
+                         note="pinned at a small value under the OLS period-estimation convention and invariant to gain dispersion; the N>=7 calibration subset matches the archived N~9 convention",
                          match=max(g["cv_T"] for g in gain_sweep) < 0.06),
         count_immune=dict(I_count_range=[min(g["I_count"] for g in gain_sweep),
                                          max(g["I_count"] for g in gain_sweep)],
-                          note="计数链信息对 sigma_k 平坦"),
+                          note="count-chain information flat in sigma_k"),
         archived_anchor=dict(fisher_time_share=0.942, fisher_amp_share=0.055,
                              I_DN="3.07/3.17 bits (96.8%)", cv_T_pinned=0.016,
                              sigma_star=0.25, ipi_cv_star=0.316, var_ratio_lit=5.7))
     for key in ["cv_A_at_sk0", "cv_A_at_sk06", "cv_T_pinned"]:
         mv = archived_check[key].get("model", archived_check[key].get("model_range"))
-        log(f"  归档核对 {key}: model={mv} match={archived_check[key]['match']}")
+        log(f"  archive check {key}: model={mv} match={archived_check[key]['match']}")
 
-    # ---- 失败与假设双录 ----
+    # ---- dual recording of failures and assumptions ----
     double_record = [
-        "L1 传感层为 registered gap：无公开单细胞 ATM 活性数据，聚类常数 c=50 DSB/触发为假设（选取依据：10 Gy -> 7 脉冲，对齐文献 0-7 脉冲/24h 剂量范围）；恒等式中 L2 损失含该层不可知成分",
-        "L3/L4 解码核（量子产出、tau、PUMA 第 3 脉冲阈值、命运阈值 TH_PUMA=800/R0=0.15/TH_P21=1500）为文献启发假设，非拟合",
-        "互信息为分箱 plug-in 估计（mRNA 12x12 分位分箱），绝对值有偏、趋势可靠（代码50 同口径声明）；同时报 Miller-Madow 校正值",
-        "p21 积分器 tau=10h > 脉冲间隔 5.5h：逐脉冲分辨在该接口死亡，幸存的是积分计数（与代码50 腿3 tau=8h 崩溃一致），积分统计量的时标为整串时长而非单脉冲间隔",
-        "幅度臂为假想反事实臂（A(D) 对数斜率 0.15、内生 CV 0.15），用于给幅度链一个'有信息可死'的对照；真实 p53 幅度剂量不变（归档 |alpha|<=0.05）",
-        "CV(T) 的归档值 0.016 取自 FHN 代表元 sigma=0.06 行；本生成模型用 OLS 周期估计复现同量级钉死值，数值一致性依赖估计口径，已显式声明",
+        "The L1 sensing layer is a registered gap: no public single-cell ATM activity data; the clustering constant c=50 DSB/trigger is an assumption (chosen so that 10 Gy -> 7 pulses, matching the literature range 0-7 pulses/24h); the L2 loss in the identity contains this layer's unknowable component",
+        "The L3/L4 decoding kernels (quantum yield, tau, PUMA produces only from the 3rd pulse, fate thresholds TH_PUMA=800/R0=0.15/TH_P21=1500) are literature-inspired assumptions, not fits",
+        "Mutual information is a binned plug-in estimate (mRNA 12x12 quantile binning); absolute values are biased, trends are reliable (same convention as code50); Miller-Madow corrected values also reported",
+        "p21 integrator tau=10h > inter-pulse interval 5.5h: per-pulse resolution dies at this interface; what survives is the integrated count (consistent with the code50 leg-3 tau=8h collapse); the timescale of the integrated statistic is the whole-train duration, not the single-pulse interval",
+        "The amplitude arm is a hypothetical counterfactual arm (A(D) log-slope 0.15, intrinsic CV 0.15), giving the amplitude channel a control with 'information to lose'; real p53 amplitude is dose-invariant (archived |alpha|<=0.05)",
+        "The archived CV(T) value 0.016 comes from the FHN representative sigma=0.06 row; this generative model reproduces the same order of pinned-down value via OLS period estimation; numerical agreement depends on the estimation convention, as explicitly declared",
     ]
 
     results = dict(
-        meta=dict(script="代码81_p53全通链路级联审计.py", seed=SEED, date="2026-09-23",
+        meta=dict(script="code81_p53_full_cascade_audit.py", seed=SEED, date="2026-09-23",
                   doses=DOSES.tolist(), n_cells_per_dose=N_CELLS,
                   constants=dict(K0_DSB=K0_DSB, C_CLUSTER=C_CLUSTER, N_MAX=N_MAX,
                                  T_PERIOD=T_PERIOD, MU_D_over_T=MU_D / T_PERIOD,
@@ -380,17 +380,17 @@ def main():
         three_legs=legs,
         archived_check=archived_check,
         double_record=double_record,
-    )
+)
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     with open(OUT_JSON, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    log("JSON 已写出:", OUT_JSON)
+    log("JSON written:", OUT_JSON)
 
-    # ---------------- 五面体图 ----------------
+    # ---------------- five-panel figure ----------------
     fig = plt.figure(figsize=(17, 10.5))
     gs = fig.add_gridspec(2, 3, hspace=0.42, wspace=0.30)
 
-    # (a) 级联图 + 幸存统计量标签
+    # (a) cascade diagram + surviving-statistic labels
     axa = fig.add_subplot(gs[0, 0])
     axa.axis("off")
     boxes = [("L0 damage\n$N_{DSB}$ ~ Pois(35D)", "count"),
@@ -413,7 +413,7 @@ def main():
                      xycoords=axa.transAxes)
     axa.set_title("(a) p53 cascade: surviving statistic per interface", fontsize=10.5)
 
-    # (b) 信息瀑布
+    # (b) information waterfall
     axb = fig.add_subplot(gs[0, 1])
     names = ["H(D)", "L0\ndamage", "L1\nsense(gap)", "L2\nencode", "L3\ndecode", "L4\nfate", "I(D;fate)"]
     starts = [0.0]
@@ -435,7 +435,7 @@ def main():
     axb.set_ylabel("bits"); axb.set_ylim(0, H_D * 1.32)
     axb.set_title("(b) Information waterfall: $H(D)=I(D;Y_4)+\\sum L_i$", fontsize=10.5)
 
-    # (c) 增益散布不对称
+    # (c) gain-dispersion asymmetry
     axc = fig.add_subplot(gs[0, 2])
     sks = [g["sigma_k"] for g in gain_sweep]
     axc.plot(sks, [g["I_count"] for g in gain_sweep], "o-", color="#0b6b3a",
@@ -458,7 +458,7 @@ def main():
     axc.legend(h1 + h2, l1 + l2, fontsize=7.5, loc="center left")
     axc.set_title("(c) Gain-dispersion asymmetry: count survives, amplitude dies", fontsize=10.5)
 
-    # (d) 固定常数鲁棒性
+    # (d) fixed-constant robustness
     axd = fig.add_subplot(gs[1, 0])
     cvs = [c["cvT"] for c in cvt_sweep]
     axd.plot(cvs, [c["I_count"] for c in cvt_sweep], "o-", color="#0b6b3a",
@@ -477,7 +477,7 @@ def main():
     axd.legend(fontsize=8, loc="upper right")
     axd.set_title("(d) Fixed-constant robustness: information vs CV(T)", fontsize=10.5)
 
-    # (e) 能耗对比
+    # (e) energy comparison
     axe = fig.add_subplot(gs[1, 1])
     axe.plot(L_axis, E_A, "o-", color="#c05640", label="analogue $E_A=2kTL^2D^2$")
     axe.plot(L_axis, E_B, "s-", color="#0b6b3a", label="counting $E_B=\\alpha kTLD^2$, $\\alpha$=7")
@@ -491,7 +491,7 @@ def main():
     axe.legend(fontsize=8.5, loc="upper left")
     axe.set_title("(e) Energy: counting vs analogue (S5.6)", fontsize=10.5)
 
-    # 摘要条
+    # summary strip
     axs = fig.add_subplot(gs[1, 2]); axs.axis("off")
     summary = (
         f"Code 81 audit summary (seed {SEED})\n\n"
@@ -507,13 +507,13 @@ def main():
         f"Amplitude share @ $\\sigma_k$=0.6: {amp_share['sigma_k=0.6']['share']*100:.1f}%\n"
         f"Energy: L*=3.5, p53 L=4 -> counting wins\n\n"
         f"Registered gap: L1 (ATM sensing, no data)"
-    )
+)
     axs.text(0.02, 0.98, summary, va="top", fontsize=8.6, family="monospace",
              transform=axs.transAxes)
     fig.suptitle("Code 81: full-pathway p53 cascade audit (L0 dose -> L4 fate)", fontsize=13)
     fig.savefig(OUT_PNG, dpi=150, bbox_inches="tight")
-    log("图已写出:", OUT_PNG)
-    log("[代码81] 完成。")
+    log("figure written:", OUT_PNG)
+    log("[code81] done.")
 
 
 if __name__ == "__main__":

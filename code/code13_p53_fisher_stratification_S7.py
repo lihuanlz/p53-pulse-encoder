@@ -6,7 +6,7 @@ Purpose: perform step 3 (Fisher stratification) of the five-step audit of the dy
 the predictions of the number-limit condition theorem (SI S2, H1–H3 ⟹ C1–C3) for p53:
   (1) the Fisher information of the count statistic is nonzero only along the structural parameter directions (D_c, ρ);
   (2) the amplitude observable pins only the product s·A; the orthogonal direction (ln A − ln s) is exactly zero
-     — this null direction is the orbit tangent of the degeneracy group G (simulated scale nuisance);
+      -  this null direction is the orbit tangent of the degeneracy group G (simulated scale nuisance);
   (3) Monte-Carlo validation of Cramér–Rao: structural parameters attain the bound; the scale direction is inestimable (likelihood ridge).
 
 Model (strictly consistent with the manuscript Methods section and code 5):
@@ -14,7 +14,7 @@ Model (strictly consistent with the manuscript Methods section and code 5):
   amplitude    ȳ ~ Normal(s·A, σ²) (M cells per dose; σ = 15%·sA, experimental-grade precision)
 Parameter vector θ = (ln D_c, ln ρ, ln A, ln s).
 
-Run: python3 代码13_p53_Fisherstratified_S7.py (< 1 minute, outputs a four-panel PNG)
+Run: python3 code13_p53_fisher_stratification_S7.py (< 1 minute, outputs a four-panel PNG)
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -23,7 +23,7 @@ rng = np.random.default_rng(20260805)
 
 # ---------- ground-truth parameters (calibrated in code 5) ----------
 rho_true  = 9.3      # count-law slope (τ_r/T structural parameter)
-Dc_true   = 0.45     # countthreshold（D₀ unit）
+Dc_true   = 0.45     # countthreshold (D₀ unit) 
 A_true    = 2.0      # physical pulse amplitude (molecular units)
 s_true    = 1.0      # simulated scale (fluorescence/molecule, nuisance)
 M         = 200      # cells per dose (typical single-cell experiment order of magnitude)
@@ -35,10 +35,10 @@ sA        = s_true*A_true
 sig       = SIG_FRAC*sA
 
 def fisher_matrix(counts_only=False):
-    """F = Σ_D [F_count + F_amp]，θ = (ln D_c, ln ρ, ln A, ln s)。"""
+    """F = Σ_D [F_count + F_amp], θ = (ln D_c, ln ρ, ln A, ln s). """
     F = np.zeros((4, 4))
     for N in N_D:
-        g = np.array([-rho_true, N, 0.0, 0.0])     # ∂N/∂θ（Poisson: F = M·g gᵀ/N）
+        g = np.array([-rho_true, N, 0.0, 0.0])     # ∂N/∂θ (Poisson: F = M·g gᵀ/N) 
         F += M*np.outer(g, g)/N
         if not counts_only:
             h = np.array([0.0, 0.0, sA, sA])       # ∂(sA)/∂θ
@@ -62,7 +62,7 @@ print(f'counts only (number limit): λ = {w_cnt}  → non-null directions: {np.s
 print(f'counts+amplitude:           λ = {w_full} → non-null directions: {np.sum(w_full > 1e-8*w_full[0])} (prediction 3)')
 print(f'smallest/largest eigenvalue = {w_full[-1]/w_full[0]:.2e} (float-noise order of magnitude → exact null direction exists)')
 v0 = V_full[:, -1]
-print(f'null directioneigenvector = {np.round(v0, 4)}（prediction ∝ (0,0,1,−1)/√2 = [0,0,0.7071,−0.7071]）')
+print(f'null directioneigenvector = {np.round(v0, 4)} (prediction ∝ (0,0,1,−1)/√2 = [0,0,0.7071,−0.7071]) ')
 G_tangent = np.array([0, 0, 1, -1])/np.sqrt(2)
 print(f'cosine of the angle with the G orbit tangent (0,0,1,−1)/√2 = {abs(v0 @ G_tangent):.6f} (prediction 1.000000)')
 
@@ -111,7 +111,7 @@ ll = [-(np.sum((rng.normal(sA, sig/np.sqrt(M), 100) - sw*aw)**2))/(2*sig**2/M)
       for sw, aw in zip(s_wrong, A_comp)]
 print('\n[Scale unidentifiable: likelihood ridge] fixing s at a wrong value; after compensation Â = sA/s the likelihood difference is < noise fluctuation:')
 for sw, aw in zip(s_wrong, A_comp):
-    print(f'  s = {sw:.1f}（{"ground truth" if sw==1.0 else "error"}）→ Â = {aw:.2f}（compensation：Â·s = {aw*sw:.2f} constant）')
+    print(f'  s = {sw:.1f} ({"ground truth" if sw==1.0 else "error"}) → Â = {aw:.2f} (compensation: Â·s = {aw*sw:.2f} constant) ')
 
 # ============================================================
 # four-panel figure
