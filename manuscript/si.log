@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.15)  16 OCT 2026 00:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.15)  16 OCT 2026 00:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -672,7 +672,14 @@ mm/m/it/10.95 :\OT1/cmr/m/n/10.95 6%$, Mdm2 $2\OML/cmm/m/it/10.95 :\OT1/cmr/m/n
 nslation,
  []
 
-[5] [6] (si.aux)
+[5]
+Overfull \hbox (3.92358pt too wide) in paragraph at lines 302--313
+\OT1/cmr/m/n/10.95 Geva-Zatorsky et al., \OT1/cmr/m/it/10.95 Mol. Syst. Biol. \
+OT1/cmr/m/n/10.95 2, 33 (2006); Loewer et al., \OT1/cmr/m/it/10.95 Cell \OT1/cm
+r/m/n/10.95 142, 89--100 (2010) (PMC3003696);
+ []
+
+[6] (si.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-09-09>
@@ -681,10 +688,10 @@ Package rerunfilecheck Info: File `si.out' has not changed.
 (rerunfilecheck)             Checksum: E353BABA12A6989B3A86293E742BED1B;2612.
  ) 
 Here is how much of TeX's memory you used:
- 10138 strings out of 469327
- 156983 string characters out of 5456969
+ 10139 strings out of 469327
+ 156991 string characters out of 5456969
  606751 words of memory out of 5000000
- 39124 multiletter control sequences out of 15000+600000
+ 39125 multiletter control sequences out of 15000+600000
  636299 words of font info for 68 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
  74i,10n,79p,383b,573s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -708,7 +715,7 @@ ers/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 .pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/cm/
 cmti10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfon
 ts/cm/cmtt10.pfb>
-Output written on si.pdf (6 pages, 242894 bytes).
+Output written on si.pdf (6 pages, 244247 bytes).
 PDF statistics:
  199 PDF objects out of 1000 (max. 8388607)
  153 compressed objects within 2 object streams
