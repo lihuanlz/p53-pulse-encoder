@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.15)  16 OCT 2026 00:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.15)  16 OCT 2026 08:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -553,14 +553,8 @@ File: fig4_closedform.png Graphic file (type png)
 <use fig4_closedform.png>
 Package pdftex.def Info: fig4_closedform.png  used on input line 208.
 (pdftex.def)             Requested size: 452.9679pt x 166.30888pt.
- [8] [9 <./fig3_molecular.png> <./fig4_closedform.png>]
-Overfull \hbox (10.95192pt too wide) in paragraph at lines 247--248
-\OT1/cmtt/m/n/10.95 i h u a n l z / p 5 3-[] p u l s e -[] e n c o d er$[][] \O
-T1/cmr/m/n/10.95 (-20) (umbrella edition archived at Zenodo, doi:10.5281/zenodo
-.23008824). 
- []
-
-[10] [11] [12] (main.aux)
+ [8] [9 <./fig3_molecular.png> <./fig4_closedform.png>] [10] [11] [12] (main.au
+x)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-09-09>
@@ -597,7 +591,7 @@ y8.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/c
 m/cmti10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsf
 onts/cm/cmtt10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/publi
 c/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (12 pages, 1036861 bytes).
+Output written on main.pdf (12 pages, 1036887 bytes).
 PDF statistics:
  406 PDF objects out of 1000 (max. 8388607)
  339 compressed objects within 4 object streams
