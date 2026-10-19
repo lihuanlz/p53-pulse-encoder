@@ -13,10 +13,10 @@ import numpy as np
 
 sys.path.insert(0, str(Path(sys.executable).parent.parent.parent))
 
-WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
-OUT_A = WS / "03_cell_line_3" / "results" / "code51r4A_noise_calibration_robustness.json"
-OUT_B = WS / "03_cell_line_3" / "results" / "code51r4B_Fisher_M4000.json"
-OUT_PNG = WS / "03_cell_line_3" / "results" / "code51r4_wrapup_fourpanel.png"
+REPO = Path(__file__).resolve().parent.parent
+OUT_A = REPO / "results" / "code51r4A_noise_calibration_robustness.json"
+OUT_B = REPO / "results" / "code51r4B_Fisher_M4000.json"
+OUT_PNG = REPO / "results" / "code51r4_wrapup_fourpanel.png"
 
 PARAM_NAMES = ["a", "b", "eps", "s", "tau_r", "I0", "sigma"]
 OBS_NAMES = ["t1", "T", "A", "N", "w", "IPI_sd"]
@@ -203,7 +203,7 @@ def fisher_M(theta0, M, hrel):
                 share=share.tolist(), N_mean=float(np.nanmean(base[:, 3])))
 
 
-CACHE = WS / "03_cell_line_3" / "results" / "_code51r4B2_cache.json"
+CACHE = REPO / "results" / "_code51r4B2_cache.json"
 
 
 def _group_mean_cache(name, factor, M, hrel, cache):
@@ -287,8 +287,11 @@ def make_figure(resA, resB):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from daimon_runtime import setup_plot
-    setup_plot()
+    try:  # optional plotting style from the original runtime; not needed to compute
+        from daimon_runtime import setup_plot
+        setup_plot()
+    except Exception:
+        pass
 
     fig, axes = plt.subplots(2, 2, figsize=(13, 9.5))
 

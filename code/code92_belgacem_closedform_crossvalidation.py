@@ -19,10 +19,12 @@ from scipy.signal import find_peaks
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 SEED_TAG = 20260925
-OUT_JSON = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\results\code92_belgacem_crossvalidation_results.json"
-OUT_PNG = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\code_and_figures\code92_belgacem_crossvalidation_twopanel.png"
+REPO = Path(__file__).resolve().parent.parent
+OUT_JSON = str(REPO / "results" / "molecular_layer" / "code92_closedform_crossvalidation_results.json")
+OUT_PNG = str(REPO / "results" / "code92_belgacem_crossvalidation_twopanel.png")
 OUT_SVG = OUT_PNG.replace(".png", ".svg")
 plt.rcParams.update({"svg.fonttype": "none", "font.size": 9,
                      "axes.spines.top": False, "axes.spines.right": False})

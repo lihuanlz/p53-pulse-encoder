@@ -15,9 +15,9 @@ import numpy as np
 
 sys.path.insert(0, str(Path(sys.executable).parent.parent.parent))
 
-WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
-OUT_JSON = WS / "03_cell_line_3" / "results" / "code51r2_p53_Fisher_audit_results.json"
-OUT_PNG = WS / "03_cell_line_3" / "results" / "code51r2_p53_Fisher_audit_sixpanel.png"
+REPO = Path(__file__).resolve().parent.parent
+OUT_JSON = REPO / "results" / "code51r2_p53_Fisher_audit_results.json"
+OUT_PNG = REPO / "results" / "code51r2_p53_Fisher_audit_sixpanel.png"
 
 PARAM_NAMES = ["a", "b", "eps", "s", "tau_r", "I0", "sigma"]
 OBS_NAMES = ["t1", "T", "A", "N", "w", "IPI_sd"]
@@ -188,8 +188,11 @@ def make_figure(res, scan, cap, gain):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from daimon_runtime import setup_plot
-    setup_plot()
+    try:  # optional plotting style from the original runtime; not needed to compute
+        from daimon_runtime import setup_plot
+        setup_plot()
+    except Exception:
+        pass
 
     fig, axes = plt.subplots(2, 3, figsize=(17, 9.5))
 

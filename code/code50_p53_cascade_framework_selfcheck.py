@@ -148,6 +148,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import os as _os
+from pathlib import Path
+REPO = Path(__file__).resolve().parent.parent
 if _os.path.exists("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"):
     fm.fontManager.addfont("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc")
 _avail = {f.name for f in fm.fontManager.ttflist}
@@ -177,5 +179,5 @@ axes[2].bar(["L1\ndamage→pulse train", "I(D;Y)\nend-to-end survival", "L2\npul
 axes[2].set_ylabel("bits"); axes[2].set_title("information-loss decomposition (H(D)=2.32)")
 
 plt.tight_layout()
-plt.savefig("/mnt/agents/output/03_cell_line_3/results/sim_p53cascade_three_leg_nucleus_check.png", dpi=150)
+plt.savefig(str(REPO / "results" / "sim_p53cascade_three_leg_nucleus_check.png"), dpi=150)
 print("\nFigure saved: 03_cell_line_3/results/sim_p53cascade_three_leg_nucleus_check.png")

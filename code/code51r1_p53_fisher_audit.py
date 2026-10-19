@@ -12,9 +12,9 @@ import numpy as np
 
 sys.path.insert(0, str(Path(sys.executable).parent.parent.parent))
 
-WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
-OUT_JSON = WS / "03_cell_line_3" / "results" / "code51_p53_Fisher_audit_results.json"
-OUT_PNG = WS / "03_cell_line_3" / "results" / "code51_p53_Fisher_audit_fourpanel.png"
+REPO = Path(__file__).resolve().parent.parent
+OUT_JSON = REPO / "results" / "code51_p53_Fisher_audit_results.json"
+OUT_PNG = REPO / "results" / "code51_p53_Fisher_audit_fourpanel.png"
 
 # ---------- model ----------
 # v' = s*(v - v^3/3 - w) + sigma*xi
@@ -167,8 +167,11 @@ def make_figure(res2, res5, cap):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from daimon_runtime import setup_plot
-    setup_plot()
+    try:  # optional plotting style from the original runtime; not needed to compute
+        from daimon_runtime import setup_plot
+        setup_plot()
+    except Exception:
+        pass
 
     fig, axes = plt.subplots(2, 2, figsize=(13, 10))
 

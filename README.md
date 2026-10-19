@@ -11,11 +11,19 @@ Companion code, results and manuscript source for the paper:
 - `manuscript/` — LaTeX source, compiled PDF, four figure PNGs, and one figure-generation script per figure (`make_fig1.py` … `make_fig4.py`; fig3/fig4 read the audited code89/code92 result JSONs under `results/molecular_layer/`).
 - `code/` — analysis scripts (ours): Fisher stratification (code13), cascade self-check (code50), Fisher audit series (code51r1–r4), discrimination map (code52), full-cascade audit (code81), mechanism audit (code82), digital-limit and cascade-model studies (code83–88), molecular-constant decomposition and cross-validation (code89–93), plus the cell-line-1 bifurcation-and-discrimination suite cited in Methods.
 - `results/` — derived outputs (ours): JSON result files, verdict figures, molecular-layer tables.
-- `data_external/` — third-party data used; see `data_external/PROVENANCE.md`. Large source archives are not re-hosted; the file lists exact sources.
+- `data_external/` — third-party data used; see `data_external/PROVENANCE.md`. The digitised Batchelor Fig. 1G/H extraction is shipped here (the input of `code52`); larger source archives are not re-hosted and the provenance file lists exact sources.
 
 ## Running
 
 Scripts are plain Python 3 (numpy/scipy/matplotlib). Each `codeNN_*.py` is self-contained against the tables in `results/` and `data_external/`; figure scripts write the manuscript PNGs.
+
+The script numbers are **historical citation keys**, not a reading order — they come from the parent project's cell-line numbering and are cited verbatim in the Methods. For the order the paper presents things in, and a one-command runner, see [`PIPELINE.md`](PIPELINE.md):
+
+```bash
+python reproduce.py              # every step, in paper order
+python reproduce.py section4     # one section
+python reproduce.py --list       # what the groups are
+```
 
 ## Ownership
 

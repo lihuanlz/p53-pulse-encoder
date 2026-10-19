@@ -17,10 +17,12 @@ from scipy.optimize import fsolve
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 SEED_TAG = 20260925
-OUT_JSON = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\results\code89_molecular_decomposition_results.json"
-OUT_PNG = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\code_and_figures\code89_molecular_decomposition_fourpanel.png"
+REPO = Path(__file__).resolve().parent.parent
+OUT_JSON = str(REPO / "results" / "molecular_layer" / "code89_molecular_decomposition_results.json")
+OUT_PNG = str(REPO / "results" / "code89_molecular_decomposition_fourpanel.png")
 OUT_SVG = OUT_PNG.replace(".png", ".svg")
 
 plt.rcParams.update({

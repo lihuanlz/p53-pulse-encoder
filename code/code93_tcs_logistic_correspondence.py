@@ -16,10 +16,12 @@ from scipy.signal import find_peaks
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 SEED = 20260925
-OUT_JSON = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\results\code93_tcs_logistic_correspondence_results.json"
-OUT_PNG = r"D:\Kimi_Agent_cell_sim_toolkit_workspace\03_cell_line_3\code_and_figures\code93_tcs_logistic_correspondence_threepanel.png"
+REPO = Path(__file__).resolve().parent.parent
+OUT_JSON = str(REPO / "results" / "molecular_layer" / "code93_tcs_logistic_correspondence_results.json")
+OUT_PNG = str(REPO / "results" / "code93_tcs_logistic_correspondence_threepanel.png")
 OUT_SVG = OUT_PNG.replace(".png", ".svg")
 plt.rcParams.update({"svg.fonttype": "none", "font.size": 9,
                      "axes.spines.top": False, "axes.spines.right": False})
