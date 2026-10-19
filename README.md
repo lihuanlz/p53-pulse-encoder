@@ -1,10 +1,10 @@
-# The p53 pulse encoder counts by topological necessity
+# The p53 pulse encoder counts by structural necessity
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23402854.svg)](https://doi.org/10.5281/zenodo.23402854)
 
 Companion code, results and manuscript source for the paper:
 
-> H. Li. *The p53 pulse encoder counts by topological necessity: theory, evidence, and the molecular origin of the 5.5-hour clock.* Companion manuscript (2026), split from the umbrella project [cell-communication-audit](https://github.com/lihuanlz/cell-communication-audit) (archived at Zenodo, doi:10.5281/zenodo.23008824).
+> H. Li. *The p53 pulse encoder counts by structural necessity: theory, evidence, and the molecular origin of the 5.5-hour clock.* Companion manuscript (2026), split from the umbrella project [cell-communication-audit](https://github.com/lihuanlz/cell-communication-audit) (archived at Zenodo, doi:10.5281/zenodo.23008824).
 
 ## Layout
 

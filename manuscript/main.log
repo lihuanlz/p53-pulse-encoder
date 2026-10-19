@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.10.19)  19 OCT 2026 12:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.10.19)  19 OCT 2026 13:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -585,13 +585,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: DD7A937B1D096229F1473F04AE9B7E01;5987.
  ) 
 Here is how much of TeX's memory you used:
- 14460 strings out of 469331
- 229865 string characters out of 5457056
- 693592 words of memory out of 5000000
+ 14452 strings out of 469331
+ 229805 string characters out of 5457056
+ 693588 words of memory out of 5000000
  43104 multiletter control sequences out of 15000+600000
- 648063 words of font info for 208 fonts, out of 8000000 for 9000
+ 647858 words of font info for 204 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
- 74i,9n,79p,2446b,616s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,9n,79p,2424b,616s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/cm/cmb
 x10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/
 cm/cmbx12.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/ams
@@ -613,7 +613,7 @@ y8.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/c
 m/cmti10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsf
 onts/cm/cmtt10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/publi
 c/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (12 pages, 1042761 bytes).
+Output written on main.pdf (12 pages, 1042702 bytes).
 PDF statistics:
  407 PDF objects out of 1000 (max. 8388607)
  340 compressed objects within 4 object streams
