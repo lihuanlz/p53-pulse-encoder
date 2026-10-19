@@ -6,6 +6,7 @@ supplies the sequence. Every step is a separate process, so a failure in one
 does not stop the others.
 """
 import argparse
+import os
 import subprocess
 import sys
 import time
@@ -53,8 +54,10 @@ def run(step):
     if not path.exists():
         return label, "MISSING SCRIPT", 0.0
     t0 = time.time()
+    env = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1")
     proc = subprocess.run([sys.executable, str(path)], cwd=str(REPO),
-                          capture_output=True, text=True)
+                          capture_output=True, text=True,
+                          encoding="utf-8", errors="replace", env=env)
     dt = time.time() - t0
     ok = proc.returncode == 0
     missing = [o for o in outputs if not (REPO / o).exists()]

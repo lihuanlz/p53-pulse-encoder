@@ -71,7 +71,11 @@ def main():
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from daimon_runtime import setup_plot
+    try:  # optional plotting style from the original runtime; not needed to compute
+        from daimon_runtime import setup_plot
+    except Exception:
+        def setup_plot(*_a, **_k):
+            return None
     setup_plot()
 
     fig, axes = plt.subplots(1, 2, figsize=(14.5, 6.8))

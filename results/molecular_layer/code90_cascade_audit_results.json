@@ -6,9 +6,9 @@
       "en": "dose->DSB",
       "name": "dose -> DSB count",
       "constant": "35 DSB/Gy",
-      "sources": "code81 anchored; code82 dual-recorded 4; code87/88 inherited",
+      "sources": "anchored by code 81; double-record 4 of code 82; reused by code 87/88",
       "status": "closed",
-      "note": "consistent across codes, but itself an assumption convention (conversion not measured); assumption flag retained",
+      "note": "consistent across codes, but itself an assumed convention (no measured conversion); assumption flag retained",
       "_pos": [
         0.06,
         0.72,
@@ -22,7 +22,7 @@
       "constant": "half-peak 1-3 min, peak 30 min (K5)",
       "sources": "constant registry v01 K5 (consistent across sources)",
       "status": "closed",
-      "note": "minute-scale, far below all downstream timescales",
+      "note": "minute scale, far below all downstream timescales",
       "_pos": [
         0.20666666666666667,
         0.72,
@@ -32,8 +32,8 @@
     {
       "id": "L2",
       "en": "gH2AX->ATM",
-      "name": "gamma-H2AX -> ATM activation",
-      "constant": "dose-graded single-cell time series missing",
+      "name": "γH2AX -> ATM activation",
+      "constant": "dose-graded single-cell time course missing",
       "sources": "v01 G1 registered gap",
       "status": "gap",
       "note": "ATM-SPARK/ATOMIC probes exist but no public dose-graded data",
@@ -48,7 +48,7 @@
       "en": "ATM->p53 cat.",
       "name": "ATM -> p53 (catalytic)",
       "constant": "kcat/Km not measured",
-      "sources": "v02 G5 (catalytic rate singled out by the user, happens to sit in a gap)",
+      "sources": "v02 G5 (user singled out the catalytic rate, which sits exactly in the gap)",
       "status": "gap",
       "note": "the model substitutes a phenomenological protection factor R=2",
       "_pos": [
@@ -62,9 +62,9 @@
       "en": "p53 engine",
       "name": "p53 pulse engine (K1/K3/K4)",
       "constant": "5.5 h / 2.0 h / 1.25 h",
-      "sources": "code89: all three constants decompose closed",
+      "sources": "code 89: all three constants decomposed and closed",
       "status": "closed",
-      "note": "period 5.95 vs 5.48 (8.5% tail registered)",
+      "note": "period 5.95 vs 5.48 (8.5% residual registered)",
       "_pos": [
         0.6466666666666667,
         0.72,
@@ -75,10 +75,10 @@
       "id": "L5",
       "en": "counting N(D)",
       "name": "dose -> pulse count N(D)",
-      "constant": "counting law D_c: archived 0.261 vs code82 0.99 Gy",
-      "sources": "code82 validation target 1: 3.8-fold discrepancy",
+      "constant": "counting-law D_c: archived 0.261 vs code 82 0.99 Gy",
+      "sources": "code 82 validation target 1: 3.8x discrepancy",
       "status": "tension",
-      "note": "direction correct (saturation shape R2=0.995); the absolute-scale offset stems from the L0 conversion assumption",
+      "note": "direction correct (saturating shape R2=0.995); absolute-scale discrepancy stems from the L0 conversion assumption",
       "_pos": [
         0.7933333333333334,
         0.72,
@@ -88,11 +88,11 @@
     {
       "id": "L6",
       "en": "first pulse t1",
-      "name": "first-pulse time t1",
+      "name": "first pulse t1",
       "constant": "distribution (first peak 2.5-3.0 h), dose-independent",
-      "sources": "D1; Lahav 2004; code87 flat 2.5-3.0 h across doses",
+      "sources": "D1; Lahav 2004; code 87 flat 2.5-3.0 h across all doses",
       "status": "closed",
-      "note": "the distribution itself is the sensing-layer signature, not a defect",
+      "note": "the distribution itself is a sensing-layer signature, not a defect",
       "_pos": [
         0.94,
         0.72,
@@ -104,10 +104,10 @@
       "en": "dispersion 5.8",
       "name": "dispersion ratio t1/IPI",
       "constant": "archived 5.8 = (240/100)^2, 5 Gy convention",
-      "sources": "code86 retracted for a convention error; code87/88 give 6.65-7.32",
+      "sources": "code 86 convention error retracted; code 87/88 obtain 6.65-7.32",
       "sources_detail": "correction registered 2026-09-25",
       "status": "closed",
-      "note": "first account closing at the same order of magnitude; the 86 retraction is registered",
+      "note": "first reconciliation at the same order of magnitude; the 86 retraction is registered",
       "_pos": [
         0.94,
         0.18,
@@ -119,9 +119,9 @@
       "en": "clock dose-indep.",
       "name": "clock dose-independent architecture",
       "constant": "dose acts only through gating + termination",
-      "sources": "code87/88 closed loop",
+      "sources": "code 87/88 closed loop",
       "status": "closed",
-      "note": "for sustained low-dose 0.3 Gy oscillation see L9",
+      "note": "for 0.3 Gy low-dose sustained oscillation see L9",
       "_pos": [
         0.7933333333333334,
         0.18,
@@ -131,11 +131,11 @@
     {
       "id": "L9",
       "en": "low-dose osc.",
-      "name": "low-dose oscillation fraction",
+      "name": "low-dose oscillating fraction",
       "constant": "literature: ~35% oscillating at 0.3 Gy",
-      "sources": "code87/88 verdict card",
+      "sources": "code 87/88 verdict card",
       "status": "tension",
-      "note": "damage-driven termination cannot produce low-dose oscillation; internal tension in the literature, registered",
+      "note": "damage-driven termination cannot produce low-dose oscillation; intra-literature tension, registered",
       "_pos": [
         0.6466666666666667,
         0.18,
@@ -145,11 +145,11 @@
     {
       "id": "L10",
       "en": "p21 tracking",
-      "name": "downstream p21 transcription tracking",
-      "constant": "exact delay value to be extracted",
-      "sources": "v01 G3 (Hafner 2020) ",
+      "name": "downstream p21 transcriptional tracking",
+      "constant": "exact delay value pending extraction",
+      "sources": "v01 G3 (Hafner 2020)",
       "status": "gap",
-      "note": "qualitative synchronized oscillation shown; quantitative delay to be extracted from the source figure",
+      "note": "qualitative co-oscillation established; quantitative delay pending extraction from the original figure",
       "_pos": [
         0.5,
         0.18,
@@ -159,9 +159,9 @@
     {
       "id": "L11",
       "en": "info budget",
-      "name": "information account I(D;fate)",
+      "name": "information budget I(D;fate)",
       "constant": "0.55-0.63 bits (after correction)",
-      "sources": "code81's 1.325 falsified by C1 for relying on dose-dependent timing",
+      "sources": "code 81's 1.325 was falsified by C1 for relying on dose-dependent timing",
       "status": "closed",
       "note": "retraction and correction both registered; the paper never cited 1.325",
       "_pos": [
@@ -174,8 +174,8 @@
       "id": "L12",
       "en": "Wip1 RNAi",
       "name": "Wip1 RNAi phenotype",
-      "constant": "amplitude direction: model rises vs Batchelor falls 45%",
-      "sources": "code82 validation target 5",
+      "constant": "amplitude direction: model up vs Batchelor down 45%",
+      "sources": "code 82 validation target 5",
       "status": "tension",
       "note": "runaway and widening predictions reproduced; the amplitude-direction conflict is registered as a model-experiment mismatch",
       "_pos": [
@@ -188,10 +188,10 @@
       "id": "L13",
       "en": "width K2",
       "name": "pulse width K2 = 3.5 h",
-      "constant": "not decomposed at the molecular layer",
-      "sources": "v02 registry, section D",
+      "constant": "molecular layer not decomposed",
+      "sources": "v02 registry section D",
       "status": "gap",
-      "note": "set by the ATM* plateau, not a pure sum of delays; decomposition pending",
+      "note": "set by the ATM* plateau, not a pure sum of delays; pending decomposition",
       "_pos": [
         0.06,
         0.18,
@@ -225,14 +225,14 @@
       2.5,
       3.0
     ],
-    "t1_definition": "Literature t1 = time of first peak (D1: MCF7 2-3 h); onset is a threshold crossing and does not equal t1",
-    "finding": "The sensing segment (gamma-H2AX 0.5 + ATM rise 0.19 + p53 threshold 0.14) totals only 0.83 h; the bulk of t1 is the p53 accumulation ramp to peak (2.38 h), not sensing delay",
+    "t1_definition": "literature t1 = first-peak time (D1: MCF7 2-3 h); onset is the threshold crossing, not equal to t1",
+    "finding": "the sensing segment (γH2AX 0.5 + ATM rise 0.19 + p53 threshold 0.14) totals only 0.83 h; the bulk of t1 is the p53 accumulation ramp to the peak (2.38 h), not sensing delay",
     "peak_closes": true
   },
   "B_ordering_ok": true,
   "C_tensions_register": [
-    "L5: counting-law D_c 3.8-fold discrepancy (conversion assumption)",
-    "L9: 0.3 Gy low-dose oscillation (internal tension in the literature)",
+    "L5: counting-law D_c 3.8x discrepancy (conversion assumption)",
+    "L9: 0.3 Gy low-dose oscillation (intra-literature tension)",
     "L12: Wip1 RNAi amplitude direction (model-experiment mismatch)",
     "B: simulated first peak 3.21 h vs measured t1 band 2.5-3.0 h (step-convention difference)"
   ]

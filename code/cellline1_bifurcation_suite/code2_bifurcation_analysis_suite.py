@@ -14,6 +14,8 @@ import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
+from pathlib import Path
+REPO = Path(__file__).resolve().parent.parent.parent
 
 # ============================================================
 # part 1 (B3): NF model - equilibrium-branch solution + Hopf detection + limit-cycle branch
@@ -150,5 +152,5 @@ ax.set_xlabel('drive (normalised) '); ax.set_ylabel('amplitude (normalised) '); 
 ax.set_title('(c) the three generic classes separate by orders of magnitude in alpha')
 
 plt.tight_layout()
-plt.savefig('TrackB_bifurcation_validation.png', dpi=200)
+plt.savefig(str(REPO / "results" / "TrackB_bifurcation_validation.png"), dpi=200)
 print('saved TrackB_bifurcation_validation.png')

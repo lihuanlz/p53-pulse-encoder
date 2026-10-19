@@ -1,3 +1,9 @@
 __pycache__/
 *.pyc
 pass*.log
+
+# outputs generated on a full run that are not part of the deposited results
+results/*.svg
+results/sim_p53cascade_three_leg_nucleus_check.png
+results/TrackB_bifurcation_validation.png
+results/TrackC_discrimination_map_experimental_points.png

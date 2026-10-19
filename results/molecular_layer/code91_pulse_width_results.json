@@ -16,7 +16,7 @@
     "W_decomp_h": 2.779,
     "closes": true,
     "closes_vs_archive": false,
-    "tautology_note": "The equality of W_decomp and FWHM is a constructive identity (the two segments exactly tile the half-maximum interval); the substantive content of the decomposition is attribution: the 1.54 h plateau is set by Wip1 accumulation, the 1.99 h collapse tail by Mdm2 recovery kinetics (dM/dAM), and the collapse tail is longer than the plateau - the dominant molecular attribution of width is Mdm2 recovery, not the Wip1 threshold crossing itself",
+    "tautology_note": "the equality of W_decomp and FWHM is a constructive identity (the two segments exactly tile the half-maximum interval); the substantive content of the decomposition is attribution: the 1.54 h plateau is set by Wip1 accumulation, the 1.99 h collapse tail by Mdm2 recovery kinetics (dM/dAM), and the collapse tail is longer than the plateau - the dominant molecular attribution of width is Mdm2 recovery, not the Wip1 threshold crossing itself",
     "reading": "width = p53 half-rise to ATM* off (0.79 h) + collapse tail (1.99 h) = 2.78 h vs FWHM 2.78 h"
   },
   "B2_dose_scan": [

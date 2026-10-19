@@ -41,7 +41,11 @@ from math import lgamma
 
 sys.path.insert(0, str(Path(sys.executable).parent.parent.parent))
 try:
-    from daimon_runtime import setup_plot
+    try:  # optional plotting style from the original runtime; not needed to compute
+        from daimon_runtime import setup_plot
+    except Exception:
+        def setup_plot(*_a, **_k):
+            return None
     setup_plot()
 except Exception:
     pass

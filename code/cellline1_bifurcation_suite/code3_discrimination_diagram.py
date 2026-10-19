@@ -22,6 +22,8 @@ Run: python3 code3_discrimination_diagram.py   (a few seconds, outputs the discr
 """
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
+REPO = Path(__file__).resolve().parent.parent.parent
 
 fig, ax = plt.subplots(figsize=(8.5, 7))
 
@@ -54,6 +56,6 @@ ax.set_ylabel('$\\nu$ (pulses per decade of dose) ')
 ax.set_title('discrimination map: experimental points (semi-quantitative; see SI for precise digitization)', fontsize=11)
 ax.legend(fontsize=8.5, loc='center right')
 plt.tight_layout()
-plt.savefig('TrackC_discrimination_map_experimental_points.png', dpi=200)
+plt.savefig(str(REPO / "results" / "TrackC_discrimination_map_experimental_points.png"), dpi=200)
 print('saved TrackC_discrimination_map_experimental_points.png')
 print('\nreading: purple/magenta stars fall deep in the EXC region (digital), orange diamonds in the analog region (control) - no quadrant misplacement.')
