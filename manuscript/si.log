@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.10.19)  19 OCT 2026 12:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.10.19)  19 OCT 2026 12:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -422,248 +422,248 @@ Package hyperref Info: Link coloring ON on input line 17.
 [1
 
 {C:/Users/lihua/AppData/Local/MiKTeX/2.9/fonts/map/pdftex/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 41--41
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
 []|\OT1/cmtt/m/n/10.95 code13[]p53[]fisher[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 41--41
+Underfull \hbox (badness 10000) in paragraph at lines 42--42
 []|\OT1/cmr/m/n/10.95 Fisher stratification of the pulse
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 42--42
+Underfull \hbox (badness 10000) in paragraph at lines 43--43
 []|\OT1/cmtt/m/n/10.95 code50[]p53[]cascade[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 43--43
+Underfull \hbox (badness 10000) in paragraph at lines 44--44
 []|\OT1/cmtt/m/n/10.95 code51r1--r4[]p53[]
  []
 
 
-Underfull \hbox (badness 7576) in paragraph at lines 43--43
+Underfull \hbox (badness 7576) in paragraph at lines 44--44
 []|\OT1/cmr/m/n/10.95 Fisher identifiability audit of the
  []
 
 
-Underfull \hbox (badness 4954) in paragraph at lines 43--43
+Underfull \hbox (badness 4954) in paragraph at lines 44--44
 \OT1/cmr/m/n/10.95 noise calibration and an $\OML/cmm/m/it/10.95 M[]\OT1/cmr/m/
 n/10.95 4000$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 43--44
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
 \OT1/cmr/m/n/10.95 (\OT1/cmtt/m/n/10.95 code51r2[]p53[]Fisher[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 43--44
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
 \OT1/cmtt/m/n/10.95 audit[]results.json\OT1/cmr/m/n/10.95 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 43--44
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
 \OT1/cmtt/m/n/10.95 code51r3[]...json\OT1/cmr/m/n/10.95 ),
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 43--44
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
 \OT1/cmtt/m/n/10.95 code51r4A[]...json\OT1/cmr/m/n/10.95 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 43--44
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
 \OT1/cmtt/m/n/10.95 code51r4B[]Fisher[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--44
-[]|\OT1/cmtt/m/n/10.95 code52[]TrackC2[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 44--45
-[]|\OT1/cmtt/m/n/10.95 code52[]TrackC2[]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 44--45
-\OT1/cmtt/m/n/10.95 results.json\OT1/cmr/m/n/10.95 ,
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 45--45
-[]|\OT1/cmtt/m/n/10.95 code81[]p53[]full[]
- []
-
-
-Underfull \hbox (badness 5147) in paragraph at lines 45--45
-[]|\OT1/cmr/m/n/10.95 full-cascade simulation (damage $\OMS/cmsy/m/n/10.95 !$
+[]|\OT1/cmtt/m/n/10.95 code52[]TrackC2[]
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 45--46
-[]|\OT1/cmtt/m/n/10.95 code81[]cascade[]audit[]
+[]|\OT1/cmtt/m/n/10.95 code52[]TrackC2[]
  []
 
 
-Underfull \hbox (badness 7397) in paragraph at lines 45--46
-\OT1/cmtt/m/n/10.95 results.json\OT1/cmr/m/n/10.95 , five-panel
+Underfull \hbox (badness 10000) in paragraph at lines 45--46
+\OT1/cmtt/m/n/10.95 results.json\OT1/cmr/m/n/10.95 ,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 46--46
-[]|\OT1/cmtt/m/n/10.95 code82[]p53[]mechanism[]
+[]|\OT1/cmtt/m/n/10.95 code81[]p53[]full[]
+ []
+
+
+Underfull \hbox (badness 5147) in paragraph at lines 46--46
+[]|\OT1/cmr/m/n/10.95 full-cascade simulation (damage $\OMS/cmsy/m/n/10.95 !$
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 46--47
-[]|\OT1/cmtt/m/n/10.95 code82[]mechanism[]audit[]
+[]|\OT1/cmtt/m/n/10.95 code81[]cascade[]audit[]
  []
 
 
-Underfull \hbox (badness 2293) in paragraph at lines 46--47
-\OT1/cmtt/m/n/10.95 results.json\OT1/cmr/m/n/10.95 , two four-
+Underfull \hbox (badness 7397) in paragraph at lines 46--47
+\OT1/cmtt/m/n/10.95 results.json\OT1/cmr/m/n/10.95 , five-panel
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 47--47
-[]|\OT1/cmtt/m/n/10.95 code83[]why[]digital[]
+[]|\OT1/cmtt/m/n/10.95 code82[]p53[]mechanism[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 47--48
+[]|\OT1/cmtt/m/n/10.95 code82[]mechanism[]audit[]
+ []
+
+
+Underfull \hbox (badness 2293) in paragraph at lines 47--48
+\OT1/cmtt/m/n/10.95 results.json\OT1/cmr/m/n/10.95 , two four-
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 48--48
-[]|\OT1/cmtt/m/n/10.95 code84[]discovery[]
+[]|\OT1/cmtt/m/n/10.95 code83[]why[]digital[]
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 49--49
-[]|\OT1/cmtt/m/n/10.95 code85[]heterogeneity[]
+[]|\OT1/cmtt/m/n/10.95 code84[]discovery[]
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 50--50
+[]|\OT1/cmtt/m/n/10.95 code85[]heterogeneity[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
 []|\OT1/cmtt/m/n/10.95 code86[]foci[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--51
+Underfull \hbox (badness 10000) in paragraph at lines 52--52
 []|\OT1/cmtt/m/n/10.95 code87[]clock[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--51
+Underfull \hbox (badness 10000) in paragraph at lines 52--52
 \OT1/cmtt/m/n/10.95 dose[] independent[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--51
+Underfull \hbox (badness 10000) in paragraph at lines 52--52
 []|\OT1/cmr/m/n/10.95 dose-independence of the clock
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 52--52
+Underfull \hbox (badness 10000) in paragraph at lines 53--53
 []|\OT1/cmtt/m/n/10.95 code88[]foci[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 53--53
+Underfull \hbox (badness 10000) in paragraph at lines 54--54
 []|\OT1/cmtt/m/n/10.95 code89[]p53[]molecular[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 53--54
+Underfull \hbox (badness 10000) in paragraph at lines 54--55
 []|\OT1/cmtt/m/n/10.95 molecular[]layer/code89[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--54
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
 []|\OT1/cmtt/m/n/10.95 code90[]p53[]full[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--54
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
 \OT1/cmtt/m/n/10.95 cascade[] consistency[]
  []
 
 
-Underfull \hbox (badness 3884) in paragraph at lines 54--54
+Underfull \hbox (badness 3884) in paragraph at lines 55--55
 []|\OT1/cmr/m/n/10.95 14 static link closures; onset-time
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--55
+Underfull \hbox (badness 10000) in paragraph at lines 55--56
 []|\OT1/cmtt/m/n/10.95 molecular[]layer/code90[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--55
+Underfull \hbox (badness 10000) in paragraph at lines 56--56
 []|\OT1/cmtt/m/n/10.95 code91[]K2[]pulse[]width[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--55
+Underfull \hbox (badness 10000) in paragraph at lines 56--56
 []|\OT1/cmr/m/n/10.95 pulse-width (FWHM) molecular
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 55--56
+Underfull \hbox (badness 10000) in paragraph at lines 56--57
 []|\OT1/cmtt/m/n/10.95 molecular[]layer/code91[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 56--56
+Underfull \hbox (badness 10000) in paragraph at lines 57--57
 []|\OT1/cmtt/m/n/10.95 code92[]belgacem[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 56--56
+Underfull \hbox (badness 10000) in paragraph at lines 57--57
 \OT1/cmtt/m/n/10.95 closedform[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 56--57
+Underfull \hbox (badness 10000) in paragraph at lines 57--58
 []|\OT1/cmtt/m/n/10.95 molecular[]layer/code92[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 57--57
+Underfull \hbox (badness 10000) in paragraph at lines 58--58
 []|\OT1/cmtt/m/n/10.95 code93[]tcs[]logistic[]
  []
 
 
-Underfull \hbox (badness 3333) in paragraph at lines 57--57
+Underfull \hbox (badness 3333) in paragraph at lines 58--58
 []|\OT1/cmr/m/n/10.95 event-time invariance under logistic
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 57--58
+Underfull \hbox (badness 10000) in paragraph at lines 58--59
 []|\OT1/cmtt/m/n/10.95 molecular[]layer/code93[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 58--58
+Underfull \hbox (badness 10000) in paragraph at lines 59--59
 []|\OT1/cmtt/m/n/10.95 cellline1[]bifurcation
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 58--58
+Underfull \hbox (badness 10000) in paragraph at lines 59--59
 []|\OT1/cmr/m/n/10.95 stochastic population simulation,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 58--58
+Underfull \hbox (badness 10000) in paragraph at lines 59--59
 \OT1/cmr/m/n/10.95 bifurcation analysis, discrimination
  []
 
 
-Underfull \hbox (badness 3386) in paragraph at lines 58--58
+Underfull \hbox (badness 3386) in paragraph at lines 59--59
 \OT1/cmr/m/n/10.95 diagram (cell-line 1 suite cited in
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 63--63
+Underfull \hbox (badness 10000) in paragraph at lines 64--64
 []|\OT1/cmr/m/n/10.95 Fig. 4 closed-form cross-validation
  []
 
@@ -674,24 +674,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 63--63
 [3]
 
 [4]
-Overfull \hbox (3.95016pt too wide) in paragraph at lines 258--264
-\OT1/cmr/m/n/10.95 15\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 3%$, Wip1 $9\OML/c
-mm/m/it/10.95 :\OT1/cmr/m/n/10.95 6%$, Mdm2 $2\OML/cmm/m/it/10.95 :\OT1/cmr/m/n
-/10.95 2%$ (sum of phases $= 4\OML/cmm/m/it/10.95 :\OT1/cmr/m/n/10.95 474$ rad)
-. Molecular closure register: $\OML/cmm/m/it/10.95 T[]$ \OT1/cmr/m/n/10.95 (tra
-nslation,
- []
-
-
 
 [5]
-Overfull \hbox (3.92358pt too wide) in paragraph at lines 303--314
-\OT1/cmr/m/n/10.95 Geva-Zatorsky et al., \OT1/cmr/m/it/10.95 Mol. Syst. Biol. \
-OT1/cmr/m/n/10.95 2, 33 (2006); Loewer et al., \OT1/cmr/m/it/10.95 Cell \OT1/cm
-r/m/n/10.95 142, 89--100 (2010) (PMC3003696);
- []
-
-
 
 [6] (si.aux)
  ***********
@@ -708,7 +692,7 @@ Here is how much of TeX's memory you used:
  39126 multiletter control sequences out of 15000+600000
  636299 words of font info for 68 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
- 74i,10n,79p,592b,573s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,10n,79p,592b,565s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/cm/cmb
 x10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/
 cm/cmbx12.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/ams
@@ -729,7 +713,7 @@ ers/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 .pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/cm/
 cmti10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfon
 ts/cm/cmtt10.pfb>
-Output written on si.pdf (6 pages, 245125 bytes).
+Output written on si.pdf (6 pages, 245106 bytes).
 PDF statistics:
  199 PDF objects out of 1000 (max. 8388607)
  153 compressed objects within 2 object streams

@@ -16,9 +16,10 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
-RES = WS / "03_cell_line_3/results"
-OUT = WS / "05_main_program/paper_cell_communication_audit_2026-09-23/split_LaTeX/paper_p53/fig2_census.png"
+HERE = Path(__file__).resolve().parent
+REPO = HERE.parent
+RES = REPO / "results"
+OUT = HERE / "fig2_census.png"
 
 r3 = json.loads((RES / "code51r3_p53_Fisher_audit_results.json").read_text(encoding="utf-8"))
 r4b = json.loads((RES / "code51r4B_Fisher_M4000.json").read_text(encoding="utf-8"))
@@ -62,7 +63,7 @@ for k, (lab, ev, c) in enumerate(cfgs):
     ev[ev <= 0] = 1e-16
     ax.bar(x + (k - 1) * wd, np.log10(ev), width=wd, color=c, label=lab)
 ax.set_xlabel("mode index"); ax.set_ylabel("log$_{10}$ eigenvalue")
-ax.set_title("Fisher spectrum: $\\lambda_7/\\lambda_1 \\leq 4.7\\times 10^{-19}$", fontsize=10)
+ax.set_title("Fisher spectrum: $\\lambda_7/\\lambda_1 = 4.7\\times 10^{-19}$ (reference config)", fontsize=10)
 ax.legend(fontsize=7.5, loc="lower left", frameon=False)
 ax.text(-0.14, 1.02, "b", transform=ax.transAxes, fontsize=13, fontweight="bold")
 

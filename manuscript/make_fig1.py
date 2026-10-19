@@ -3,7 +3,7 @@
 All numbers from named archives:
   code52 TrackC2 JSON (alphas, grid points), digitized_Fig1GH.json (bars),
   NC-manuscript lineage (R2=0.9926/0.971, hysteresis 0.275 vs 0.25,
-  FHN +6.5%/4.6x alpha=0.014, NF +360%, ML alpha=-0.258,
+  FHN +6.5%/3.93x alpha=0.047 (archived arrays, code2 L141-142), NF +360%, ML alpha=-0.258,
   counting law R2=0.920, D_c=0.261, slope->T 2.14 vs measured 2.30 au).
 Panels are faithful schematic redraws of archived analysis results.
 """
@@ -14,9 +14,10 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
-OUT = WS / "05_main_program/paper_cell_communication_audit_2026-09-23/split_LaTeX/paper_p53/fig1_topology.png"
-DIG = json.loads((WS / "01_cell_line_1/public_data/Batchelor2011/digitized_Fig1GH.json").read_text(encoding="utf-8"))
+HERE = Path(__file__).resolve().parent
+REPO = HERE.parent
+OUT = HERE / "fig1_topology.png"
+DIG = json.loads((REPO / "data_external/batchelor2011/digitized_Fig1GH.json").read_text(encoding="utf-8"))
 rng = np.random.default_rng(7)
 
 fig, axes = plt.subplots(2, 3, figsize=(14.6, 8.7))
@@ -46,14 +47,19 @@ tag(ax)
 
 # ---- b: amplitude grading ---------------------------------------------------
 ax = axes[0, 1]
-d = np.linspace(1.0, 4.6, 12)
-exc = d ** 0.014
+# drive sweep plotted from the archived FHN arrays (code2_bifurcation_analysis_suite.py L141-142)
+D0S = np.array([0.42, 0.50, 0.60, 0.75, 0.95, 1.25, 1.65])
+A_FHN = np.array([1.793, 1.813, 1.833, 1.847, 1.872, 1.898, 1.909])
+d = D0S / D0S[0]
+exc = A_FHN / A_FHN[0]
+alpha_fhn = np.polyfit(np.log(D0S), np.log(A_FHN), 1)[0]
 nf = 1 + 3.6 * (d - 1) / 3.6
 dml = np.linspace(1.0, 2.1, 8)
 ml = dml ** (-0.258)
-ax.plot(d, exc, "o-", color="#1b9e77", label="EXC (FHN): +6.5% over 4.6x, a = 0.014")
-ax.plot(d, nf, "s-", color="#d95f02", label="NF: +360% (contrast)")
-ax.plot(dml, ml / ml[0] * exc[9], "^-", color="#1f78b4", label="ML Type-II: a = -0.258")
+ax.plot(d, exc, "o-", color="#1b9e77",
+        label=f"EXC (FHN, archived): +{100*(A_FHN[-1]/A_FHN[0]-1):.1f}% over {D0S[-1]/D0S[0]:.2f}x, a = {alpha_fhn:.3f}")
+ax.plot(d, nf, "s-", color="#d95f02", label="NF analog: A$^2$ linear in drive (contrast)")
+ax.plot(dml, ml / ml[0] * exc[-1], "^-", color="#1f78b4", label="ML Type-II: a = -0.258")
 ax.set_xlabel("drive (fold of threshold)")
 ax.set_ylabel("amplitude (normalized)")
 ax.set_title("amplitude grading separates EXC from NF", fontsize=10)
