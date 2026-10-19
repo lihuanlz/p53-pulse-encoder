@@ -60,3 +60,8 @@ needed; every input is inside the repository.
 - **The archived result files are the output of these exact scripts.** Re-running
   them reproduces every number; a handful of human-readable strings in the JSON
   differ from the shipped ones where the prose was edited after generation.
+- **`code82` is a Monte Carlo audit.** The mechanism-level split that the paper
+  quotes is stable across runs (`share_time` 0.451137 vs 0.451139), but
+  near-singular quantities move: the Fisher condition number of the 23-parameter
+  model varies by roughly 10% between runs. The paper quotes the shares, not
+  that condition number.
