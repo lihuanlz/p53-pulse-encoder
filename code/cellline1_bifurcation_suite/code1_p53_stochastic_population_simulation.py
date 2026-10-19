@@ -21,6 +21,8 @@ Run: python3 code1_p53_stochastic_population_simulation.py   (approx. 1-2 min, o
 import numpy as np
 from scipy.signal import find_peaks
 import matplotlib.pyplot as plt
+from pathlib import Path
+REPO = Path(__file__).resolve().parent.parent.parent
 
 rng = np.random.default_rng(7)          # fixed seed, reproducible results
 
@@ -106,5 +108,5 @@ ax.set_xlabel('time (h)'); ax.set_ylabel('cells'); ax.legend()
 ax.set_title('(d) D=3.0: phase dispersion vs precise beat')
 
 plt.tight_layout()
-plt.savefig('p53_pulse_simulation.png', dpi=200)
+plt.savefig(str(REPO / "results" / "p53_pulse_simulation.png"), dpi=200)
 print('\nsaved p53_pulse_simulation.png')

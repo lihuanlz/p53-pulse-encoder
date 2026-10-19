@@ -18,6 +18,8 @@ Run: python3 code13_p53_fisher_stratification_S7.py (< 1 minute, outputs a four-
 """
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
+REPO = Path(__file__).resolve().parent.parent
 
 rng = np.random.default_rng(20260805)
 
@@ -162,5 +164,5 @@ ax.legend(fontsize=8, loc='upper right')
 ax.set_title('(d) scale unidentifiable: the entire G orbit is likelihood-degenerate')
 
 plt.tight_layout()
-plt.savefig('p53_Fisherstratified_S7.png', dpi=200)
+plt.savefig(str(REPO / "results" / "p53_Fisherstratified_S7.png"), dpi=200)
 print('\nSaved p53_Fisherstratified_S7.png')
