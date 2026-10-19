@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "script": "code84_discovery_cascade_model.py",
+    "seed": 20260925,
+    "date": "2026-09-25",
+    "K_constants": {
+      "K0_DSB": 35.0,
+      "R_FAST": 0.35,
+      "FRAC_SLOW": 0.1,
+      "T_HALF_SLOW": 20.0,
+      "T_PERIOD": 5.5,
+      "JIT_IPI": 0.085,
+      "W_PULSE": 3.5,
+      "LAG_MDM2": 2.0,
+      "W": 48.0
+    },
+    "calibrated": {
+      "LAM0": 0.003,
+      "A_MIN": 10.0,
+      "anchors": "LAM0: 10Gy first-pulse mean ~1.5h; A_MIN: 10Gy ~7 pulses/24h"
+    }
+  },
+  "H_D": 2.807354922057604,
+  "count_law": [
+    0.052,
+    0.1155,
+    0.226,
+    0.41625,
+    1.2115,
+    3.22075,
+    6.86475
+  ],
+  "responding_fraction": [
+    0.052,
+    0.1155,
+    0.226,
+    0.39425,
+    0.71425,
+    0.9185,
+    0.99425
+  ],
+  "doses": [
+    0.1,
+    0.25,
+    0.5,
+    1.0,
+    2.5,
+    5.0,
+    10.0
+  ],
+  "t1_stats": {
+    "2.5Gy": {
+      "t1_mean": 6.682828339182921,
+      "t1_sd": 9.76729597154058,
+      "ipi_sd": 0.27097530517866997,
+      "dispersion_ratio": 36.0449671423026
+    },
+    "5.0Gy": {
+      "t1_mean": 3.8746487379731342,
+      "t1_sd": 6.873684295081195,
+      "ipi_sd": 0.322747668213651,
+      "dispersion_ratio": 21.297394131848495
+    },
+    "10.0Gy": {
+      "t1_mean": 1.6641932521650824,
+      "t1_sd": 3.396531036670722,
+      "ipi_sd": 0.39534081625971357,
+      "dispersion_ratio": 8.591399868106254
+    }
+  },
+  "info_chain": {
+    "I_chain": [
+      2.5224288316814683,
+      0.9670792258939286,
+      0.9994909582246858,
+      0.8773459156360104,
+      0.8171898472933338
+    ],
+    "losses": [
+      0.2849260903761359,
+      1.5553496057875398,
+      -0.032411732330757226,
+      0.12214504258867542,
+      0.060156068342676616
+    ],
+    "end_to_end": 0.8171898472933338,
+    "code81_reference": 1.325
+  },
+  "mdm2_check": {
+    "demo_dose": 2.5,
+    "measured_lag_h": 2.6,
+    "expected_lag_h": 2.0
+  },
+  "double_record": [
+    "LAM0 and A_MIN are the only two non-literature constants: aligned respectively to the two literature anchors '10Gy first-pulse mean ~1.5h' and '10Gy ~7 pulses/24h'; not tuned to any audit output",
+    "The γH2AX formation timescale of 30 min (K5) is far below T=5.5h and is treated as instantaneous; with an explicit 30 min delay shift, the first-pulse distribution would shift right by ~0.5h without changing the order of magnitude of the dispersion ratio (not run, registered)",
+    "The measurement convention of the literature dispersion ratio 5.8 (Loewer 2010, per-dose SD(t1)/SD(IPI)) differs from this model's ensemble convention; code 82 already registered that a homogeneous ensemble cannot reproduce 5.8 (an extra heterogeneity source is needed), and if this model likewise fails to reproduce it, the two corroborate each other",
+    "The MDM2 shadow layer is a morphological demo (τ=1h filtering is an approximate convention) and does not enter the information chain",
+    "The square-wave width 3.5h (K2) stays comparable to the code 81 quantum convention via area alignment q_r=q/w; second-order effects of width on integrator output were not scanned separately",
+    "Mutual information is a binned plug-in estimate (same convention as code 81); absolute values are biased, trends are reliable"
+  ]
+}

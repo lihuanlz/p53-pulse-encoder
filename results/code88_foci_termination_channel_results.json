@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "script": "code88_foci_termination_channel.py",
+    "seed": 20260925,
+    "date": "2026-09-25",
+    "architecture": "dose enters only via gate and termination; clock dose-independent",
+    "anchored": {
+      "t1_gamma_k": 0.47,
+      "t1_scale": 5.82,
+      "T_cell": "5.5+/-1.5h",
+      "jit": 0.085,
+      "repair": "code84 sealed biphasic"
+    },
+    "fitted": {
+      "p0_spont": 0.25,
+      "c_gate_per_Gy": 0.22,
+      "note": "two parameters align the three C6 points; the only fitted element"
+    }
+  },
+  "doses": [
+    0.1,
+    0.3,
+    0.5,
+    1.0,
+    2.5,
+    5.0,
+    10.0
+  ],
+  "resp_frac": [
+    0.26625,
+    0.298,
+    0.337,
+    0.39,
+    0.57225,
+    0.746,
+    0.91275
+  ],
+  "osc_frac": [
+    0.0,
+    0.01175,
+    0.08675,
+    0.32625,
+    0.56925,
+    0.74475,
+    0.9125
+  ],
+  "count_law": [
+    0.26625,
+    0.36025,
+    0.65625,
+    1.59225,
+    3.922,
+    6.35725,
+    8.176
+  ],
+  "gate_fit_at_lit_doses": [
+    0.2979018517812859,
+    0.7503466872264404,
+    0.9168976312282496
+  ],
+  "lit_osc_frac": [
+    0.35,
+    0.5,
+    0.9
+  ],
+  "t1_by_dose": {
+    "0.1Gy": {
+      "mean": 2.819608506886736,
+      "sd": 4.037624341186395
+    },
+    "0.3Gy": {
+      "mean": 2.5926743200452544,
+      "sd": 3.9318165448483757
+    },
+    "0.5Gy": {
+      "mean": 3.025021842986371,
+      "sd": 4.442339884854075
+    },
+    "1.0Gy": {
+      "mean": 2.8671939418404353,
+      "sd": 4.129325043359966
+    },
+    "2.5Gy": {
+      "mean": 2.6390359587087455,
+      "sd": 3.9067412230749325
+    },
+    "5.0Gy": {
+      "mean": 2.6586844677452666,
+      "sd": 3.879210917257055
+    },
+    "10.0Gy": {
+      "mean": 2.7333978904258736,
+      "sd": 3.9814898776125927
+    }
+  },
+  "variance_check_5Gy": {
+    "var_t1": 15.053322019527286,
+    "var_ipi_pooled": 2.265344487899485,
+    "sd_t1": 3.8798610825037647,
+    "sd_ipi_pooled": 1.5051061384166518,
+    "var_ratio": 6.645047629592667,
+    "archived": 5.8,
+    "sd_ratio_continuity": 9.389707026890363
+  },
+  "info": {
+    "H_D": 2.807354922057604,
+    "I_D_fate": 0.5519322688072934
+  },
+  "double_record": [
+    "the t1 gamma shape (k=0.47, scale=5.82h) is itself anchored to archived mean/SD (C1+C2); the variance ratio 6.5 vs 5.8 is a test of internal consistency among three measured numbers, not a zero-fit prediction",
+    "the two gating parameters (p0=0.25 spontaneous baseline, c=0.22/Gy) align the three C6 points and are the only fitted element of the whole model",
+    "the GZ2006 'oscillating cell' convention (sustained oscillation) is approximated by >=3 pulses; the >=1 pulse convention is reported alongside",
+    "amplitude channel not modelled (C7 registered): amplitude is dose-independent with CV~70%, consistent with the information-chain conclusion (amplitude share 5.5%)",
+    "the Lahav 2004 dose-independence claim rests on at most two peaks in a 16h window; there are no direct data on dose-independence of t1 at 0.3 Gy; the model predicts 'responder t1 identically distributed across doses', which is falsifiable",
+    "Mutual information is a binned plug-in estimate; absolute values are biased, trends are reliable",
+    "The only change of code88 relative to 87: termination signal A(t)->F(t) (t_half=11h); triggering remains dose-independent gamma; the focus constants are the second reuse of code86 (falsified in the 86 triggering convention, used here in the termination convention)"
+  ]
+}

@@ -1,11 +1,11 @@
 \contentsline {section}{\numberline {1}Pipeline map: scripts and outputs}{2}{section.1}%
 \contentsline {section}{\numberline {2}Fisher identifiability audit (code51r1--r4)}{3}{section.2}%
-\contentsline {section}{\numberline {3}Counting-vs-amplitude discrimination (code52)}{4}{section.3}%
+\contentsline {section}{\numberline {3}Counting-vs-amplitude discrimination (code52)}{3}{section.3}%
 \contentsline {section}{\numberline {4}Full-cascade audit (code81)}{4}{section.4}%
-\contentsline {section}{\numberline {5}Mechanistic-model audit (code82)}{5}{section.5}%
+\contentsline {section}{\numberline {5}Mechanistic-model audit (code82)}{4}{section.5}%
 \contentsline {section}{\numberline {6}Molecular decomposition of the 5.5 h clock (code89)}{5}{section.6}%
-\contentsline {section}{\numberline {7}Full-cascade consistency (code90)}{6}{section.7}%
-\contentsline {section}{\numberline {8}Pulse-width decomposition (code91)}{6}{section.8}%
+\contentsline {section}{\numberline {7}Full-cascade consistency (code90)}{5}{section.7}%
+\contentsline {section}{\numberline {8}Pulse-width decomposition (code91)}{5}{section.8}%
 \contentsline {section}{\numberline {9}Closed-form cross-validation (code92)}{6}{section.9}%
 \contentsline {section}{\numberline {10}TCS--logistic correspondence (code93)}{6}{section.10}%
 \contentsline {section}{\numberline {11}Third-party data provenance}{6}{section.11}%

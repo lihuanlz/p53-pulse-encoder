@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.10.19)  19 OCT 2026 13:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.10.19)  19 OCT 2026 14:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -533,8 +533,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 48--48
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 48--49
+[]|\OT1/cmtt/m/n/10.95 results/code83[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--49
+\OT1/cmtt/m/n/10.95 variational[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--49
+\OT1/cmtt/m/n/10.95 competition[]
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 49--49
 []|\OT1/cmtt/m/n/10.95 code84[]discovery[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
+[]|\OT1/cmtt/m/n/10.95 results/code84[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
+\OT1/cmtt/m/n/10.95 discovery[]cascade[]
  []
 
 
@@ -543,8 +568,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 50--50
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 50--51
+[]|\OT1/cmtt/m/n/10.95 results/code85[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--51
+\OT1/cmtt/m/n/10.95 heterogeneity[]recheck[]
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 51--51
 []|\OT1/cmtt/m/n/10.95 code86[]foci[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--52
+[]|\OT1/cmtt/m/n/10.95 results/code86[]foci[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 51--52
+\OT1/cmtt/m/n/10.95 persistence[]trigger[]
  []
 
 
@@ -563,8 +608,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--52
  []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
+[]|\OT1/cmtt/m/n/10.95 results/code87[]clock[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
+\OT1/cmtt/m/n/10.95 dose[]independent[]
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 53--53
 []|\OT1/cmtt/m/n/10.95 code88[]foci[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--54
+[]|\OT1/cmtt/m/n/10.95 results/code88[]foci[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--54
+\OT1/cmtt/m/n/10.95 termination[]channel[]
  []
 
 
@@ -671,9 +736,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 64--64
 
 [2]
 
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+
 [3]
 
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+
 [4]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
 
 [5]
 
@@ -688,7 +774,7 @@ Package rerunfilecheck Info: File `si.out' has not changed.
 Here is how much of TeX's memory you used:
  10139 strings out of 469331
  156991 string characters out of 5457056
- 606782 words of memory out of 5000000
+ 611217 words of memory out of 5000000
  39126 multiletter control sequences out of 15000+600000
  636299 words of font info for 68 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
@@ -713,7 +799,7 @@ ers/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 .pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/cm/
 cmti10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfon
 ts/cm/cmtt10.pfb>
-Output written on si.pdf (6 pages, 245106 bytes).
+Output written on si.pdf (6 pages, 245467 bytes).
 PDF statistics:
  199 PDF objects out of 1000 (max. 8388607)
  153 compressed objects within 2 object streams

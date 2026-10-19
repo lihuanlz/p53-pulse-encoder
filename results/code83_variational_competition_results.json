@@ -1,0 +1,269 @@
+{
+  "meta": {
+    "script": "code83_why_digital_variational_competition.py",
+    "seed": 20260925,
+    "date": "2026-09-25",
+    "question": "Q-A: the physically irreducible part vs the design part of the L1 loss of 0.872 bits; Q-B: a variational race of three encoder structures (counting/FM/AM) under the same upstream noise",
+    "constants": {
+      "K0_DSB": 35.0,
+      "C_CLUSTER": 50.0,
+      "N_MAX": 12,
+      "T_PERIOD": 5.5,
+      "JIT_IPI": 0.085,
+      "W": 48.0,
+      "N_FIXED": 5,
+      "GAMMA_T": 0.15,
+      "AMP_SLOPE": 0.15,
+      "AMP_INTR": 0.15
+    }
+  },
+  "H_D": 2.807354922057604,
+  "part_A": {
+    "I_DSB_exact": 2.5234562871132176,
+    "L0_poisson_floor": 0.2838986349443866,
+    "c_sweep": [
+      {
+        "c": 1,
+        "I": 0.8419443435055692,
+        "loss": 1.6815119436076484
+      },
+      {
+        "c": 2,
+        "I": 1.3006093673874943,
+        "loss": 1.2228469197257232
+      },
+      {
+        "c": 5,
+        "I": 1.7971180802941826,
+        "loss": 0.7263382068190349
+      },
+      {
+        "c": 10,
+        "I": 2.036660553800304,
+        "loss": 0.48679573331291337
+      },
+      {
+        "c": 25,
+        "I": 2.055720077894112,
+        "loss": 0.4677362092191055
+      },
+      {
+        "c": 50,
+        "I": 1.6533642746812527,
+        "loss": 0.8700920124319649
+      },
+      {
+        "c": 100,
+        "I": 1.1243570126539122,
+        "loss": 1.3990992744593054
+      },
+      {
+        "c": 200,
+        "I": 0.5863109460260829,
+        "loss": 1.9371453410871347
+      }
+    ],
+    "optimal_quantizer": {
+      "M": 13,
+      "I": 2.5068586314751062,
+      "loss": 0.01659765563811133,
+      "bounds": [
+        0,
+        4,
+        6,
+        8,
+        11,
+        13,
+        16,
+        22,
+        26,
+        30,
+        58,
+        127,
+        253
+      ]
+    },
+    "thinning_sweep": [
+      {
+        "phi": 1.0,
+        "I_perfect_sense": 2.5234562871132176,
+        "I_optimal_quant": 2.5068586314751062,
+        "I_c50": 1.6533642746812527,
+        "loss_thinning": 0.0,
+        "loss_total_optimal": 0.01659765563811133,
+        "loss_total_c50": 0.8700920124319649
+      },
+      {
+        "phi": 0.8,
+        "I_perfect_sense": 2.4592937615137007,
+        "I_optimal_quant": 2.441863021490521,
+        "I_c50": 1.6691224790969224,
+        "loss_thinning": 0.06416252559951685,
+        "loss_total_optimal": 0.08159326562269653,
+        "loss_total_c50": 0.8543338080162952
+      },
+      {
+        "phi": 0.6,
+        "I_perfect_sense": 2.3716551925960987,
+        "I_optimal_quant": 2.3513705948664456,
+        "I_c50": 1.29831086699092,
+        "loss_thinning": 0.15180109451711887,
+        "loss_total_optimal": 0.17208569224677195,
+        "loss_total_c50": 1.2251454201222975
+      },
+      {
+        "phi": 0.4,
+        "I_perfect_sense": 2.2366365341598784,
+        "I_optimal_quant": 2.213736168463837,
+        "I_c50": 1.206857522877256,
+        "loss_thinning": 0.28681975295333917,
+        "loss_total_optimal": 0.30972011864938054,
+        "loss_total_c50": 1.3165987642359616
+      },
+      {
+        "phi": 0.25,
+        "I_perfect_sense": 2.056388081778745,
+        "I_optimal_quant": 2.0305987197036814,
+        "I_c50": 0.7051782706527587,
+        "loss_thinning": 0.46706820533447235,
+        "loss_total_optimal": 0.4928575674095361,
+        "loss_total_c50": 1.8182780164604588
+      },
+      {
+        "phi": 0.15,
+        "I_perfect_sense": 1.8287276547730664,
+        "I_optimal_quant": 1.805670910601374,
+        "I_c50": 0.5135682590861754,
+        "loss_thinning": 0.6947286323401511,
+        "loss_total_optimal": 0.7177853765118436,
+        "loss_total_c50": 2.009888028027042
+      },
+      {
+        "phi": 0.1,
+        "I_perfect_sense": 1.631252807550239,
+        "I_optimal_quant": 1.6143233528871181,
+        "I_c50": 0.3140451589374419,
+        "loss_thinning": 0.8922034795629785,
+        "loss_total_optimal": 0.9091329342260994,
+        "loss_total_c50": 2.2094111281757756
+      },
+      {
+        "phi": 0.05,
+        "I_perfect_sense": 1.2864558338652208,
+        "I_optimal_quant": 1.2820249095473288,
+        "I_c50": 0.4050627749832444,
+        "loss_thinning": 1.2370004532479968,
+        "loss_total_optimal": 1.2414313775658887,
+        "loss_total_c50": 2.1183935121299733
+      }
+    ]
+  },
+  "part_B": {
+    "armA": {
+      "I_enc": 1.6365025333110477,
+      "I_dec": 1.4461529857683648,
+      "mean_pulses": 2.4788214285714285
+    },
+    "armB_fm": [
+      {
+        "cvT": 0.0,
+        "I_enc": 2.1125728952124216,
+        "I_dec": 1.011209063130087,
+        "frac_estimable": 0.9960357142857142
+      },
+      {
+        "cvT": 0.016,
+        "I_enc": 2.0589877071296323,
+        "I_dec": 0.9959659772540945,
+        "frac_estimable": 0.9958928571428571
+      },
+      {
+        "cvT": 0.05,
+        "I_enc": 1.6800617480936795,
+        "I_dec": 0.9148968760063485,
+        "frac_estimable": 0.9961428571428571
+      },
+      {
+        "cvT": 0.1,
+        "I_enc": 1.1436568274815921,
+        "I_dec": 0.7243045197596016,
+        "frac_estimable": 0.9955
+      },
+      {
+        "cvT": 0.2,
+        "I_enc": 0.5781315897611458,
+        "I_dec": 0.4216873019790288,
+        "frac_estimable": 0.9938214285714285
+      }
+    ],
+    "armC_am": [
+      {
+        "sigma_k": 0.0,
+        "I_enc": 1.6521848363458247,
+        "I_dec": 1.5178473072244971
+      },
+      {
+        "sigma_k": 0.02,
+        "I_enc": 1.616334354929342,
+        "I_dec": 1.476199755612213
+      },
+      {
+        "sigma_k": 0.05,
+        "I_enc": 1.4285486914270056,
+        "I_dec": 1.3168310105092536
+      },
+      {
+        "sigma_k": 0.075,
+        "I_enc": 1.248765045441531,
+        "I_dec": 1.1562754794324661
+      },
+      {
+        "sigma_k": 0.1,
+        "I_enc": 1.0689729704762856,
+        "I_dec": 0.9954578478530889
+      },
+      {
+        "sigma_k": 0.2,
+        "I_enc": 0.5748015614154776,
+        "I_dec": 0.5472039289351509
+      },
+      {
+        "sigma_k": 0.3,
+        "I_enc": 0.32787050243067745,
+        "I_dec": 0.3200247492725835
+      },
+      {
+        "sigma_k": 0.45,
+        "I_enc": 0.17034180833679125,
+        "I_dec": 0.17123500691969037
+      },
+      {
+        "sigma_k": 0.6,
+        "I_enc": 0.10629853690835495,
+        "I_dec": 0.1112114175959786
+      }
+    ],
+    "note_budget": "arms B/C use fixed N=5 pulses (a budget bias in favor of FM/AM)"
+  },
+  "verdict": {
+    "A_count_enc": 1.6365025333110477,
+    "A_count_dec": 1.4461529857683648,
+    "FM_native_enc": 2.0589877071296323,
+    "FM_native_dec": 0.9959659772540945,
+    "AM_native_enc": 0.32787050243067745,
+    "AM_native_dec": 0.3200247492725835,
+    "AM_sk06_enc": 0.10629853690835495,
+    "count_wins_enc": false,
+    "count_wins_dec": true
+  },
+  "double_record": [
+    "Part A uses the analytic Poisson channel throughout (not MC), reported alongside code 81's MC convention (I(D;N_DSB)=2.526); the difference between the two is an estimation-convention difference",
+    "The optimal quantizer is an exact DP (minimizing sum p(b) H(D|b)), M=13 levels aligned with N_MAX=12+1; it gives the 'information upper bound under the pulse cap', and does not represent biological realizability",
+    "In the repair-thinning arm, phi is a free parameter (the fraction of DSBs surviving unrepaired before triggering); the literature half-life range is not pinned down, so it is reported as a sweep, and conclusions are cited only at the monotonic level of 'smaller phi means larger loss'",
+    "Arms B/C use fixed N=5 pulses: arm A's population-mean pulse count is about 2.5, so this choice favors the FM/AM arms (more pulses = better period/amplitude estimation)  -  a conservative fairness bias (against the counting arm)",
+    "The FM arm's T(D) mapping (gamma=0.15, 2x dynamic range) is an arbitrary choice; the part of the sweep showing the conclusion is insensitive to the direction of this slope is in the JSON; the slope itself was not optimized",
+    "The AM arm directly reuses the code 81 hypothetical amplitude-arm convention (slope 0.15/ln, endogenous CV 0.15, LogNormal gain); the sigma_k=0.6 row should be on the same order as code 81's I_amp=0.096 bits",
+    "The decoding stage shares the same pair of leaky integrators across all three arms (tau=10h/4h): this itself favors the counting arm, because an integrator is natively a counter; this bias is part of the argument (the known decoder hardware is an integrator), but is registered as a structural bias",
+    "Mutual information is a binned plug-in estimate (12x12 / 16-quantile binning); absolute values are biased, trends are reliable (same-convention declaration as code 50/81)"
+  ]
+}
