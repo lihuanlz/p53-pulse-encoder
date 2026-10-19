@@ -43,10 +43,25 @@ GROUPS = {
                   ["results/molecular_layer/code92_closedform_crossvalidation_results.json"]),
                  ("tcs",     "code/code93_tcs_logistic_correspondence.py",
                   ["results/molecular_layer/code93_tcs_logistic_correspondence_results.json"])],
+    "extra": [("stratify","code/code13_p53_fisher_stratification_S7.py",
+               ["results/p53_channel_census.csv"]),
+              ("variant",  "code/code83_why_digital_variational_competition.py",
+               ["results/code83_variational_competition_results.json"]),
+              ("discovery","code/code84_discovery_cascade_model.py",
+               ["results/code84_discovery_cascade_results.json"]),
+              ("heterog",  "code/code85_heterogeneity_recheck.py",
+               ["results/code85_heterogeneity_recheck_results.json"]),
+              ("foci",     "code/code86_foci_persistence_trigger.py",
+               ["results/code86_foci_persistence_trigger_results.json"]),
+              ("clock",    "code/code87_clock_dose_independent_architecture.py",
+               ["results/code87_clock_dose_independent_results.json"]),
+              ("terminate","code/code88_foci_termination_channel.py",
+               ["results/code88_foci_termination_channel_results.json"]),
+              ("pop",      "code/cellline1_bifurcation_suite/code1_p53_stochastic_population_simulation.py", [])],
     "support": [("selfcheck","code/code50_p53_cascade_framework_selfcheck.py", [])],
 }
 
-ORDER = ["section2", "section3", "section4", "section5", "support"]
+ORDER = ["section2", "section3", "section4", "section5", "extra", "support"]
 
 
 def run(step):
