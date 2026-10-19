@@ -7,3 +7,6 @@ results/*.svg
 results/sim_p53cascade_three_leg_nucleus_check.png
 results/TrackB_bifurcation_validation.png
 results/TrackC_discrimination_map_experimental_points.png
+
+# resumable cache written by code51r4 part B
+results/_code51r4B2_cache.json

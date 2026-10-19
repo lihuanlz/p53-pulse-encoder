@@ -33,8 +33,8 @@ with open(find_json("code89_molecular_decomposition_results.json"), encoding="ut
     res = json.load(f)
 
 plt.rcParams.update({
-    "font.size": 6, "axes.titlesize": 6.5, "axes.labelsize": 6,
-    "xtick.labelsize": 5.5, "ytick.labelsize": 5.5, "legend.fontsize": 5.5,
+    "font.size": 6.5, "axes.titlesize": 7.1, "axes.labelsize": 6.5,
+    "xtick.labelsize": 6.0, "ytick.labelsize": 6.0, "legend.fontsize": 6.0,
     "axes.linewidth": 0.6, "xtick.major.width": 0.6, "ytick.major.width": 0.6,
     "xtick.major.size": 2.2, "ytick.major.size": 2.2,
     "axes.spines.top": False, "axes.spines.right": False,
@@ -51,7 +51,7 @@ fig.subplots_adjust(hspace=0.52, wspace=0.30, left=0.085, right=0.975, top=0.905
 
 
 def tag(ax, letter):
-    ax.text(-0.18, 1.05, letter, transform=ax.transAxes, fontsize=8,
+    ax.text(-0.18, 1.05, letter, transform=ax.transAxes, fontsize=8.7,
             fontweight="bold", va="top", ha="left")
 
 
@@ -65,17 +65,17 @@ bottom = 0
 for lb, v, c in zip(labels, vals, colors):
     ax.bar([0], [v], bottom=bottom, color=c, width=0.42, label=lb)
     ax.text(0, bottom + v / 2, f"{v:.2f}", ha="center", va="center",
-            fontsize=5.5, color="white")
+            fontsize=6.0, color="white")
     bottom += v
 ax.axhspan(1.5, 2.5, color="#C44E52", alpha=0.15)
 ax.axhline(2.0, color="#C44E52", lw=0.8)
-ax.text(0.26, 2.05, "measured\n2.0 $\\pm$ 0.5 h", fontsize=5.2, color="#C44E52")
+ax.text(0.26, 2.05, "measured\n2.0 $\\pm$ 0.5 h", fontsize=5.7, color="#C44E52")
 ax.set_xlim(-0.45, 0.62)
 ax.set_ylim(0, 3.0)
 ax.set_xticks([])
 ax.set_ylabel("lag (h)")
 ax.set_title(f"K3 (Mdm2 lag): {K3_pred:.2f} h vs 2.0")
-ax.legend(loc="lower right", frameon=False, handletextpad=0.3, fontsize=5)
+ax.legend(loc="lower right", frameon=False, handletextpad=0.3, fontsize=5.5)
 tag(ax, "a")
 
 # ---- b: K4 decomposition -----------------------------------------------------
@@ -87,17 +87,17 @@ for lb, v, c in zip(["transcription\n0.5 h", "wip1 mRNA\nphase"], vals,
                     ["#4C72B0", "#8172B3"]):
     ax.bar([0], [v], bottom=bottom, color=c, width=0.42, label=lb)
     ax.text(0, bottom + v / 2, f"{v:.2f}", ha="center", va="center",
-            fontsize=5.5, color="white")
+            fontsize=6.0, color="white")
     bottom += v
 ax.axhline(1.25, color="#C44E52", lw=0.8)
 ax.axhspan(1.0, 1.5, color="#C44E52", alpha=0.15)
-ax.text(0.26, 1.30, "Wip1-arm delay\ntarget 1.25 h", fontsize=5.2, color="#C44E52")
+ax.text(0.26, 1.30, "Wip1-arm delay\ntarget 1.25 h", fontsize=5.7, color="#C44E52")
 ax.set_xlim(-0.45, 0.62)
 ax.set_ylim(0, 2.2)
 ax.set_xticks([])
 ax.set_ylabel("delay (h)")
 ax.set_title(f"K4 (Wip1 arm): {K4_pred:.2f} h vs 1.25")
-ax.legend(loc="lower right", frameon=False, handletextpad=0.3, fontsize=5)
+ax.legend(loc="lower right", frameon=False, handletextpad=0.3, fontsize=5.5)
 tag(ax, "b")
 
 # ---- c: period phase shares --------------------------------------------------
@@ -108,10 +108,10 @@ names = [k for k, _ in order_s]
 vals = [100 * v for _, v in order_s]
 ax.barh(range(len(vals)), vals, color="#4C72B0", height=0.68)
 ax.set_yticks(range(len(vals)))
-ax.set_yticklabels(names, fontsize=6)
+ax.set_yticklabels(names, fontsize=6.5)
 ax.invert_yaxis()
 for i, v in enumerate(vals):
-    ax.text(v + 0.8, i, f"{v:.0f}", va="center", fontsize=5.5)
+    ax.text(v + 0.8, i, f"{v:.0f}", va="center", fontsize=6.0)
 ax.set_xlim(0, 36)
 ax.set_xlabel("share of loop phase sum (%)")
 ax.set_title(f"K1 period: Jacobian {T_pred:.2f} h vs 5.48")
@@ -128,8 +128,8 @@ rows = [
 y = np.arange(len(rows))[::-1]
 for yi, (nm, st, c) in zip(y, rows):
     ax.scatter([0.03], [yi], s=26, marker="s", color=c, clip_on=False)
-    ax.text(0.09, yi + 0.12, nm, fontsize=6, va="center")
-    ax.text(0.09, yi - 0.26, st, fontsize=5.2, va="center", color="#444444")
+    ax.text(0.09, yi + 0.12, nm, fontsize=6.5, va="center")
+    ax.text(0.09, yi - 0.26, st, fontsize=5.7, va="center", color="#444444")
 ax.set_xlim(0, 1)
 ax.set_ylim(-0.7, len(rows) - 0.25)
 ax.set_xticks([])

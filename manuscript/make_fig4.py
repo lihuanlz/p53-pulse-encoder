@@ -34,8 +34,8 @@ with open(find_json("code92_closedform_crossvalidation_results.json"), encoding=
     res = json.load(f)
 
 plt.rcParams.update({
-    "font.size": 6, "axes.titlesize": 6.5, "axes.labelsize": 6,
-    "xtick.labelsize": 5.5, "ytick.labelsize": 5.5, "legend.fontsize": 5.2,
+    "font.size": 6.5, "axes.titlesize": 7.1, "axes.labelsize": 6.5,
+    "xtick.labelsize": 6.0, "ytick.labelsize": 6.0, "legend.fontsize": 5.7,
     "axes.linewidth": 0.6, "xtick.major.width": 0.6, "ytick.major.width": 0.6,
     "xtick.major.size": 2.2, "ytick.major.size": 2.2, "lines.linewidth": 1.0,
     "axes.spines.top": False, "axes.spines.right": False,
@@ -79,7 +79,7 @@ fig.subplots_adjust(wspace=0.34, left=0.085, right=0.975, top=0.86, bottom=0.19)
 
 
 def tag(ax, letter):
-    ax.text(-0.16, 1.04, letter, transform=ax.transAxes, fontsize=8,
+    ax.text(-0.16, 1.04, letter, transform=ax.transAxes, fontsize=8.7,
             fontweight="bold", va="top", ha="left")
 
 
@@ -93,7 +93,7 @@ ys = [r["period_sim_h"] for r in dde_rows if r["period_sim_h"]]
 ax.plot(xs, ys, "o", ms=3.2, color="#C44E52", label="our DDE")
 ax.axhline(5.5, color="#333333", lw=0.7, ls="--", label="measured 5.5 h")
 ax.axvline(2.0, color="#DD8452", lw=0.7, ls=":")
-ax.text(2.06, 9.6, "K3 lag 2.0 h", fontsize=5.2, color="#B5641E")
+ax.text(2.06, 9.6, "K3 lag 2.0 h", fontsize=5.7, color="#B5641E")
 ax.set_xlabel(r"loop delay $\tau$ (h)")
 ax.set_ylabel("period (h)")
 ax.set_ylim(5.2, 11.2)
@@ -109,11 +109,11 @@ Ts4 = [T1, T2, T3, T4]
 colors = ["#888888", "#4C72B0", "#55A868", "#DD8452"]
 ax.bar(range(4), Ts4, color=colors, width=0.58)
 for i, v in enumerate(Ts4):
-    ax.text(i, v + 0.15, f"{v:.2f}", ha="center", fontsize=5.5)
+    ax.text(i, v + 0.15, f"{v:.2f}", ha="center", fontsize=6.0)
 ax.axhspan(5.2, 5.8, color="#C44E52", alpha=0.15)
 ax.axhline(5.5, color="#C44E52", lw=0.7, ls="--", label="measured 5.5 h")
 ax.set_xticks(range(4))
-ax.set_xticklabels(cases, fontsize=5.2)
+ax.set_xticklabels(cases, fontsize=5.7)
 ax.set_ylabel("period (h)")
 ax.set_ylim(0, 10.2)
 ax.set_title("four constant sets")

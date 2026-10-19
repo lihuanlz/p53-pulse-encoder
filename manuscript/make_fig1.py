@@ -25,8 +25,8 @@ DIG = json.loads((REPO / "data_external/batchelor2011/digitized_Fig1GH.json").re
 rng = np.random.default_rng(7)
 
 plt.rcParams.update({
-    "font.size": 6, "axes.titlesize": 6.5, "axes.labelsize": 6,
-    "xtick.labelsize": 5.5, "ytick.labelsize": 5.5, "legend.fontsize": 5.5,
+    "font.size": 6.5, "axes.titlesize": 7.1, "axes.labelsize": 6.5,
+    "xtick.labelsize": 6.0, "ytick.labelsize": 6.0, "legend.fontsize": 6.0,
     "axes.linewidth": 0.6, "xtick.major.width": 0.6, "ytick.major.width": 0.6,
     "xtick.major.size": 2.2, "ytick.major.size": 2.2, "lines.linewidth": 1.0,
     "legend.handlelength": 1.6, "legend.borderpad": 0.2, "legend.labelspacing": 0.25,
@@ -37,7 +37,7 @@ fig.subplots_adjust(hspace=0.58, wspace=0.42, left=0.075, right=0.985, top=0.915
 
 
 def tag(ax, letter):
-    ax.text(-0.20, 1.06, letter, transform=ax.transAxes, fontsize=8,
+    ax.text(-0.20, 1.06, letter, transform=ax.transAxes, fontsize=8.7,
             fontweight="bold", va="top", ha="left")
 
 
@@ -49,7 +49,7 @@ y2 = 0.055 * x * (1 + 0.03 * rng.standard_normal(x.size))
 ax.plot(x, y1, "o-", ms=2.6, color="#1f77b4", label="NF Hopf")
 ax.plot(x, y2, "s--", ms=2.4, color="#6baed6", label="delayed NF")
 ax.axvline(0, color="0.4", ls=":", lw=0.7)
-ax.text(3.45, 0.035, "$R^2$ = 0.993\n$R^2$ = 0.971", fontsize=5.5)
+ax.text(3.45, 0.035, "$R^2$ = 0.993\n$R^2$ = 0.971", fontsize=6.0)
 ax.set_xlabel("drive above onset, $s-s_H$")
 ax.set_ylabel("squared amplitude $A^2$")
 ax.set_title("NF: $A^2$ linear in drive")
@@ -89,7 +89,7 @@ ax.axvline(0.0, color="0.4", ls=":", lw=0.7)
 ax.axvline(-0.25, color="0.4", ls=":", lw=0.7)
 ax.annotate("", xy=(0.0, 0.50), xytext=(-0.275, 0.50),
             arrowprops=dict(arrowstyle="<->", color="#b8860b", lw=0.8))
-ax.text(0.10, 0.66, "hysteresis 0.275\n(predicted 0.25)", fontsize=5.5,
+ax.text(0.10, 0.66, "hysteresis 0.275\n(predicted 0.25)", fontsize=6.0,
         color="#b8860b", ha="left")
 ax.set_xlabel(r"normal-form parameter $\mu$")
 ax.set_ylabel("amplitude")
@@ -109,8 +109,8 @@ Ns = slope * np.log(Ds / Dc) * (1 + 0.02 * rng.standard_normal(Ds.size))
 ax.plot(D, Nlaw, color="#1f77b4", lw=1.2)
 ax.plot(Ds, Ns, "o", ms=2.6, color="#1f77b4")
 ax.axvline(Dc, color="0.4", ls=":", lw=0.7)
-ax.text(Dc + 0.02, 9.0, "$D_c$ = 0.261", rotation=90, fontsize=5.5, color="0.35", va="top")
-ax.text(0.40, 2.6, "$R^2$ = 0.920\nslope$\\to T$ 2.14\nmeasured 2.30", fontsize=5.5)
+ax.text(Dc + 0.02, 9.0, "$D_c$ = 0.261", rotation=90, fontsize=6.0, color="0.35", va="top")
+ax.text(0.40, 2.6, "$R^2$ = 0.920\nslope$\\to T$ 2.14\nmeasured 2.30", fontsize=6.0)
 ax.set_xlabel("damage dose $D$")
 ax.set_ylabel("pulse count $N$")
 ax.set_title("counting law")
@@ -128,9 +128,9 @@ xu = [4, 5, 6, 7, 8]
 ax.bar(xu, uv["val"], yerr=uv["err"], capsize=1.6, width=0.62,
        color="#d95f02", label="UV (4.3$\\times$)", error_kw={"lw": 0.6})
 ax.set_xticks(xb + xu)
-ax.set_xticklabels(["N1", "N2", "N3", "U1", "U2", "U3", "U4", "U5"], fontsize=5)
+ax.set_xticklabels(["N1", "N2", "N3", "U1", "U2", "U3", "U4", "U5"], fontsize=5.5)
 ax.text(0.03, 0.96, "$\\alpha$ = $-0.001 \\pm 0.113$\n$\\alpha$ = $+0.981 \\pm 0.114$",
-        transform=ax.transAxes, fontsize=5.5, va="top")
+        transform=ax.transAxes, fontsize=6.0, va="top")
 ax.set_ylabel("pulse amplitude (AU)")
 ax.set_title("Batchelor: invariant vs graded")
 ax.legend(loc="upper left", frameon=False, bbox_to_anchor=(0.0, 0.80), handletextpad=0.3)
@@ -151,14 +151,14 @@ ax.plot(1.13, 0.0, "s", mfc="none", mec="k", ms=4.2, label="NF anchor")
 ax.plot(0.04, 1.4, "D", mfc="none", mec="#cc79a7", ms=4.2, label="EXC anchor")
 ax.axhline(0, color="0.4", lw=0.6)
 ax.axvline(0, color="0.4", lw=0.6)
-ax.text(-0.42, 2.20, "counting\n($\\alpha\\approx$0, $\\nu>$0)", fontsize=5.5, color="0.35")
-ax.text(0.70, -0.60, "amplitude\n($\\alpha\\approx$1, $\\nu\\approx$0)", fontsize=5.5, color="0.35")
+ax.text(-0.43, 2.55, "counting\n($\\alpha\\approx$0, $\\nu>$0)", fontsize=6.0, color="0.35")
+ax.text(0.46, -0.66, "amplitude\n($\\alpha\\approx$1, $\\nu\\approx$0)", fontsize=6.0, color="0.35")
 ax.set_xlabel(r"amplitude-dose exponent $\alpha$")
 ax.set_ylabel(r"counting exponent $\nu$")
 ax.set_title("signature grid")
 ax.legend(loc="upper right", frameon=False, handletextpad=0.3, borderaxespad=0.2)
 ax.set_xlim(-0.45, 1.5)
-ax.set_ylim(-0.75, 2.75)
+ax.set_ylim(-0.85, 2.95)
 tag(ax, "f")
 
 fig.savefig(OUT, dpi=300, facecolor="white")
