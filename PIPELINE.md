@@ -54,9 +54,11 @@ needed; every input is inside the repository.
 
 ## Two things worth knowing
 
-- **`code51r4` is the long step.** It runs `M=4000` finite-difference spectra in
-  segments and keeps a resumable cache in `results/`. It can be skipped if only
-  the figures are wanted; the archived JSONs are shipped.
+- **`code51r4` runs in modes.** `python code51r4...py A` (the default) does the
+  robustness sweep in seconds; `... B lo hi` recomputes the `M=4000` spectrum in
+  segments with a resumable cache, and is the only slow step; `... FIG` redraws
+  the four-panel figure from the two JSONs. `reproduce.py` runs A and FIG; run B
+  only if you want to regenerate `code51r4B` (the shipped one is archived).
 - **The archived result files are the output of these exact scripts.** Re-running
   them reproduces every number; a handful of human-readable strings in the JSON
   differ from the shipped ones where the prose was edited after generation.

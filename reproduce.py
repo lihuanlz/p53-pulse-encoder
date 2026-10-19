@@ -25,9 +25,10 @@ GROUPS = {
                   ["results/code51_p53_Fisher_audit_results.json"]),
                  ("spectra2","code/code51r2_p53_fisher_audit.py",
                   ["results/code51r2_p53_Fisher_audit_results.json"]),
-                 ("wrapup", "code/code51r4_p53_fisher_wrapup.py",
-                  ["results/code51r4A_noise_calibration_robustness.json",
-                   "results/code51r4B_Fisher_M4000.json"]),
+                 ("wrapup-A", "code/code51r4_p53_fisher_wrapup.py",
+                  ["results/code51r4A_noise_calibration_robustness.json"], ["A"]),
+                 ("wrapup-fig", "code/code51r4_p53_fisher_wrapup.py",
+                  ["results/code51r4_wrapup_fourpanel.png"], ["FIG"]),
                  ("cascade","code/code81_p53_full_cascade_audit.py",
                   ["results/code81_cascade_audit_results.json"])],
     "section5": [("mechanism","code/code82_p53_mechanism_model_audit.py",
@@ -49,13 +50,14 @@ ORDER = ["section2", "section3", "section4", "section5", "support"]
 
 
 def run(step):
-    label, script, outputs = step
+    label, script, outputs = step[0], step[1], step[2]
+    argv = step[3] if len(step) > 3 else []
     path = REPO / script
     if not path.exists():
         return label, "MISSING SCRIPT", 0.0
     t0 = time.time()
     env = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1")
-    proc = subprocess.run([sys.executable, str(path)], cwd=str(REPO),
+    proc = subprocess.run([sys.executable, str(path)] + list(argv), cwd=str(REPO),
                           capture_output=True, text=True,
                           encoding="utf-8", errors="replace", env=env)
     dt = time.time() - t0
