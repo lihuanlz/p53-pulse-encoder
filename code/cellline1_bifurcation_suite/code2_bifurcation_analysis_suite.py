@@ -141,7 +141,9 @@ alpha_NF = np.polyfit(np.log(s_br/s_H), np.log(A_br/A_br[0]), 1)[0]
 D0s_ = np.array([0.42, 0.50, 0.60, 0.75, 0.95, 1.25, 1.65])
 A_fhn = np.array([1.793, 1.813, 1.833, 1.847, 1.872, 1.898, 1.909])  # code1/TrackB results
 ax.plot(s_br/s_H, A_br/A_br[0], 'rs-', ms=5, label=f'NF analog: alpha~{alpha_NF:.1f} (diverges near onset)')
-ax.plot(D0s_/D0s_[0], A_fhn/A_fhn[0], 'bo-', ms=5, label='FHN slow drive (digital): alpha=0.014')
+alpha_fhn = np.polyfit(np.log(D0s_), np.log(A_fhn), 1)[0]
+ax.plot(D0s_/D0s_[0], A_fhn/A_fhn[0], 'bo-', ms=5,
+        label=f'FHN slow drive (digital): alpha={alpha_fhn:.3f}, {100*(A_fhn[-1]/A_fhn[0]-1):.1f}% over {D0s_[-1]/D0s_[0]:.2f}x')
 ax.plot(Is/Is[0], As/As[0], 'g^-', ms=6, label=f'ML fast drive (leaky): alpha={alpha_ML:.2f}')
 ax.set_xscale('log'); ax.set_yscale('log')
 ax.set_xlabel('drive (normalised) '); ax.set_ylabel('amplitude (normalised) '); ax.legend(fontsize=9)

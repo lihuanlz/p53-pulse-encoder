@@ -14,10 +14,10 @@ import numpy as np
 
 sys.path.insert(0, str(Path(sys.executable).parent.parent.parent))
 
-WS = Path(r"D:\Kimi_Agent_cell_sim_toolkit_workspace")
-DATA = WS / "01_cell_line_1" / "public_data" / "Batchelor2011" / "digitized_Fig1GH.json"
-OUT_PNG = WS / "03_cell_line_3" / "results" / "code52_TrackC2_alpha_nu_discrimination.png"
-OUT_JSON = WS / "03_cell_line_3" / "results" / "code52_TrackC2_results.json"
+REPO = Path(__file__).resolve().parent.parent
+DATA = REPO / "data_external" / "batchelor2011" / "digitized_Fig1GH.json"
+OUT_PNG = REPO / "results" / "code52_TrackC2_alpha_nu_discrimination.png"
+OUT_JSON = REPO / "results" / "code52_TrackC2_results.json"
 
 RNG = np.random.default_rng(11)
 

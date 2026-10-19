@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.15)  16 OCT 2026 08:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.10.19)  19 OCT 2026 12:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -497,6 +497,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 (C:\Users\lihua\AppData\Roaming\MiKTeX\2.9\tex/latex/microtype\mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
+
 [1
 
 {C:/Users/lihua/AppData/Local/MiKTeX/2.9/fonts/map/pdftex/pdftex.map}]
@@ -520,13 +521,19 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 50.
 
+
+
 [2]
 <fig1_topology.png, id=163, 1055.142pt x 628.0263pt>
 File: fig1_topology.png Graphic file (type png)
 <use fig1_topology.png>
 Package pdftex.def Info: fig1_topology.png  used on input line 90.
 (pdftex.def)             Requested size: 452.9679pt x 269.60522pt.
- [3] [4 <./fig1_topology.png>]
+
+
+[3]
+
+[4 <./fig1_topology.png>]
 Overfull \hbox (0.54385pt too wide) in paragraph at lines 134--135
 \OT1/cmr/m/n/10.95 (-20) The class-level encoder is the EXC representative, a F
 itzHugh--Nagumo reduction with exponential
@@ -536,25 +543,40 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
+
+
 [5]
-<fig2_census.png, id=207, 1073.2095pt x 591.8913pt>
+<fig2_census.png, id=206, 1073.2095pt x 591.8913pt>
 File: fig2_census.png Graphic file (type png)
 <use fig2_census.png>
 Package pdftex.def Info: fig2_census.png  used on input line 179.
 (pdftex.def)             Requested size: 452.9679pt x 249.82094pt.
- [6] [7 <./fig2_census.png>]
-<fig3_molecular.png, id=246, 717.1593pt x 512.6352pt>
+
+
+[6]
+
+[7 <./fig2_census.png>]
+<fig3_molecular.png, id=241, 717.1593pt x 512.6352pt>
 File: fig3_molecular.png Graphic file (type png)
 <use fig3_molecular.png>
 Package pdftex.def Info: fig3_molecular.png  used on input line 201.
 (pdftex.def)             Requested size: 452.9679pt x 323.7832pt.
-<fig4_closedform.png, id=247, 897.5934pt x 329.5512pt>
+<fig4_closedform.png, id=242, 897.5934pt x 329.5512pt>
 File: fig4_closedform.png Graphic file (type png)
 <use fig4_closedform.png>
 Package pdftex.def Info: fig4_closedform.png  used on input line 208.
 (pdftex.def)             Requested size: 452.9679pt x 166.30888pt.
- [8] [9 <./fig3_molecular.png> <./fig4_closedform.png>] [10] [11] [12] (main.au
-x)
+
+
+[8]
+
+[9 <./fig3_molecular.png> <./fig4_closedform.png>]
+
+[10]
+
+[11]
+
+[12] (main.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-09-09>
@@ -563,13 +585,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: DD7A937B1D096229F1473F04AE9B7E01;5987.
  ) 
 Here is how much of TeX's memory you used:
- 14453 strings out of 469327
- 229801 string characters out of 5456969
- 693496 words of memory out of 5000000
- 43102 multiletter control sequences out of 15000+600000
- 647910 words of font info for 205 fonts, out of 8000000 for 9000
+ 14460 strings out of 469331
+ 229865 string characters out of 5457056
+ 693592 words of memory out of 5000000
+ 43104 multiletter control sequences out of 15000+600000
+ 648063 words of font info for 208 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
- 74i,9n,79p,2200b,620s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,9n,79p,2446b,616s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/cm/cmb
 x10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/
 cm/cmbx12.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/ams
@@ -591,10 +613,10 @@ y8.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/c
 m/cmti10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsf
 onts/cm/cmtt10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/publi
 c/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (12 pages, 1036887 bytes).
+Output written on main.pdf (12 pages, 1041394 bytes).
 PDF statistics:
- 406 PDF objects out of 1000 (max. 8388607)
- 339 compressed objects within 4 object streams
+ 407 PDF objects out of 1000 (max. 8388607)
+ 340 compressed objects within 4 object streams
  80 named destinations out of 1000 (max. 500000)
  46301 words of extra memory for PDF output out of 51595 (max. 10000000)
 
