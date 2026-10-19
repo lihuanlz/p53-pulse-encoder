@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.10.19)  19 OCT 2026 13:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2026.10.19)  19 OCT 2026 13:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -524,16 +524,16 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 [2]
-<fig1_topology.png, id=163, 1055.142pt x 628.0263pt>
+<fig1_topology.png, id=163, 1887.05pt x 1294.8375pt>
 File: fig1_topology.png Graphic file (type png)
 <use fig1_topology.png>
 Package pdftex.def Info: fig1_topology.png  used on input line 90.
-(pdftex.def)             Requested size: 452.9679pt x 269.60522pt.
+(pdftex.def)             Requested size: 452.9679pt x 310.80685pt.
 
 
 [3]
 
-[4 <./fig1_topology.png>]
+[4 <./fig1_topology.png (PNG copy)>]
 Overfull \hbox (0.54385pt too wide) in paragraph at lines 134--135
 \OT1/cmr/m/n/10.95 (-20) The class-level encoder is the EXC representative, a F
 itzHugh--Nagumo reduction with exponential
@@ -546,31 +546,31 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 [5]
-<fig2_census.png, id=206, 1073.2095pt x 591.8913pt>
+<fig2_census.png, id=204, 1887.05pt x 1294.8375pt>
 File: fig2_census.png Graphic file (type png)
 <use fig2_census.png>
 Package pdftex.def Info: fig2_census.png  used on input line 179.
-(pdftex.def)             Requested size: 452.9679pt x 249.82094pt.
+(pdftex.def)             Requested size: 452.9679pt x 310.80685pt.
 
 
 [6]
 
-[7 <./fig2_census.png>]
-<fig3_molecular.png, id=241, 717.1593pt x 512.6352pt>
+[7 <./fig2_census.png (PNG copy)>]
+<fig3_molecular.png, id=238, 1887.05pt x 1294.8375pt>
 File: fig3_molecular.png Graphic file (type png)
 <use fig3_molecular.png>
 Package pdftex.def Info: fig3_molecular.png  used on input line 201.
-(pdftex.def)             Requested size: 452.9679pt x 323.7832pt.
-<fig4_closedform.png, id=242, 897.5934pt x 329.5512pt>
+(pdftex.def)             Requested size: 452.9679pt x 310.80685pt.
+<fig4_closedform.png, id=239, 1887.05pt x 828.09375pt>
 File: fig4_closedform.png Graphic file (type png)
 <use fig4_closedform.png>
 Package pdftex.def Info: fig4_closedform.png  used on input line 208.
-(pdftex.def)             Requested size: 452.9679pt x 166.30888pt.
+(pdftex.def)             Requested size: 452.9679pt x 198.77184pt.
 
 
 [8]
 
-[9 <./fig3_molecular.png> <./fig4_closedform.png>]
+[9 <./fig3_molecular.png (PNG copy)> <./fig4_closedform.png (PNG copy)>]
 
 [10]
 
@@ -613,10 +613,10 @@ y8.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsfonts/c
 m/cmti10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/amsf
 onts/cm/cmtt10.pfb><C:/Users/lihua/AppData/Roaming/MiKTeX/2.9/fonts/type1/publi
 c/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (12 pages, 1042810 bytes).
+Output written on main.pdf (12 pages, 949890 bytes).
 PDF statistics:
- 407 PDF objects out of 1000 (max. 8388607)
- 340 compressed objects within 4 object streams
+ 402 PDF objects out of 1000 (max. 8388607)
+ 339 compressed objects within 4 object streams
  80 named destinations out of 1000 (max. 500000)
  46301 words of extra memory for PDF output out of 51595 (max. 10000000)
 
